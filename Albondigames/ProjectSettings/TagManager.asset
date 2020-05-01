@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - EnemyBullet
+  - Enemy
+  - Bullet
+  - AuxCollider
+  - Fixed Enemy
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Player
+  - Enemies
+  - Projectiles
+  - FixedEnemy
+  - PlayerProjectiles
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Bg
+    uniqueID: 3508259585
+    locked: 0
+  - name: Player
+    uniqueID: 3772550717
+    locked: 0
+  - name: Enemies
+    uniqueID: 1553615209
+    locked: 0
+  - name: Projectiles
+    uniqueID: 2057485619
+    locked: 0
+  - name: UI
+    uniqueID: 2930464859
+    locked: 0
