@@ -6,6 +6,13 @@
 [Bb]uild
 /[Bb]uilds/
 /[Ll]ibrary/
+
+Albondigames/[Tt]emp/
+Albondigames/[Oo]bj/
+Albondigames/[Bb]uild
+Albondigames/[Bb]uilds/
+Albondigames/[Ll]ibrary/
+
 sysinfo.txt
 *.stackdump
 /Assets/AssetStoreTools*
