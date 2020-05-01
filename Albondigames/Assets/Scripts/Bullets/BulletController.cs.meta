@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Albondigames/Assets/Scripts/Bullets/BulletController.cs.meta
 guid: 790c5e3affc30d8438cba6f32b820c6e
+=======
+guid: e2fddcdc042463c41ac5829d251d86a6
+>>>>>>> Stashed changes:Albondigames/Assets/Scripts/GuiScript.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
