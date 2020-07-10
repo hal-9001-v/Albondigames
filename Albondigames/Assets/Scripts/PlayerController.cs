@@ -20,12 +20,46 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         HandleMovement();
         if(IsGrounded() && Input.GetKey(KeyCode.Space)) {
             float jumpVelocity = 12f;
             rb2d.velocity = Vector2.up * jumpVelocity;
         }
+
+    }
+
+    private void FixedUpdate() {
+    }
+
+    public void Burp(){
+
+   if(Input.GetKeyDown(KeyCode.E)) {
+
+            float r = Random.Range(1, 5);
+               Debug.Log(r);
+            switch (r) {
+             
+            case 1:
+                SoundManager.PlaySound(SoundManager.Sound.eructo1, 0.1f);
+                break;
+            case 2:
+                SoundManager.PlaySound(SoundManager.Sound.eructo2, 0.1f);
+                break;
+            case 3:
+                SoundManager.PlaySound(SoundManager.Sound.eructo3, 0.1f);
+                break;
+            case 4:
+                SoundManager.PlaySound(SoundManager.Sound.eructo4, 0.1f);
+                break;
+            default:
+                SoundManager.PlaySound(SoundManager.Sound.eructo4, 0.1f);
+                break;    
+            
+            }
+
+        }
+
 
     }
 
@@ -45,11 +79,13 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovement(){
         float midAirControl = 5f;
+        Burp();
 
         if(Input.GetKey(KeyCode.W)) {
 
         }
 
+     
         if(Input.GetKey(KeyCode.S)) {
 
         }
