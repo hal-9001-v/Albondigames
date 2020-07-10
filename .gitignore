@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Mm]emoryCaptures/
+Albondigames/[Ll]ibrary/
+Albondigames/[Tt]emp/
+Albondigames/[Oo]bj/
+Albondigames/[Bb]uild/
+Albondigames/[Bb]uilds/
+Albondigames/[Ll]ogs/
+Albondigames/[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -59,4 +59,6 @@ sysinfo.txt
 crashlytics-build.properties
 
 ################################
-CurrentLayout-default.dwlt
+#CurrentLayout-default.dwlt
+ArtifactDB
+ArtifactDB-lock
