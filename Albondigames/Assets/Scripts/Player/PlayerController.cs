@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     public bool isGettingUp = false;
     public bool isClimbing = false;
     public bool isWalking = false;
-   
+
     // LEVEL 1
     public bool jToMove = false; //
     public bool canMove = true; //
@@ -50,80 +50,100 @@ public class PlayerController : MonoBehaviour
     // LEVEL 2
     public bool invertedControls = false;//
     public bool canPunch = true;//
-    
+
 
     // LEVEL 3
     public bool moveACounterOn = false;//
     public int moveACounter = 0;//
 
 
-    private void Awake(){
-    rb2d = GetComponent<Rigidbody2D>();
-    bx2d = GetComponent<BoxCollider2D>();
-    spr = GetComponent<SpriteRenderer>();
-    ps = FindObjectOfType<PlayerStats>();
-    punch = FindObjectOfType<Punch>();
-    initVars();
-    punch.SetActive(b);
-}
+    private void Awake()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+        bx2d = GetComponent<BoxCollider2D>();
+        spr = GetComponent<SpriteRenderer>();
+        if (ps == null)
+            ps = FindObjectOfType<PlayerStats>();
+        punch = FindObjectOfType<Punch>();
+        initVars();
+        punch.SetActive(b);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (isRunning)  {MOVEMENT_SPEED = 15f;} else {MOVEMENT_SPEED = 10f;}
+        if (isRunning) { MOVEMENT_SPEED = 15f; } else { MOVEMENT_SPEED = 10f; }
         AnimationHandler();
-        if (!canClimb){
-            if(!invertedControls) {
-            
-                if ((moveDCounterOn && moveDCounter> 0) | (moveACounterOn && moveACounter > 0) ){
-                
-                    if(moveDCounterOn && Input.GetKeyDown(KeyCode.D)){
+        if (!canClimb)
+        {
+            if (!invertedControls)
+            {
+
+                if ((moveDCounterOn && moveDCounter > 0) | (moveACounterOn && moveACounter > 0))
+                {
+
+                    if (moveDCounterOn && Input.GetKeyDown(KeyCode.D))
+                    {
                         moveDCounter--;
-                } else  if(moveACounterOn && Input.GetKeyDown(KeyCode.A)){
+                    }
+                    else if (moveACounterOn && Input.GetKeyDown(KeyCode.A))
+                    {
                         moveACounter--;
-                }  
-                } else {
+                    }
+                }
+                else
+                {
                     moveDCounterOn = false;
                     moveACounterOn = false;
                     moveDCounter = 5;
                     moveACounter = 5;
                     HandleMovement();
-                        if(IsGrounded() && Input.GetKey(KeyCode.Space) && canMove) {
-                            rb2d.velocity = Vector2.up * jumpVelocity;
+                    if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
+                    {
+                        rb2d.velocity = Vector2.up * jumpVelocity;
+                    }
+
                 }
-                
-        }
-        
-        } else {
-            HandleInvertedMovement();
-            if(IsGrounded() && Input.GetKey(KeyCode.Space) && canMove) {
-                float jumpVelocity = 12f;
-                rb2d.velocity = Vector2.up * jumpVelocity;
+
+            }
+            else
+            {
+                HandleInvertedMovement();
+                if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
+                {
+                    float jumpVelocity = 12f;
+                    rb2d.velocity = Vector2.up * jumpVelocity;
+                }
             }
         }
-    } else if (canClimb){
-        if(!invertedControls){
-            HandleClimbMovement();
-        } else if (invertedControls) {
-            HandleInvertedClimbMovement();
-        }
-    }
-
-    }
-
-    void initVars() {
-     hp = ps.hp;
-
-}
-
-//TO DO
-// WHEN CHANGING SCENES CALL UPDATESTATS();
-
-        public void updateStats()
+        else if (canClimb)
         {
-            ps.hp = hp;
-
+            if (!invertedControls)
+            {
+                HandleClimbMovement();
+            }
+            else if (invertedControls)
+            {
+                HandleInvertedClimbMovement();
+            }
         }
+
+    }
+
+    void initVars()
+    {
+        hp = ps.hp;
+
+    }
+
+    //TO DO
+    // WHEN CHANGING SCENES CALL UPDATESTATS();
+
+    public void updateStats()
+    {
+        ps.hp = hp;
+
+    }
 
 
 
@@ -143,14 +163,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
- IEnumerator Inmunity()
+    IEnumerator Inmunity()
     {
         inmune = true;
         yield return new WaitForSeconds(0.75f);
         inmune = false;
     }
 
-   
+
     public void die()
     {
 
@@ -158,30 +178,33 @@ public class PlayerController : MonoBehaviour
 
         Debug.LogWarning("Player Died");
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 
     }
 
-    public void Burp(){
-   if(Input.GetKeyDown(KeyCode.E) && isGrounded) {
+    public void Burp()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && isGrounded)
+        {
             float r = Random.Range(1, 5);
-               Debug.Log(r);
-            switch (r) {
-            case 1:
-                SoundManager.PlaySound(SoundManager.Sound.eructo1, 0.1f);
-                break;
-            case 2:
-                SoundManager.PlaySound(SoundManager.Sound.eructo2, 0.1f);
-                break;
-            case 3:
-                SoundManager.PlaySound(SoundManager.Sound.eructo3, 0.1f);
-                break;
-            case 4:
-                SoundManager.PlaySound(SoundManager.Sound.eructo4, 0.1f);
-                break;
-            default:
-                SoundManager.PlaySound(SoundManager.Sound.eructo4, 0.1f);
-                break;      
+            Debug.Log(r);
+            switch (r)
+            {
+                case 1:
+                    SoundManager.PlaySound(SoundManager.Sound.eructo1, 0.1f);
+                    break;
+                case 2:
+                    SoundManager.PlaySound(SoundManager.Sound.eructo2, 0.1f);
+                    break;
+                case 3:
+                    SoundManager.PlaySound(SoundManager.Sound.eructo3, 0.1f);
+                    break;
+                case 4:
+                    SoundManager.PlaySound(SoundManager.Sound.eructo4, 0.1f);
+                    break;
+                default:
+                    SoundManager.PlaySound(SoundManager.Sound.eructo4, 0.1f);
+                    break;
             }
             StartCoroutine(BurpWait());
 
@@ -191,66 +214,77 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator BurpWait()
     {
-       isBurping= true;
-       canMove = false;
+        isBurping = true;
+        canMove = false;
         yield return new WaitForSeconds(0.75f);
         canMove = true;
-        isBurping= false;
+        isBurping = false;
         inmune = false;
     }
 
-    private bool IsGrounded(){
-        RaycastHit2D rcht =  Physics2D.Raycast(bx2d.bounds.center, Vector2.down, bx2d.bounds.extents.y + xtraheight, lm);
+    private bool IsGrounded()
+    {
+        RaycastHit2D rcht = Physics2D.Raycast(bx2d.bounds.center, Vector2.down, bx2d.bounds.extents.y + xtraheight, lm);
         Color rc;
-        if(rcht.collider != null) {
+        if (rcht.collider != null)
+        {
             rc = Color.green;
-        } else {
+        }
+        else
+        {
             rc = Color.red;
         }
         Debug.DrawRay(bx2d.bounds.center, Vector2.down * (bx2d.bounds.extents.y + xtraheight), rc);
         return rcht.collider != null;
-   }
+    }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag.Equals("Ladder"))
         {
             canClimb = true;
-        } 
+        }
 
-        if (col.gameObject.tag.Equals("Enemy")){
+        if (col.gameObject.tag.Equals("Enemy"))
+        {
 
             TakeDamage();
-            
+
         }
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-                if (col.gameObject.tag.Equals("Ladder"))
+        if (col.gameObject.tag.Equals("Ladder"))
         {
             canClimb = false;
-        } 
+        }
     }
-  void FalconPunch(){
-      b = true;
-      inmune = true;
-    punch.SetActive(b);
-    StartCoroutine(PunchWait());
-   }
-   
-   void AnimationHandler(){
+    void FalconPunch()
+    {
+        b = true;
+        inmune = true;
+        punch.SetActive(b);
+        StartCoroutine(PunchWait());
+    }
 
-       if(rb2d.velocity.x != 0) {
-           isMoving = true;
-       } else { isMoving = false;}
-if(rb2d.velocity.y != 0) {
-           isClimbing = true;
-       } else { isClimbing = false;}
-    if(IsGrounded()) { isGrounded = true;} else {isGrounded = false;}
-   
-   }
- IEnumerator PunchWait()
+    void AnimationHandler()
+    {
+
+        if (rb2d.velocity.x != 0)
+        {
+            isMoving = true;
+        }
+        else { isMoving = false; }
+        if (rb2d.velocity.y != 0)
+        {
+            isClimbing = true;
+        }
+        else { isClimbing = false; }
+        if (IsGrounded()) { isGrounded = true; } else { isGrounded = false; }
+
+    }
+    IEnumerator PunchWait()
     {
         b = false;
         isPunching = true;
@@ -263,142 +297,198 @@ if(rb2d.velocity.y != 0) {
     }
 
 
-    private void HandleMovement(){
+    private void HandleMovement()
+    {
         rb2d.gravityScale = 3;
 
-        if (Input.GetKey(KeyCode.LeftShift)){
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
             isRunning = true;
-        } else {isRunning = false;}
-        if (canPunch && Input.GetKeyDown(KeyCode.Q) && isGrounded){
-       FalconPunch();
+        }
+        else { isRunning = false; }
+        if (canPunch && Input.GetKeyDown(KeyCode.Q) && isGrounded)
+        {
+            FalconPunch();
         }
         Burp();
-        if (Input.GetKey(KeyCode.A) && canMove) {
+        if (Input.GetKey(KeyCode.A) && canMove)
+        {
             spr.flipX = true;
-            if(IsGrounded()){
-                isWalking=true;
-            rb2d.velocity = new Vector2( -MOVEMENT_SPEED, rb2d.velocity.y);
-            } else {
-            rb2d.velocity += new Vector2( -MOVEMENT_SPEED*midAirControl* Time.deltaTime, 0);
-            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            if (IsGrounded())
+            {
+                isWalking = true;
+                rb2d.velocity = new Vector2(-MOVEMENT_SPEED, rb2d.velocity.y);
             }
-        } else if(Input.GetKey(KeyCode.D) && !jToMove && canMove)  {
-             spr.flipX = false;
-            if(IsGrounded()){
-            isWalking = true;
-            rb2d.velocity = new Vector2( MOVEMENT_SPEED, rb2d.velocity.y);
-            } else {
-            rb2d.velocity += new Vector2( +MOVEMENT_SPEED *midAirControl * Time.deltaTime, 0);
-            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            else
+            {
+                rb2d.velocity += new Vector2(-MOVEMENT_SPEED * midAirControl * Time.deltaTime, 0);
+                rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
             }
-        } else if (Input.GetKey(KeyCode.J) && jToMove && canMove) {
+        }
+        else if (Input.GetKey(KeyCode.D) && !jToMove && canMove)
+        {
             spr.flipX = false;
-               if(IsGrounded()){
-                   isWalking = true;
-                    rb2d.velocity = new Vector2( MOVEMENT_SPEED, rb2d.velocity.y);
-            } else {
-            rb2d.velocity += new Vector2( +MOVEMENT_SPEED *midAirControl * Time.deltaTime, 0);
-            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            if (IsGrounded())
+            {
+                isWalking = true;
+                rb2d.velocity = new Vector2(MOVEMENT_SPEED, rb2d.velocity.y);
             }
-        }else {
-            if(IsGrounded()) {
+            else
+            {
+                rb2d.velocity += new Vector2(+MOVEMENT_SPEED * midAirControl * Time.deltaTime, 0);
+                rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            }
+        }
+        else if (Input.GetKey(KeyCode.J) && jToMove && canMove)
+        {
+            spr.flipX = false;
+            if (IsGrounded())
+            {
+                isWalking = true;
+                rb2d.velocity = new Vector2(MOVEMENT_SPEED, rb2d.velocity.y);
+            }
+            else
+            {
+                rb2d.velocity += new Vector2(+MOVEMENT_SPEED * midAirControl * Time.deltaTime, 0);
+                rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            }
+        }
+        else
+        {
+            if (IsGrounded())
+            {
                 isWalking = false;
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
     }
 
-    private void HandleInvertedMovement(){
-      rb2d.gravityScale = 3;
+    private void HandleInvertedMovement()
+    {
+        rb2d.gravityScale = 3;
 
-        if (Input.GetKey(KeyCode.LeftShift)){
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
             isRunning = true;
-        } else {isRunning = false;}
-        if (canPunch && Input.GetKeyDown(KeyCode.Q) && isGrounded){
-       FalconPunch();
+        }
+        else { isRunning = false; }
+        if (canPunch && Input.GetKeyDown(KeyCode.Q) && isGrounded)
+        {
+            FalconPunch();
         }
         Burp();
-        if (Input.GetKey(KeyCode.D) && canMove) {
+        if (Input.GetKey(KeyCode.D) && canMove)
+        {
             spr.flipX = true;
-            if(IsGrounded()){
-            rb2d.velocity = new Vector2( -MOVEMENT_SPEED, rb2d.velocity.y);
-            } else {
-            rb2d.velocity += new Vector2( -MOVEMENT_SPEED*midAirControl* Time.deltaTime, 0);
-            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            if (IsGrounded())
+            {
+                rb2d.velocity = new Vector2(-MOVEMENT_SPEED, rb2d.velocity.y);
             }
-        } else if(Input.GetKey(KeyCode.A) && !jToMove && canMove)  {
-                        spr.flipX = false;
-                        if(IsGrounded()){
-            rb2d.velocity = new Vector2( MOVEMENT_SPEED, rb2d.velocity.y);
-            } else {
-            rb2d.velocity += new Vector2( +MOVEMENT_SPEED *midAirControl * Time.deltaTime, 0);
-            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            else
+            {
+                rb2d.velocity += new Vector2(-MOVEMENT_SPEED * midAirControl * Time.deltaTime, 0);
+                rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
             }
-        } else if (Input.GetKey(KeyCode.J) && jToMove && canMove) {
-               if(IsGrounded()){
-            rb2d.velocity = new Vector2( MOVEMENT_SPEED, rb2d.velocity.y);
-            } else {
-            rb2d.velocity += new Vector2( +MOVEMENT_SPEED *midAirControl * Time.deltaTime, 0);
-            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+        }
+        else if (Input.GetKey(KeyCode.A) && !jToMove && canMove)
+        {
+            spr.flipX = false;
+            if (IsGrounded())
+            {
+                rb2d.velocity = new Vector2(MOVEMENT_SPEED, rb2d.velocity.y);
             }
-        }else {
-            if(IsGrounded()) {
+            else
+            {
+                rb2d.velocity += new Vector2(+MOVEMENT_SPEED * midAirControl * Time.deltaTime, 0);
+                rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            }
+        }
+        else if (Input.GetKey(KeyCode.J) && jToMove && canMove)
+        {
+            if (IsGrounded())
+            {
+                rb2d.velocity = new Vector2(MOVEMENT_SPEED, rb2d.velocity.y);
+            }
+            else
+            {
+                rb2d.velocity += new Vector2(+MOVEMENT_SPEED * midAirControl * Time.deltaTime, 0);
+                rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            }
+        }
+        else
+        {
+            if (IsGrounded())
+            {
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
 
     }
 
-    private void HandleClimbMovement(){
+    private void HandleClimbMovement()
+    {
 
-rb2d.gravityScale = 0;
-if(Input.GetKeyDown(KeyCode.W)){
-            rb2d.velocity = new Vector2( 0, MOVEMENT_SPEED);
-}
-else if (Input.GetKeyDown(KeyCode.S)){
-                rb2d.velocity = new Vector2( 0, -MOVEMENT_SPEED);
+        rb2d.gravityScale = 0;
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            rb2d.velocity = new Vector2(0, MOVEMENT_SPEED);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            rb2d.velocity = new Vector2(0, -MOVEMENT_SPEED);
 
-}
- else if(Input.GetKeyDown(KeyCode.A)){
-               rb2d.velocity = new Vector2( -MOVEMENT_SPEED, 0);
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            rb2d.velocity = new Vector2(-MOVEMENT_SPEED, 0);
 
-}
- else if(Input.GetKeyDown(KeyCode.D)){
-               rb2d.velocity = new Vector2( MOVEMENT_SPEED, 0);
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            rb2d.velocity = new Vector2(MOVEMENT_SPEED, 0);
 
-} else {
- rb2d.velocity = new Vector2(  rb2d.velocity.x, rb2d.velocity.y);
-
-
-}
-
-
-
-
-}
-
-    private void HandleInvertedClimbMovement(){
-
-rb2d.gravityScale = 0;
-if(Input.GetKeyDown(KeyCode.S)){
-            rb2d.velocity = new Vector2( 0, MOVEMENT_SPEED);
-}
-else if (Input.GetKeyDown(KeyCode.W)){
-                rb2d.velocity = new Vector2( 0, -MOVEMENT_SPEED);
-
-}
- else if(Input.GetKeyDown(KeyCode.D)){
-               rb2d.velocity = new Vector2( -MOVEMENT_SPEED, 0);
-
-}
- else if(Input.GetKeyDown(KeyCode.A)){
-               rb2d.velocity = new Vector2( MOVEMENT_SPEED, 0);
-
-} else {
- rb2d.velocity = new Vector2(  rb2d.velocity.x, rb2d.velocity.y);
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
 
 
-}
+        }
+
+
+
+
+    }
+
+    private void HandleInvertedClimbMovement()
+    {
+
+        rb2d.gravityScale = 0;
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            rb2d.velocity = new Vector2(0, MOVEMENT_SPEED);
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            rb2d.velocity = new Vector2(0, -MOVEMENT_SPEED);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            rb2d.velocity = new Vector2(-MOVEMENT_SPEED, 0);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            rb2d.velocity = new Vector2(MOVEMENT_SPEED, 0);
+
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
+
+
+        }
 
     }
 
