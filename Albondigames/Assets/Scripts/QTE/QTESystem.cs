@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class QTESystem : MonoBehaviour
 {
-    public bool busy;
+    [HideInInspector]
+    public bool free;
+    [HideInInspector]
     public QTE currentQTE;
 
     public ReadyState readyState;
@@ -21,40 +23,45 @@ public class QTESystem : MonoBehaviour
         waitState = new WaitState(this);
         coordinateState = new CoordinateState(this);
 
+        readyState.enter();
 
     }
 
     public void triggerWaitQTE(QTE qte)
     {
-        if (busy)
+        if (free)
         {
             currentQTE = qte;
             readyState.setKey(qte.interactionKey);
             readyState.exit();
 
 
+            Debug.Log("Starting QTE of wait");
         }
     }
 
     public void triggerSpamQTE(QTE qte)
     {
-        if (busy)
+        if (free)
         {
             currentQTE = qte;
             readyState.setKey(qte.interactionKey);
             readyState.exitToSpam();
 
 
+            Debug.Log("Starting QTE of Spam");
         }
     }
 
     public void triggerCoordinateQTE(QTE qte)
     {
-        if (busy)
+        if (free)
         {
             currentQTE = qte;
             readyState.setKey(qte.interactionKey);
             readyState.exitToCoordinate();
+
+            Debug.Log("Starting QTE of coordination");
         }
     }
 
@@ -76,7 +83,7 @@ public class QTESystem : MonoBehaviour
 
         public void enter()
         {
-
+            mySystem.free = true;
         }
 
         public IEnumerator Execute()
@@ -87,6 +94,7 @@ public class QTESystem : MonoBehaviour
         //ExitToWaiT
         public void exit()
         {
+            mySystem.free = false;
             mySystem.waitState.setKey(interactionKey);
             mySystem.waitState.enter();
 
@@ -94,12 +102,14 @@ public class QTESystem : MonoBehaviour
 
         public void exitToSpam()
         {
+            mySystem.free = false;
             mySystem.spamState.setKey(interactionKey);
             mySystem.spamState.enter();
         }
 
         public void exitToCoordinate()
         {
+            mySystem.free = false;
             mySystem.spamState.setKey(interactionKey);
             mySystem.coordinateState.enter();
         }
@@ -131,8 +141,10 @@ public class QTESystem : MonoBehaviour
 
         public IEnumerator Execute()
         {
+            Debug.Log("Need to press " + interactionKey.ToString());
             while (!Input.GetKeyDown(interactionKey))
                 yield return null;
+            exit();
         }
 
         public void exit()
@@ -162,7 +174,6 @@ public class QTESystem : MonoBehaviour
             interactionKey = key;
         }
 
-
         public void enter()
         {
             mySystem.StartCoroutine(Execute());
@@ -179,6 +190,8 @@ public class QTESystem : MonoBehaviour
 
         public IEnumerator Execute()
         {
+
+            Debug.Log("Need to SPAM " + interactionKey.ToString());
             int pressedCounter = 0;
             float timePassed = 0;
             while (timesPressed < pressedCounter)
@@ -206,6 +219,14 @@ public class QTESystem : MonoBehaviour
         public void exit()
         {
             mySystem.readyState.enter();
+            mySystem.currentQTE.atEndActions.Invoke();
+
+        }
+
+        public void failureExit()
+        {
+            mySystem.readyState.enter();
+            mySystem.currentQTE.atFailureActions.Invoke();
 
         }
 
@@ -245,7 +266,7 @@ public class QTESystem : MonoBehaviour
 
         public void exitToSpam()
         {
-            mySystem.spamState.enter();
+            mySystem.readyState.enter();
         }
 
 

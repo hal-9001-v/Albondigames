@@ -35,7 +35,7 @@ public class QTE : MonoBehaviour
         }
 
         if (spamQTE) {
-            mySystem.triggerspamQTE(this);
+            mySystem.triggerSpamQTE(this);
             return;
         }
 

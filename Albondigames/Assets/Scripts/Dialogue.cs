@@ -23,7 +23,7 @@ public class Dialogue : MonoBehaviour
 
     }
 
-    private void triggerDialogue()
+    public void triggerDialogue()
     {
 
         //Try to trigger this dialogue
@@ -36,14 +36,6 @@ public class Dialogue : MonoBehaviour
             myDialogueManager.triggerAutoDialogue(this);
         }
 
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            triggerDialogue();
-        }
     }
 
     public void printThis()
