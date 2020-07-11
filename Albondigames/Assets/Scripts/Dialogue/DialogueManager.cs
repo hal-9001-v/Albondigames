@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
 
+    //TECLA CON LA QUE INTERACTUAR
+    private KeyCode interactionKey = KeyCode.Z;
+
     private TextMeshProUGUI myNameText;
     public GameObject myNameObject;
 
@@ -37,8 +40,6 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingChild;
     private bool lineIsCompleted;
 
-    //TECLA CON LA QUE INTERACTUAR
-    private KeyCode interactionKey = KeyCode.Z;
 
     void Awake()
     {
