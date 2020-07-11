@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4586331169175781008}
   m_Layer: 0
   m_Name: Window_proj
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeed: 0.02
+  lifeTime: 5
 --- !u!95 &4586331169175781008
 Animator:
   serializedVersion: 3
