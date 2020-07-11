@@ -62,8 +62,10 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         bx2d = GetComponent<BoxCollider2D>();
         spr = GetComponent<SpriteRenderer>();
+
         if (ps == null)
             ps = FindObjectOfType<PlayerStats>();
+
         punch = FindObjectOfType<Punch>();
         initVars();
         punch.SetActive(b);
