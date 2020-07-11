@@ -6,13 +6,20 @@ using UnityEngine.Events;
 
 class StartTrigger : Trigger
 {
+
+    Triggerable t;
     bool done;
+
+    private void Start()
+    {
+        t = GetComponent<Triggerable>();
+    }
 
     private void Update()
     {
         if (!done)
         {
-            actions.Invoke();
+            t.trigger();
             done = true;
         }
 

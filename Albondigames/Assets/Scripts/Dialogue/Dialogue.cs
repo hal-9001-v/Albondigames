@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Dialogue : MonoBehaviour
+public class Dialogue : Triggerable
 {
+    public string speaker;
     [TextArea(3, 10)]
     public string[] text;
     public float delay = 0;
@@ -23,9 +24,8 @@ public class Dialogue : MonoBehaviour
 
     }
 
-    public void triggerDialogue()
+    public override void trigger()
     {
-
         //Try to trigger this dialogue
         if (!autoDialogue)
         {
@@ -37,6 +37,4 @@ public class Dialogue : MonoBehaviour
         }
 
     }
-
-
 }

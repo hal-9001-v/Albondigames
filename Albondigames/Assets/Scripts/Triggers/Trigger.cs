@@ -1,16 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine.Events;
-using UnityEngine;
+﻿using UnityEngine;
 
 class Trigger : MonoBehaviour
 {
-    public UnityEvent actions;
+    private Triggerable t;
+    [Range(0, 10)]
+    public float range;
 
-    private void triggerActions()
+    private void Start()
     {
-        actions.Invoke();
+        t = GetComponent<Triggerable>();
+    }
+
+    public void triggerAction()
+    {
+        t.trigger();
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

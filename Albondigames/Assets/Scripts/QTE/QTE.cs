@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class QTE : MonoBehaviour
+public class QTE : Triggerable
 {
     public bool waitQTE;
 
@@ -25,29 +25,28 @@ public class QTE : MonoBehaviour
     private void Awake()
     {
         mySystem = GameObject.FindObjectOfType<QTESystem>();
-        
+
     }
 
-    public void triggerQTE() {
-        if (waitQTE) {
+    public override void trigger()
+    {
+        if (waitQTE)
+        {
             mySystem.triggerWaitQTE(this);
             return;
         }
 
-        if (spamQTE) {
+        if (spamQTE)
+        {
             mySystem.triggerSpamQTE(this);
             return;
         }
 
-        if (coordinateQTE) {
+        if (coordinateQTE)
+        {
             mySystem.triggerCoordinateQTE(this);
             return;
         }
+
     }
-
-
-
-   
-
-
 }

@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    
+
+    private TextMeshProUGUI myNameText;
+    public GameObject myNameObject;
+
     private TextMeshProUGUI myText;
+    public GameObject myTextObject;
+
+    public GameObject myImageObject;
+    private RawImage myRawImage;
 
     private Queue<string> linesQueue;
     private string currentLine;
@@ -15,8 +23,6 @@ public class DialogueManager : MonoBehaviour
     
     [HideInInspector]
     public Dialogue currentDialogue;
-
-    public GameObject myTextObject;
 
     [HideInInspector]
     public bool free = false;
@@ -38,6 +44,9 @@ public class DialogueManager : MonoBehaviour
     {
         //Initializing
         myText = myTextObject.GetComponent<TextMeshProUGUI>();
+        myRawImage = myImageObject.GetComponent<RawImage>();
+        myNameText = myNameObject.GetComponent<TextMeshProUGUI>();
+
         linesQueue = new Queue<string>();
 
         //Creating States
@@ -60,8 +69,10 @@ public class DialogueManager : MonoBehaviour
     {
         if (free)
         {
-            currentDialogue = dialogue;
+            myNameText.text = dialogue.speaker;
 
+            currentDialogue = dialogue;
+            
             foreach (string line in dialogue.text)
             {
                 linesQueue.Enqueue(line);
@@ -76,6 +87,8 @@ public class DialogueManager : MonoBehaviour
     {
         if (free)
         {
+            myNameText.text = dialogue.speaker;
+
             currentDialogue = dialogue;
 
             timedIdleState.delayTime = dialogue.endDelay;
@@ -92,12 +105,16 @@ public class DialogueManager : MonoBehaviour
 
     public void showText()
     {
+        myNameText.enabled = true;
         myText.enabled = true;
+        myRawImage.enabled = true;
     }
 
     public void hideText()
     {
+        myNameText.enabled = false;
         myText.enabled = false;
+        myRawImage.enabled = false;
     }
 
     public bool isEmpty()
@@ -166,6 +183,10 @@ public class DialogueManager : MonoBehaviour
         {
             dm.free = true;
             dm.hideText();
+
+            if (dm.currentDialogue != null) {
+                dm.currentDialogue.atEndActions.Invoke();
+            }
         }
 
         //No execute is needed
