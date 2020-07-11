@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     private float MOVEMENT_SPEED = 10f;
     private BoxCollider2D bx2d;
     [SerializeField] private LayerMask lm;
- 
+
+    string solo = "Space";
 
     private void Awake(){
     rb2d = GetComponent<Rigidbody2D>();
@@ -20,26 +21,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         HandleMovement();
         if(IsGrounded() && Input.GetKey(KeyCode.Space)) {
             float jumpVelocity = 12f;
             rb2d.velocity = Vector2.up * jumpVelocity;
         }
-
     }
 
     private void FixedUpdate() {
     }
 
     public void Burp(){
-
    if(Input.GetKeyDown(KeyCode.E)) {
-
             float r = Random.Range(1, 5);
                Debug.Log(r);
             switch (r) {
-             
             case 1:
                 SoundManager.PlaySound(SoundManager.Sound.eructo1, 0.1f);
                 break;
@@ -54,13 +50,9 @@ public class PlayerController : MonoBehaviour
                 break;
             default:
                 SoundManager.PlaySound(SoundManager.Sound.eructo4, 0.1f);
-                break;    
-            
+                break;      
             }
-
         }
-
-
     }
 
 
@@ -80,16 +72,10 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement(){
         float midAirControl = 5f;
         Burp();
-
         if(Input.GetKey(KeyCode.W)) {
-
         }
-
-     
         if(Input.GetKey(KeyCode.S)) {
-
         }
-
         if (Input.GetKey(KeyCode.A)) {
             if(IsGrounded()){
             rb2d.velocity = new Vector2( -MOVEMENT_SPEED, rb2d.velocity.y);
@@ -109,8 +95,5 @@ public class PlayerController : MonoBehaviour
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
-
     }
-
-
 }
