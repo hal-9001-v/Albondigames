@@ -6,8 +6,13 @@ using UnityEngine.Events;
 public class QTE : MonoBehaviour
 {
     public bool waitQTE;
+
     public bool spamQTE;
+    public int timesPressed;
+
     public bool coordinateQTE;
+
+    public float timeAvaliable;
 
     public KeyCode interactionKey;
 

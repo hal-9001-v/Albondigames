@@ -11,12 +11,15 @@ public class QTESystem : MonoBehaviour
     public ReadyState readyState;
     public WaitState waitState;
     public SpamState spamState;
+    public CoordinateState coordinateState;
 
 
     private void Awake()
     {
         readyState = new ReadyState(this);
         spamState = new SpamState(this);
+        waitState = new WaitState(this);
+        coordinateState = new CoordinateState(this);
 
 
     }
@@ -28,7 +31,7 @@ public class QTESystem : MonoBehaviour
             currentQTE = qte;
             readyState.setKey(qte.interactionKey);
             readyState.exit();
-            
+
 
         }
     }
@@ -81,19 +84,29 @@ public class QTESystem : MonoBehaviour
             yield return null;
         }
 
+        //ExitToWaiT
         public void exit()
         {
-
+            mySystem.waitState.setKey(interactionKey);
             mySystem.waitState.enter();
+
         }
 
         public void exitToSpam()
         {
+            mySystem.spamState.setKey(interactionKey);
             mySystem.spamState.enter();
+        }
+
+        public void exitToCoordinate()
+        {
+            mySystem.spamState.setKey(interactionKey);
+            mySystem.coordinateState.enter();
         }
 
 
     }
+
 
     public class WaitState : IState
     {
@@ -113,12 +126,13 @@ public class QTESystem : MonoBehaviour
         public void enter()
         {
             mySystem.StartCoroutine(Execute());
+            mySystem.currentQTE.atStartActions.Invoke();
         }
 
         public IEnumerator Execute()
         {
-            while(!Input.GetKeyDown(interactionKey))
-            yield return null;
+            while (!Input.GetKeyDown(interactionKey))
+                yield return null;
         }
 
         public void exit()
@@ -130,11 +144,13 @@ public class QTESystem : MonoBehaviour
 
     }
 
-
     public class SpamState : IState
     {
         QTESystem mySystem;
         KeyCode interactionKey;
+
+        int timesPressed;
+        float timeAvaliable;
 
         public SpamState(QTESystem mySystem)
         {
@@ -150,14 +166,41 @@ public class QTESystem : MonoBehaviour
         public void enter()
         {
             mySystem.StartCoroutine(Execute());
+
+            //How many times to press
+            timesPressed = mySystem.currentQTE.timesPressed;
+
+            //Time to press enogugh times
+            timeAvaliable = mySystem.currentQTE.timeAvaliable;
+
             mySystem.currentQTE.atStartActions.Invoke();
 
         }
 
         public IEnumerator Execute()
         {
-         //   while (Input.GetKeyDown) { }
-            yield return null;
+            int pressedCounter = 0;
+            float timePassed = 0;
+            while (timesPressed < pressedCounter)
+            {
+                if (Input.GetKeyDown(interactionKey))
+                {
+                    pressedCounter++;
+                }
+
+                timePassed += Time.deltaTime;
+
+                if (timePassed > timeAvaliable)
+                {
+                    failureExit();
+                }
+
+
+                yield return null;
+            }
+
+            exit();
+
         }
 
         public void exit()
@@ -165,6 +208,8 @@ public class QTESystem : MonoBehaviour
             mySystem.readyState.enter();
 
         }
+
+
     }
 
     public class CoordinateState : IState
