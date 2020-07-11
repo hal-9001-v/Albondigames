@@ -21,16 +21,27 @@ public class CameraController : MonoBehaviour
         public float bottom;
     }
 
+    //Modo normal.
     public GameObject playerFollowed;
     public Limits limits;
-
     public UnityEvent inTransition;
 
     private Camera camera;
     private bool followingPlayer;
     private float startingSize;
     private float aspectRatio;
-    
+
+    //Modo cinemático.
+    public CameraNode[] nodes;
+
+    private Queue<CameraNode> nodeQueue;
+    private CameraNode currentNode;
+    private Vector3 destination;
+    private Vector3 startPosition;
+    private bool arrived;
+    private float timeToReachTarget;
+    private float timeCounter;
+
     void Awake()
     {   //Nada más emplearse se comprueba si es viable el GameObject asociado.
         camera = GetComponent<Camera>();
@@ -44,35 +55,125 @@ public class CameraController : MonoBehaviour
         aspectRatio = (float) camera.pixelWidth / camera.pixelHeight;
         if (inTransition == null)
             inTransition = new UnityEvent();
+
+        nodeQueue = new Queue<CameraNode>();
+        foreach (CameraNode node in nodes)
+        {
+            nodeQueue.Enqueue(node);
+        }
+        arrived = true;
+        currentNode = null;
     }
 
+    private void OnGUI()
+    {
+        GUIStyle font = new GUIStyle(GUI.skin.GetStyle("label"));
+        font.fontSize = 64;
+        GUI.Label(new Rect(100, 100, 500, 300), "arrived: " + arrived, font);
+        GUI.Label(new Rect(100, 300, 500, 300), "followingPlayer: " + followingPlayer, font); 
+        GUI.Label(new Rect(100, 200, 500, 300), "currentNode: " + currentNode, font);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!arrived)
+        {
+            timeCounter += Time.deltaTime / timeToReachTarget;
+            if (Vector3.Distance(destination, transform.position) < 0.05)
+            {
+                transform.position = destination;
+                if (currentNode) StartCoroutine(NodeTransition());
+                else arrived = true;
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(startPosition, destination, timeCounter);
+                if (followingPlayer)
+                {
+                    destination = new Vector3(playerFollowed.transform.position.x,
+                        playerFollowed.transform.position.y, startPosition.z);
+                    destination = FitToLimits(destination);
+                }
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
-        //Si la cámara está siguiendo el personaje.
-        if (followingPlayer)
+        //Para que se siga correctamente al personaje, su movimiento
+        //deberá ser realizado mediante FixedUpdate (físicas).
+        if (followingPlayer && arrived)
         {
             transform.position = new Vector3(playerFollowed.transform.position.x,
                 playerFollowed.transform.position.y, transform.position.z);
+
+            //Ajustamos la cámara a los límites.
+            camera.transform.position = FitToLimits(camera.transform.position);
         }
-
-        //Ajustamos la cámara a los límites.
-        fitToLimits();
-
     }
     
     //Getters y Setters
-    public bool doFollowPlayer(bool follow)
+    public bool DoFollowPlayer(bool follow, float seconds)
     {
-        if (playerFollowed)
+        if (arrived)
         {
-            followingPlayer = follow;
-            return true;
+            if (playerFollowed)
+            {
+                if (!followingPlayer && follow)
+                {
+                    if (seconds <= 0)
+                    {
+                        followingPlayer = follow;
+                    }
+                    else
+                    {
+                        currentNode = null;
+                        followingPlayer = true;
+                        arrived = false;
+                        timeCounter = 0;
+                        timeToReachTarget = seconds;
+                        startPosition = transform.position;
+                        destination = new Vector3(playerFollowed.transform.position.x,
+                            playerFollowed.transform.position.y, startPosition.z);
+                    }
+                    return true;
+                }
+                else
+                {
+                    followingPlayer = follow;
+                    return true;
+                }
+            }
+            return false;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
-    public bool setLimits(Limits lim)
+    //Deja de seguir al personaje y mueve la cámara a cierto punto.
+    public bool MoveCamera(Vector2 pos, float seconds)
+    {
+        if (arrived)
+        {
+            currentNode = null;
+            followingPlayer = false;
+            arrived = false;
+            timeCounter = 0;
+            timeToReachTarget = seconds;
+            startPosition = transform.position;
+            destination = new Vector3(pos.x, pos.y, startPosition.z);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    //Establece los límites del following de la cámara.
+    public bool SetLimits(Limits lim)
     {
         //Falla en caso de emplear límites contradictorios.
         if (((lim.right - lim.left) < 0) || ((lim.top - lim.bottom) < 0)) return false;
@@ -81,28 +182,31 @@ public class CameraController : MonoBehaviour
         return true;
     }
 
-    public bool setZoom(float zoom)
+    //Establece un Zoom a la cámara (valores de 0 a 1 alejan el objetivo).
+    public bool SetZoom(float zoom)
     {
         if (zoom <= 0) return false;
         camera.orthographicSize = startingSize * (1 / zoom);
         return true;
     }
 
-    //Transiciones
-    public void transitionToBlack(float seconds)
+    //TRANSICIONES
+    //Transición a negro.
+    public void TransitionToBlack(float seconds)
     {
         RawImage canvas = GameObject.Find("Transiciones").GetComponentInChildren<RawImage>();
         canvas.color = new Color(0, 0, 0, 0);
-        StartCoroutine(startTransition(seconds, canvas));
+        StartCoroutine(StartTransition(seconds, canvas));
     }
-    public void transitionToWhite(float seconds)
+    //Transición a blanco.
+    public void TransitionToWhite(float seconds)
     {
         RawImage canvas = GameObject.Find("Transiciones").GetComponentInChildren<RawImage>();
         canvas.color = new Color(1, 1, 1, 0);
-        StartCoroutine(startTransition(seconds, canvas));
+        StartCoroutine(StartTransition(seconds, canvas));
     }
 
-    IEnumerator startTransition(float seconds, RawImage canvas)
+    IEnumerator StartTransition(float seconds, RawImage canvas)
     {
         while (canvas.color.a < 1)
         {
@@ -112,9 +216,9 @@ public class CameraController : MonoBehaviour
         }
         inTransition.Invoke();
         yield return new WaitForSeconds(Time.deltaTime);
-        StartCoroutine(endTransition(seconds, canvas));
+        StartCoroutine(EndTransition(seconds, canvas));
     }
-    IEnumerator endTransition(float seconds, RawImage canvas)
+    IEnumerator EndTransition(float seconds, RawImage canvas)
     {
         while (canvas.color.a > 0)
         {
@@ -125,32 +229,96 @@ public class CameraController : MonoBehaviour
     }
 
     //Privados.
-    private void fitToLimits()
+    private Vector3 FitToLimits(Vector3 pos)
     {
+        Vector3 resultado = new Vector3();
         //Ajustamos la camara para no salirse de los límites.
         if (limits.useHorizontalLimits)
         {
-            //Derecha.
-            if (camera.transform.position.x + camera.orthographicSize * aspectRatio > limits.right)
-                camera.transform.position = new Vector3(limits.right - camera.orthographicSize * aspectRatio,
-                    camera.transform.position.y, camera.transform.position.z);
 
             //Izquierda.
-            if (camera.transform.position.x - camera.orthographicSize * aspectRatio < limits.left)
-                camera.transform.position = new Vector3(limits.left + camera.orthographicSize * aspectRatio,
-                    camera.transform.position.y, camera.transform.position.z);
+            if (pos.x - camera.orthographicSize * aspectRatio < limits.left)
+                resultado.x = limits.left + camera.orthographicSize * aspectRatio;
+
+            //Derecha.
+            else if (pos.x + camera.orthographicSize * aspectRatio > limits.right)
+                resultado.x = limits.right - camera.orthographicSize * aspectRatio;
+
+            //No se exceden los topes.
+            else resultado.x = pos.x;
+        }
+        else
+        {
+            resultado.x = pos.x;
         }
 
         if (limits.useVerticalLimits)
         {
-            //Arriba.
-            if (camera.transform.position.y + camera.orthographicSize > limits.top)
-                camera.transform.position = new Vector3(camera.transform.position.x,
-                    limits.top - camera.orthographicSize, camera.transform.position.z);
             //Abajo.
-            if (camera.transform.position.y - camera.orthographicSize < limits.bottom)
-                camera.transform.position = new Vector3(camera.transform.position.x,
-                    limits.bottom + camera.orthographicSize, camera.transform.position.z);
+            if (pos.y - camera.orthographicSize < limits.bottom)
+                resultado.y = limits.bottom + camera.orthographicSize;
+
+            //Arriba.
+            else if (pos.y + camera.orthographicSize > limits.top)
+                resultado.y = limits.top - camera.orthographicSize;
+            
+            else resultado.y = pos.y;
         }
+        else
+        {
+            resultado.y = pos.y;
+        }
+        resultado.z = pos.z;
+        return resultado;
+    }
+
+    //MODO CINEMÁTICO.
+    //Desactiva el seguimiento de la cámara y realiza una transición
+    //a una posición dada en los segundos indicados en el nodo.
+    //Devuelve true si ha podido ejecutarse, false en caso contrario.
+    public bool GoToNextNode()
+    {
+        if (arrived)
+        {
+            followingPlayer = false;
+
+            if (nodeQueue.Count != 0)
+            {
+                arrived = false;
+
+                currentNode = nodeQueue.Dequeue();
+
+                timeCounter = 0;
+                timeToReachTarget = currentNode.timeToGet;
+                startPosition = transform.position;
+                destination = currentNode.transform.position;
+
+                currentNode.atStartEvent.Invoke();
+                return true;
+            }
+            else
+            {
+                //currentNode.atEndEvent.Invoke();
+                currentNode = null;
+            }
+        }
+        return false;
+
+    }
+    public bool HasArrived()
+    {
+        return arrived;
+    }
+    IEnumerator NodeTransition()
+    {
+        //En espera
+        currentNode.delayEvent.Invoke();
+        yield return new WaitForSeconds(currentNode.delay);
+
+        //Finalizar nodo.
+        currentNode.atEndEvent.Invoke();
+        arrived = true;
+        print("Putaso");
+
     }
 }
