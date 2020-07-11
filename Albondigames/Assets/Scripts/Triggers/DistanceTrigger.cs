@@ -9,6 +9,8 @@ class DistanceTrigger : Trigger
 
     Vector3 playerPosition;
 
+    public KeyCode interactionKey;
+
     private void Start()
     {
         //playerPosition = FindGameObjectOfType()
@@ -30,7 +32,7 @@ class DistanceTrigger : Trigger
             }
 
             //!Automatic
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(interactionKey))
             {
                 if (done) return;
 
