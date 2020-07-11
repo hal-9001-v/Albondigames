@@ -11,6 +11,7 @@ public class Dialogue : Triggerable
     public float delay = 0;
 
     public bool autoDialogue;
+    public bool locked;
     public float endDelay = 0.5f;
 
     public UnityEvent atStartActions;

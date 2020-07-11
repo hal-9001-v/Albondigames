@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour
     private string currentLine;
 
     private float delay = 0;
-    
+
     [HideInInspector]
     public Dialogue currentDialogue;
 
@@ -67,12 +67,12 @@ public class DialogueManager : MonoBehaviour
 
     public void triggerDialogue(Dialogue dialogue)
     {
-        if (free)
+        if (free || currentDialogue.locked)
         {
             myNameText.text = dialogue.speaker;
 
             currentDialogue = dialogue;
-            
+
             foreach (string line in dialogue.text)
             {
                 linesQueue.Enqueue(line);
@@ -85,7 +85,7 @@ public class DialogueManager : MonoBehaviour
 
     public void triggerAutoDialogue(Dialogue dialogue)
     {
-        if (free)
+        if (free || currentDialogue.locked)
         {
             myNameText.text = dialogue.speaker;
 
@@ -184,7 +184,8 @@ public class DialogueManager : MonoBehaviour
             dm.free = true;
             dm.hideText();
 
-            if (dm.currentDialogue != null) {
+            if (dm.currentDialogue != null)
+            {
                 dm.currentDialogue.atEndActions.Invoke();
             }
         }
@@ -331,7 +332,18 @@ public class DialogueManager : MonoBehaviour
         public void exit()
         {
             if (dm.isEmpty())
-                dm.hiddenState.enter();
+            {
+                if (!dm.currentDialogue.locked)
+                {
+                    dm.hiddenState.enter();
+
+                }
+                else
+                {
+                    dm.currentDialogue.atEndActions.Invoke();
+                }
+            }
+
             else
                 dm.typeState.enter();
         }
@@ -368,8 +380,14 @@ public class DialogueManager : MonoBehaviour
         {
             if (dm.isEmpty())
             {
-                dm.hiddenState.enter();
-                dm.currentDialogue.atEndActions.Invoke();
+                if (!dm.currentDialogue.locked)
+                {
+                    dm.hiddenState.enter();
+                }
+                else
+                {
+                    dm.currentDialogue.atEndActions.Invoke();
+                }
             }
             else
                 dm.autoTypeState.enter();

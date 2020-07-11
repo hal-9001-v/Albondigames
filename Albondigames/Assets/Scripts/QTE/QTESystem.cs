@@ -32,10 +32,8 @@ public class QTESystem : MonoBehaviour
             currentQTE = qte;
             readyState.setKey(qte.interactionKey);
             readyState.exit();
-
-
-            Debug.Log("Starting QTE of wait");
         }
+
     }
 
     public void triggerSpamQTE(QTE qte)
@@ -47,7 +45,6 @@ public class QTESystem : MonoBehaviour
             readyState.exitToSpam();
 
 
-            Debug.Log("Starting QTE of Spam");
         }
     }
 
@@ -59,7 +56,6 @@ public class QTESystem : MonoBehaviour
             readyState.setKey(qte.interactionKey);
             readyState.exitToCoordinate();
 
-            Debug.Log("Starting QTE of coordination");
         }
     }
 
@@ -139,7 +135,6 @@ public class QTESystem : MonoBehaviour
 
         public IEnumerator Execute()
         {
-            Debug.Log("Need to press " + interactionKey.ToString());
             while (!Input.GetKeyDown(interactionKey))
                 yield return null;
             exit();
@@ -208,9 +203,7 @@ public class QTESystem : MonoBehaviour
                 {
                     failureExit();
                     yield break;
-
                 }
-
 
                 yield return null;
             }
