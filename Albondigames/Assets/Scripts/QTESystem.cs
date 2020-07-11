@@ -92,6 +92,10 @@ public class QTESystem : MonoBehaviour
             mySystem.spamState.enter();
         }
 
+        public void exitToCoordinate() { 
+            mySystem.t
+        }
+
 
     }
 
