@@ -5,15 +5,20 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    public Dialogue currentDialogue;
-
-    public GameObject myTextObject;
+    
     private TextMeshProUGUI myText;
 
     private Queue<string> linesQueue;
     private string currentLine;
 
     private float delay = 0;
+    
+    [HideInInspector]
+    public Dialogue currentDialogue;
+
+    public GameObject myTextObject;
+
+    [HideInInspector]
     public bool free = false;
 
     public HiddenState hiddenState;

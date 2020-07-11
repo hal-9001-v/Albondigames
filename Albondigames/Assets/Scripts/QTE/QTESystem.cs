@@ -110,7 +110,7 @@ public class QTESystem : MonoBehaviour
         public void exitToCoordinate()
         {
             mySystem.free = false;
-            mySystem.spamState.setKey(interactionKey);
+            mySystem.coordinateState.setKey(interactionKey);
             mySystem.coordinateState.enter();
         }
 
@@ -161,8 +161,8 @@ public class QTESystem : MonoBehaviour
         QTESystem mySystem;
         KeyCode interactionKey;
 
-        int timesPressed;
-        float timeAvaliable;
+        int haveToPress;
+        float avaliableTime;
 
         public SpamState(QTESystem mySystem)
         {
@@ -176,25 +176,28 @@ public class QTESystem : MonoBehaviour
 
         public void enter()
         {
-            mySystem.StartCoroutine(Execute());
-
             //How many times to press
-            timesPressed = mySystem.currentQTE.timesPressed;
+            haveToPress = mySystem.currentQTE.haveToPress;
 
             //Time to press enogugh times
-            timeAvaliable = mySystem.currentQTE.timeAvaliable;
+            avaliableTime = mySystem.currentQTE.avaliableTime;
 
             mySystem.currentQTE.atStartActions.Invoke();
+
+            mySystem.StartCoroutine(Execute());
+
 
         }
 
         public IEnumerator Execute()
         {
+            Debug.Log("Need to SPAM " + interactionKey.ToString() + " " + haveToPress + " times");
 
-            Debug.Log("Need to SPAM " + interactionKey.ToString());
             int pressedCounter = 0;
+
             float timePassed = 0;
-            while (timesPressed < pressedCounter)
+
+            while (pressedCounter < haveToPress)
             {
                 if (Input.GetKeyDown(interactionKey))
                 {
@@ -203,9 +206,11 @@ public class QTESystem : MonoBehaviour
 
                 timePassed += Time.deltaTime;
 
-                if (timePassed > timeAvaliable)
+                if (timePassed > avaliableTime)
                 {
                     failureExit();
+                    yield break;
+
                 }
 
 
@@ -214,6 +219,73 @@ public class QTESystem : MonoBehaviour
 
             exit();
 
+
+        }
+
+        public void exit()
+        {
+            Debug.Log("Success");
+            mySystem.readyState.enter();
+            mySystem.currentQTE.atEndActions.Invoke();
+
+        }
+
+        public void failureExit()
+        {
+            Debug.Log("Failure");
+            mySystem.readyState.enter();
+            mySystem.currentQTE.atFailureActions.Invoke();
+
+        }
+
+
+    }
+
+    public class CoordinateState : IState
+    {
+        QTESystem mySystem;
+        KeyCode interactionKey;
+
+        float avaliableTime;
+
+        public CoordinateState(QTESystem mySystem)
+        {
+            this.mySystem = mySystem;
+        }
+
+        public void setKey(KeyCode key)
+        {
+            interactionKey = key;
+        }
+
+        public void enter()
+        {
+            //Time to press enogugh times
+            avaliableTime = mySystem.currentQTE.avaliableTime;
+
+            mySystem.currentQTE.atStartActions.Invoke();
+
+            mySystem.StartCoroutine(Execute());
+        }
+
+        public IEnumerator Execute()
+        {
+            float timePassed = 0;
+
+            while (timePassed < avaliableTime)
+            {
+                if (Input.GetKeyDown(interactionKey))
+                {
+                    exit();
+                    yield break;
+                }
+
+                timePassed += Time.deltaTime;
+
+                yield return null;
+            }
+
+            failureExit();
         }
 
         public void exit()
@@ -228,45 +300,6 @@ public class QTESystem : MonoBehaviour
             mySystem.readyState.enter();
             mySystem.currentQTE.atFailureActions.Invoke();
 
-        }
-
-
-    }
-
-    public class CoordinateState : IState
-    {
-        QTESystem mySystem;
-        KeyCode interactionKey;
-
-        public void setKey(KeyCode key)
-        {
-            interactionKey = key;
-        }
-
-        public CoordinateState(QTESystem mySystem)
-        {
-            this.mySystem = mySystem;
-        }
-
-        public void enter()
-        {
-
-        }
-
-        public IEnumerator Execute()
-        {
-            yield return null;
-        }
-
-        public void exit()
-        {
-
-            mySystem.waitState.enter();
-        }
-
-        public void exitToSpam()
-        {
-            mySystem.readyState.enter();
         }
 
 

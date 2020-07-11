@@ -8,11 +8,11 @@ public class QTE : MonoBehaviour
     public bool waitQTE;
 
     public bool spamQTE;
-    public int timesPressed;
+    public int haveToPress;
 
     public bool coordinateQTE;
 
-    public float timeAvaliable;
+    public float avaliableTime;
 
     public KeyCode interactionKey;
 
@@ -22,7 +22,7 @@ public class QTE : MonoBehaviour
     public UnityEvent atEndActions;
     public UnityEvent atFailureActions;
 
-    private void Start()
+    private void Awake()
     {
         mySystem = GameObject.FindObjectOfType<QTESystem>();
         

@@ -17,7 +17,7 @@ public class Dialogue : MonoBehaviour
 
 
     DialogueManager myDialogueManager;
-    void Start()
+    void Awake()
     {
         myDialogueManager = GameObject.FindObjectOfType<DialogueManager>();
 
@@ -27,7 +27,7 @@ public class Dialogue : MonoBehaviour
     {
 
         //Try to trigger this dialogue
-        if (autoDialogue)
+        if (!autoDialogue)
         {
             myDialogueManager.triggerDialogue(this);
         }
@@ -38,9 +38,5 @@ public class Dialogue : MonoBehaviour
 
     }
 
-    public void printThis()
-    {
-        Debug.Log("HOI");
-    }
 
 }
