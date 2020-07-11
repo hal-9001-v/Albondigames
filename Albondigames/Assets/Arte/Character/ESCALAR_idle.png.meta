@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 457137a333db5444c9997d097da10926
+guid: 961371877ad113d4ca1822b820291b69
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 974096244520303552
-    second: idle_TARSEQUIETO_0
+      213: -3623173856458629025
+    second: ESCALAR_idle_0
   - first:
-      213: -3186893175498922427
-    second: idle_TARSEQUIETO_1
+      213: 5348280182911865138
+    second: ESCALAR_idle_1
+  - first:
+      213: 279401828667834856
+    second: ESCALAR_idle_2
+  - first:
+      213: -5523568360173153957
+    second: ESCALAR_idle_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -53,7 +59,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -141,13 +147,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: idle_TARSEQUIETO_0
+      name: ESCALAR_idle_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 3
-        width: 48
-        height: 122
+        x: 12
+        y: 0
+        width: 45
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cbbca79f5fa48d00800000000000000
-      internalID: 974096244520303552
+      spriteID: f502d4ee296e7bdc0800000000000000
+      internalID: -3623173856458629025
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: idle_TARSEQUIETO_1
+      name: ESCALAR_idle_1
       rect:
         serializedVersion: 2
-        x: 73
-        y: 3
-        width: 48
-        height: 122
+        x: 71
+        y: 0
+        width: 45
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,8 +182,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5462541ba81e5c3d0800000000000000
-      internalID: -3186893175498922427
+      spriteID: 23119bd6d78e83a40800000000000000
+      internalID: 5348280182911865138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ESCALAR_idle_2
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 0
+        width: 45
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e1475b9b72a0e300800000000000000
+      internalID: 279401828667834856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ESCALAR_idle_3
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 0
+        width: 45
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b51da4f67d75853b0800000000000000
+      internalID: -5523568360173153957
       vertices: []
       indices: 
       edges: []

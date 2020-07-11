@@ -1,13 +1,25 @@
 fileFormatVersion: 2
-guid: 457137a333db5444c9997d097da10926
+guid: bc1d0f78fbaedc7418f8265ccdeda979
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 974096244520303552
-    second: idle_TARSEQUIETO_0
+      213: -6363517219651670841
+    second: PEGARSE_0
   - first:
-      213: -3186893175498922427
-    second: idle_TARSEQUIETO_1
+      213: -7626941655818653153
+    second: PEGARSE_1
+  - first:
+      213: -5492980622074744622
+    second: PEGARSE_2
+  - first:
+      213: 8814044014583916443
+    second: PEGARSE_3
+  - first:
+      213: 8990577317786722485
+    second: PEGARSE_4
+  - first:
+      213: -2074939951223879908
+    second: PEGARSE_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -141,13 +153,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: idle_TARSEQUIETO_0
+      name: PEGARSE_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 3
-        width: 48
-        height: 122
+        x: 0
+        y: 0
+        width: 64
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +167,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cbbca79f5fa48d00800000000000000
-      internalID: 974096244520303552
+      spriteID: 7cca498ddce30b7a0800000000000000
+      internalID: -6363517219651670841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: idle_TARSEQUIETO_1
+      name: PEGARSE_1
       rect:
         serializedVersion: 2
-        x: 73
-        y: 3
-        width: 48
-        height: 122
+        x: 70
+        y: 0
+        width: 64
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,8 +188,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5462541ba81e5c3d0800000000000000
-      internalID: -3186893175498922427
+      spriteID: f12bc4a29f8a72690800000000000000
+      internalID: -7626941655818653153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PEGARSE_2
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 0
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d0712f2a3305c3b0800000000000000
+      internalID: -5492980622074744622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PEGARSE_3
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b97aeeb1556c15a70800000000000000
+      internalID: 8814044014583916443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PEGARSE_4
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 0
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b0ac58bf62f4cc70800000000000000
+      internalID: 8990577317786722485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PEGARSE_5
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 0
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c17c80d9b155433e0800000000000000
+      internalID: -2074939951223879908
       vertices: []
       indices: 
       edges: []

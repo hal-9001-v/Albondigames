@@ -25,4 +25,5 @@ public class WindowProj : MonoBehaviour
         yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
     }
+
 }

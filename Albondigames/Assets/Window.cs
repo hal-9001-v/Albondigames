@@ -25,6 +25,7 @@ public class Window : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(proj);
+        proj =  Instantiate(proj, transform.position + new Vector3(4.75f,-5,0), transform.rotation);
+
     }
 }

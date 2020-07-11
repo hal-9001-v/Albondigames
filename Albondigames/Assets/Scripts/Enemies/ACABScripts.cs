@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public class RatBehaviour : MonoBehaviour
+public class ACABScripts : MonoBehaviour
 {
+
+
     public PlayerController playerGO;
 
     private Vector2 moveDirection;
-    public float chaseDistance = 5;
+    public float chaseDistance = 10000000000;
     public float moveSpeed = 5;
     public int hp = 6;
 
@@ -86,3 +86,5 @@ public class RatBehaviour : MonoBehaviour
         isHit = false;
     }
 }
+
+
