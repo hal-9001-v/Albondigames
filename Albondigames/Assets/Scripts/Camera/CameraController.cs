@@ -18,9 +18,9 @@ public class CameraController : MonoBehaviour
         public bool useVerticalLimits;
         public bool useHorizontalLimits;
         public float top;
+        public float bottom;
         public float right;
         public float left;
-        public float bottom;
     }
 
     //Modo normal.
@@ -28,6 +28,7 @@ public class CameraController : MonoBehaviour
     public GameObject transitionCanvas;
     //Instancia del jugador.
     public GameObject playerFollowed;
+    public Vector2 relativeFollowing;
 
     public Limits limits;
     public UnityEvent inTransition;
@@ -88,10 +89,10 @@ public class CameraController : MonoBehaviour
                 transform.position = Vector3.Lerp(startPosition, destination, timeCounter);
                 if (followingPlayer)
                 {
-                    destination = new Vector3(playerFollowed.transform.position.x,
-                        playerFollowed.transform.position.y, startPosition.z);
-                    destination = FitToLimits(destination);
+                    destination = new Vector3(playerFollowed.transform.position.x + relativeFollowing.x,
+                        playerFollowed.transform.position.y + relativeFollowing.y, startPosition.z);
                 }
+                destination = FitToLimits(destination);
             }
         }
     }
@@ -102,8 +103,8 @@ public class CameraController : MonoBehaviour
         //deberá ser realizado mediante FixedUpdate (físicas).
         if (followingPlayer && arrived)
         {
-            transform.position = new Vector3(playerFollowed.transform.position.x,
-                playerFollowed.transform.position.y, transform.position.z);
+            transform.position = new Vector3(playerFollowed.transform.position.x + relativeFollowing.x,
+                playerFollowed.transform.position.y + relativeFollowing.y, transform.position.z);
 
             //Ajustamos la cámara a los límites.
             camera.transform.position = FitToLimits(camera.transform.position);
@@ -130,8 +131,8 @@ public class CameraController : MonoBehaviour
                         timeCounter = 0;
                         timeToReachTarget = seconds;
                         startPosition = transform.position;
-                        destination = new Vector3(playerFollowed.transform.position.x,
-                            playerFollowed.transform.position.y, startPosition.z);
+                        destination = new Vector3(playerFollowed.transform.position.x + relativeFollowing.x,
+                            playerFollowed.transform.position.y + relativeFollowing.y, startPosition.z);
                     }
                     return true;
                 }
