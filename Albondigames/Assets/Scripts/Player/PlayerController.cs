@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,12 +11,16 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D bx2d;
     [SerializeField] private LayerMask lm;
     [SerializeField] private LayerMask ladm;
-
+    public PlayerStats ps;
+    public Punch punch;
     //Character attributes
     private float MOVEMENT_SPEED = 10f;
     private float CLIMBING_SPEED = 10f;
     private float xtraheight = .1f;
     private float midAirControl = 5f;
+    float jumpVelocity = 12f;
+    private bool inmune = false;
+    bool b = false;
 
     public int hp = 3;
     public int dmg = 1;
@@ -41,6 +46,10 @@ public class PlayerController : MonoBehaviour
     private void Awake(){
     rb2d = GetComponent<Rigidbody2D>();
     bx2d = GetComponent<BoxCollider2D>();
+    ps = FindObjectOfType<PlayerStats>();
+    punch = FindObjectOfType<Punch>();
+    initVars();
+    punch.SetActive(b);
 }
 
     // Update is called once per frame
@@ -63,7 +72,6 @@ public class PlayerController : MonoBehaviour
                     moveACounter = 5;
                     HandleMovement();
                         if(IsGrounded() && Input.GetKey(KeyCode.Space) && canMove) {
-                            float jumpVelocity = 12f;
                             rb2d.velocity = Vector2.up * jumpVelocity;
                 }
                 
@@ -86,14 +94,56 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
+    void initVars() {
+     hp = ps.hp;
 
-    public void Punch(){
-    
-        //TO DO
+}
 
+//TO DO
+// WHEN CHANGING SCENES CALL UPDATESTATS();
+
+        public void updateStats()
+        {
+            ps.hp = hp;
+
+        }
+
+
+
+    public void TakeDamage()
+    {
+        if (!inmune)
+        {
+            //SoundManager.PlaySound(SoundManager.Sound.mariOomph, 0.5f);
+
+            hp -= 1;
+            StartCoroutine(Inmunity());
+        }
+
+        if (hp <= 0)
+        {
+            die();
+        }
     }
 
+ IEnumerator Inmunity()
+    {
+        inmune = true;
+        yield return new WaitForSeconds(0.75f);
+        inmune = false;
+    }
+
+   
+    public void die()
+    {
+
+        rb2d.velocity = Vector2.zero;
+
+        Debug.LogWarning("Player Died");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex-1);
+
+    }
 
     public void Burp(){
    if(Input.GetKeyDown(KeyCode.E)) {
@@ -137,6 +187,12 @@ public class PlayerController : MonoBehaviour
         {
             canClimb = true;
         } 
+
+        if (col.gameObject.tag.Equals("Enemy")){
+
+            TakeDamage();
+            
+        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -146,12 +202,28 @@ public class PlayerController : MonoBehaviour
             canClimb = false;
         } 
     }
+  void FalconPunch(){
+      b = true;
+      inmune = true;
+    punch.SetActive(b);
+    StartCoroutine(PunchWait());
+   }
+   
+ IEnumerator PunchWait()
+    {
+        b = false;
+        
+        yield return new WaitForSeconds(0.75f);
+        inmune = false;
+    punch.SetActive(b);
+    }
+
 
     private void HandleMovement(){
         rb2d.gravityScale = 2;
 
-        if (canPunch){
-            Punch();
+        if (canPunch && Input.GetKeyDown(KeyCode.Q)){
+       FalconPunch();
         }
         Burp();
         if (Input.GetKey(KeyCode.A) && canMove) {
@@ -185,8 +257,8 @@ public class PlayerController : MonoBehaviour
     private void HandleInvertedMovement(){
       rb2d.gravityScale = 2;
 
-    if (canPunch){
-            Punch();
+    if (canPunch&& Input.GetKeyDown(KeyCode.Q)){
+           //
         }
         Burp();
         if (Input.GetKey(KeyCode.D) && canMove) {

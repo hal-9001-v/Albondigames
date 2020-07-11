@@ -24,7 +24,6 @@ public class GameAssets : MonoBehaviour
 
     public Sprite[] hpArray;
 
-
     
     [System.Serializable]
     public class SoundAudioClip {

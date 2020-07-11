@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ladder
+  - Enemy
+  - Punch
   layers:
   - Default
   - TransparentFX
@@ -19,7 +21,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Enemy
   - Platforms
   - Ladder
   - 
@@ -44,6 +46,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1772450289
+    locked: 0
+  - name: Foreground
+    uniqueID: 975971069
     locked: 0
   - name: Character
     uniqueID: 3578892447
