@@ -105,6 +105,46 @@ public class DialogueManager : MonoBehaviour
         return lineIsCompleted;
     }
 
+    public class AutoTypeState : IState
+    {
+        DialogueManager dm;
+
+        public State(DialogueManager dm)
+        {
+            this.dm = dm;
+        }
+
+        //Start typing
+        public void enter()
+        {
+            dm.nextSentence();
+
+            dm.StartCoroutine(Execute());
+        }
+
+        //Check for input so full sentence will appear.
+        public IEnumerator Execute()
+        {
+            yield return null;
+
+            while (!Input.GetKeyDown(KeyCode.Z))
+            {
+                if (dm.isEndOfLine())
+                {
+                    break;
+                }
+                yield return null;
+            }
+
+            dm.loadCurrentLine();
+            exit();
+        }
+
+        public void exit()
+        {
+            dm.idleState.enter();
+        }
+    }
 
     public class HiddenState : IState
     {
