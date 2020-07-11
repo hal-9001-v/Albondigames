@@ -65,15 +65,6 @@ public class CameraController : MonoBehaviour
         currentNode = null;
     }
 
-    private void OnGUI()
-    {
-        GUIStyle font = new GUIStyle(GUI.skin.GetStyle("label"));
-        font.fontSize = 64;
-        GUI.Label(new Rect(100, 100, 500, 300), "arrived: " + arrived, font);
-        GUI.Label(new Rect(100, 300, 500, 300), "followingPlayer: " + followingPlayer, font); 
-        GUI.Label(new Rect(100, 200, 500, 300), "currentNode: " + currentNode, font);
-    }
-
     private void FixedUpdate()
     {
         if (!arrived)
@@ -228,6 +219,23 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    //EVENTO DE TRANSICIONES.
+    public void setTransition(UnityAction action)
+    {
+        inTransition.RemoveAllListeners();
+        inTransition.AddListener(action);
+    }
+
+    public void addTransition(UnityAction action)
+    {
+        inTransition.AddListener(action);
+    }
+
+    public void removeTransition(UnityAction action)
+    {
+        inTransition.RemoveAllListeners();
+    }
+
     //Privados.
     private Vector3 FitToLimits(Vector3 pos)
     {
@@ -318,7 +326,5 @@ public class CameraController : MonoBehaviour
         //Finalizar nodo.
         currentNode.atEndEvent.Invoke();
         arrived = true;
-        print("Putaso");
-
     }
 }
