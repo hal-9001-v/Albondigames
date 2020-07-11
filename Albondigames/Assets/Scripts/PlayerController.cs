@@ -10,8 +10,24 @@ public class PlayerController : MonoBehaviour
     private float MOVEMENT_SPEED = 10f;
     private BoxCollider2D bx2d;
     [SerializeField] private LayerMask lm;
-
     string solo = "Space";
+
+    //GAME CONTROL BOOLEANS
+    // LEVEL 1
+    public bool jToMove = false; //
+    public bool canMove = true; //
+    public bool moveDCounterOn = false;//
+    public int moveDCounter = 0;//
+
+    // LEVEL 2
+    public bool invertedControls = false;//
+    public bool canPunch = true;//
+    
+
+    // LEVEL 3
+    public bool moveACounterOn = false;//
+    public int moveACounter = 0;//
+
 
     private void Awake(){
     rb2d = GetComponent<Rigidbody2D>();
@@ -21,14 +37,45 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleMovement();
-        if(IsGrounded() && Input.GetKey(KeyCode.Space)) {
-            float jumpVelocity = 12f;
-            rb2d.velocity = Vector2.up * jumpVelocity;
+        if(!invertedControls) {
+            
+            if ((moveDCounterOn && moveDCounter> 0) | (moveACounterOn && moveACounter > 0) ){
+                
+                if(moveDCounterOn && Input.GetKeyDown(KeyCode.D)){
+                moveDCounter--;
+                } else  if(moveACounterOn && Input.GetKeyDown(KeyCode.A)){
+                moveACounter--;
+                }  
+                } else {
+                    moveDCounterOn = false;
+                    moveACounterOn = false;
+                    moveDCounter = 5;
+                    moveACounter = 5;
+                    HandleMovement();
+                    if(IsGrounded() && Input.GetKey(KeyCode.Space) && canMove) {
+                    float jumpVelocity = 12f;
+                    rb2d.velocity = Vector2.up * jumpVelocity;
+                }
+                
         }
+        
+        } else {
+            HandleInvertedMovement();
+            if(IsGrounded() && Input.GetKey(KeyCode.Space) && canMove) {
+                float jumpVelocity = 12f;
+                rb2d.velocity = Vector2.up * jumpVelocity;
+            }
+        
+            }
     }
 
     private void FixedUpdate() {
+    }
+
+    public void Punch(){
+
+        //TO DO
+
     }
 
     public void Burp(){
@@ -70,30 +117,87 @@ public class PlayerController : MonoBehaviour
    }
 
     private void HandleMovement(){
+        if (canPunch){
+            Punch();
+        }
         float midAirControl = 5f;
         Burp();
-        if(Input.GetKey(KeyCode.W)) {
-        }
-        if(Input.GetKey(KeyCode.S)) {
-        }
-        if (Input.GetKey(KeyCode.A)) {
+        if (Input.GetKey(KeyCode.A) && canMove) {
             if(IsGrounded()){
             rb2d.velocity = new Vector2( -MOVEMENT_SPEED, rb2d.velocity.y);
             } else {
             rb2d.velocity += new Vector2( -MOVEMENT_SPEED*midAirControl* Time.deltaTime, 0);
             rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
             }
-        } else if(Input.GetKey(KeyCode.D)) {
+        } else if(Input.GetKey(KeyCode.D) && !jToMove && canMove)  {
                         if(IsGrounded()){
             rb2d.velocity = new Vector2( MOVEMENT_SPEED, rb2d.velocity.y);
             } else {
             rb2d.velocity += new Vector2( +MOVEMENT_SPEED *midAirControl * Time.deltaTime, 0);
             rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
             }
-        } else {
+        } else if (Input.GetKey(KeyCode.J) && jToMove && canMove) {
+               if(IsGrounded()){
+            rb2d.velocity = new Vector2( MOVEMENT_SPEED, rb2d.velocity.y);
+            } else {
+            rb2d.velocity += new Vector2( +MOVEMENT_SPEED *midAirControl * Time.deltaTime, 0);
+            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            }
+        }else {
             if(IsGrounded()) {
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         }
     }
+
+private void HandleInvertedMovement(){
+      
+if (canPunch){
+            Punch();
+        }
+        float midAirControl = 5f;
+        Burp();
+        if (Input.GetKey(KeyCode.D) && canMove) {
+            if(IsGrounded()){
+            rb2d.velocity = new Vector2( -MOVEMENT_SPEED, rb2d.velocity.y);
+            } else {
+            rb2d.velocity += new Vector2( -MOVEMENT_SPEED*midAirControl* Time.deltaTime, 0);
+            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            }
+        } else if(Input.GetKey(KeyCode.A) && !jToMove && canMove)  {
+                        if(IsGrounded()){
+            rb2d.velocity = new Vector2( MOVEMENT_SPEED, rb2d.velocity.y);
+            } else {
+            rb2d.velocity += new Vector2( +MOVEMENT_SPEED *midAirControl * Time.deltaTime, 0);
+            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            }
+        } else if (Input.GetKey(KeyCode.J) && jToMove && canMove) {
+               if(IsGrounded()){
+            rb2d.velocity = new Vector2( MOVEMENT_SPEED, rb2d.velocity.y);
+            } else {
+            rb2d.velocity += new Vector2( +MOVEMENT_SPEED *midAirControl * Time.deltaTime, 0);
+            rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -MOVEMENT_SPEED, +MOVEMENT_SPEED), rb2d.velocity.y);
+            }
+        }else {
+            if(IsGrounded()) {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            }
+        }
+
+
+    }
+
+private void HandleClimbMovement(){
+
+
+
+}
+
+private void HandleInvertedClimbMovement(){
+
+
+
+}
+
+
 }
