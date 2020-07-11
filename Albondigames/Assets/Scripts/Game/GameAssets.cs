@@ -22,6 +22,7 @@ public class GameAssets : MonoBehaviour
 
     public SoundAudioClip[] soundAudioClipArryay;
 
+    public Sprite[] hpArray;
 
 
     

@@ -52,3 +52,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: ce9b809cdb0283a4994b96b86df9627f, type: 3}
   - sound: 3
     audioClip: {fileID: 8300000, guid: d1d251a114fdaf84389bfd998bc56a6a, type: 3}
+  hpArray:
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

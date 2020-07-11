@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-  
+    //Unity Components
     private Rigidbody2D rb2d;
     private Vector3 moveDir;
-    private float MOVEMENT_SPEED = 10f;
-    private float CLIMBING_SPEED = 10f;
     private BoxCollider2D bx2d;
     [SerializeField] private LayerMask lm;
     [SerializeField] private LayerMask ladm;
 
+    //Character attributes
+    private float MOVEMENT_SPEED = 10f;
+    private float CLIMBING_SPEED = 10f;
+    private float xtraheight = .1f;
+    private float midAirControl = 5f;
+
+    public int hp = 3;
+    public int dmg = 1;
     //GAME CONTROL BOOLEANS
     // MOVEMENT
     public bool canClimb = false;
@@ -80,10 +86,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    
 
     public void Punch(){
-
+    
         //TO DO
 
     }
@@ -114,7 +120,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool IsGrounded(){
-        float xtraheight = .1f;
         RaycastHit2D rcht =  Physics2D.Raycast(bx2d.bounds.center, Vector2.down, bx2d.bounds.extents.y + xtraheight, lm);
         Color rc;
         if(rcht.collider != null) {
@@ -148,7 +153,6 @@ public class PlayerController : MonoBehaviour
         if (canPunch){
             Punch();
         }
-        float midAirControl = 5f;
         Burp();
         if (Input.GetKey(KeyCode.A) && canMove) {
             if(IsGrounded()){
@@ -181,10 +185,9 @@ public class PlayerController : MonoBehaviour
     private void HandleInvertedMovement(){
       rb2d.gravityScale = 2;
 
-if (canPunch){
+    if (canPunch){
             Punch();
         }
-        float midAirControl = 5f;
         Burp();
         if (Input.GetKey(KeyCode.D) && canMove) {
             if(IsGrounded()){
