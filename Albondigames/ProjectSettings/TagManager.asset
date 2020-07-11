@@ -7,6 +7,7 @@ TagManager:
   - Ladder
   - Enemy
   - Punch
+  - Platforms
   layers:
   - Default
   - TransparentFX

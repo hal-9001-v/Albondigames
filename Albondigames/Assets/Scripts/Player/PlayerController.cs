@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     private float MOVEMENT_SPEED = 10f;
     private float CLIMBING_SPEED = 10f;
     private float xtraheight = .1f;
-    private float midAirControl = 5f;
-    float jumpVelocity = 20f;
+    private float midAirControl = 4f;
+    float jumpVelocity = 15f;
     private bool inmune = false;
     bool b = false;
 
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
                 HandleInvertedMovement();
                 if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
                 {
-                    float jumpVelocity = 12f;
+                    float jumpVelocity = 20f;
                     rb2d.velocity = Vector2.up * jumpVelocity;
                 }
             }
