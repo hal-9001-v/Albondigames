@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -22,7 +24,11 @@ public class CameraController : MonoBehaviour
     }
 
     //Modo normal.
+    //Prefab del canvas.
+    public GameObject transitionCanvas;
+    //Instancia del jugador.
     public GameObject playerFollowed;
+
     public Limits limits;
     public UnityEvent inTransition;
 
@@ -39,6 +45,7 @@ public class CameraController : MonoBehaviour
     private Vector3 destination;
     private Vector3 startPosition;
     private bool arrived;
+    private bool usingNode;
     private float timeToReachTarget;
     private float timeCounter;
 
@@ -62,7 +69,7 @@ public class CameraController : MonoBehaviour
             nodeQueue.Enqueue(node);
         }
         arrived = true;
-        currentNode = null;
+        usingNode = false;
     }
 
     private void FixedUpdate()
@@ -73,7 +80,7 @@ public class CameraController : MonoBehaviour
             if (Vector3.Distance(destination, transform.position) < 0.05)
             {
                 transform.position = destination;
-                if (currentNode) StartCoroutine(NodeTransition());
+                if (usingNode) StartCoroutine(NodeTransition());
                 else arrived = true;
             }
             else
@@ -118,7 +125,6 @@ public class CameraController : MonoBehaviour
                     }
                     else
                     {
-                        currentNode = null;
                         followingPlayer = true;
                         arrived = false;
                         timeCounter = 0;
@@ -148,7 +154,6 @@ public class CameraController : MonoBehaviour
     {
         if (arrived)
         {
-            currentNode = null;
             followingPlayer = false;
             arrived = false;
             timeCounter = 0;
@@ -185,58 +190,72 @@ public class CameraController : MonoBehaviour
     //Transición a negro.
     public void TransitionToBlack(float seconds)
     {
-        RawImage canvas = GameObject.Find("Transiciones").GetComponentInChildren<RawImage>();
-        canvas.color = new Color(0, 0, 0, 0);
-        StartCoroutine(StartTransition(seconds, canvas));
+        if (transitionCanvas)
+        {
+            GameObject canvas = Instantiate(transitionCanvas, new Vector3(), Quaternion.identity);
+            canvas.GetComponent<Canvas>().worldCamera = Camera.current;
+            RawImage image = canvas.GetComponentInChildren<RawImage>();
+            image.color = new Color(0, 0, 0, 0);
+            StartCoroutine(StartTransition(seconds, canvas, image));
+        }
     }
     //Transición a blanco.
     public void TransitionToWhite(float seconds)
     {
-        RawImage canvas = GameObject.Find("Transiciones").GetComponentInChildren<RawImage>();
-        canvas.color = new Color(1, 1, 1, 0);
-        StartCoroutine(StartTransition(seconds, canvas));
+        if (transitionCanvas)
+        {
+            GameObject canvas = Instantiate(transitionCanvas, new Vector3(), Quaternion.identity);
+            canvas.GetComponent<Canvas>().worldCamera = Camera.current;
+            RawImage image = canvas.GetComponentInChildren<RawImage>();
+            image.color = new Color(1, 1, 1, 0);
+            StartCoroutine(StartTransition(seconds, canvas, image));
+        }
     }
 
-    IEnumerator StartTransition(float seconds, RawImage canvas)
+    IEnumerator StartTransition(float seconds, GameObject canvas, RawImage image)
     {
-        while (canvas.color.a < 1)
+        while (image.color.a < 1)
         {
-            canvas.color = new Color(canvas.color.r, canvas.color.g, canvas.color.b,
-                canvas.color.a + seconds * 0.5f * Time.deltaTime);
+            image.color = new Color(image.color.r, image.color.g, image.color.b,
+                image.color.a + seconds * 0.5f * Time.deltaTime);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         inTransition.Invoke();
         yield return new WaitForSeconds(Time.deltaTime);
-        StartCoroutine(EndTransition(seconds, canvas));
+        StartCoroutine(EndTransition(seconds, canvas, image));
     }
-    IEnumerator EndTransition(float seconds, RawImage canvas)
+    IEnumerator EndTransition(float seconds, GameObject canvas, RawImage image)
     {
-        while (canvas.color.a > 0)
+        while (image.color.a > 0)
         {
-            canvas.color = new Color(canvas.color.r, canvas.color.g, canvas.color.b,
-                canvas.color.a - seconds * 0.5f * Time.deltaTime);
+            image.color = new Color(image.color.r, image.color.g, image.color.b,
+                image.color.a - seconds * 0.5f * Time.deltaTime);
             yield return new WaitForSeconds(Time.deltaTime);
         }
+        Destroy(canvas);
     }
 
     //EVENTO DE TRANSICIONES.
+    //Establece evento de transicion.
     public void setTransition(UnityAction action)
     {
         inTransition.RemoveAllListeners();
         inTransition.AddListener(action);
     }
 
+    //Añade evento de transicion.
     public void addTransition(UnityAction action)
     {
         inTransition.AddListener(action);
     }
 
+    //Elimina eventos de transicion.
     public void removeTransition(UnityAction action)
     {
         inTransition.RemoveAllListeners();
     }
 
-    //Privados.
+    //Ajusta un Vector3 de posición a unos límites relativos a la cámara.
     private Vector3 FitToLimits(Vector3 pos)
     {
         Vector3 resultado = new Vector3();
@@ -286,37 +305,36 @@ public class CameraController : MonoBehaviour
     //Devuelve true si ha podido ejecutarse, false en caso contrario.
     public bool GoToNextNode()
     {
-        if (arrived)
+        if (arrived && nodeQueue.Count != 0)
         {
             followingPlayer = false;
+            arrived = false;
+            usingNode = true;
+            currentNode = nodeQueue.Dequeue();
 
-            if (nodeQueue.Count != 0)
-            {
-                arrived = false;
+            timeCounter = 0;
+            timeToReachTarget = currentNode.timeToGet;
+            startPosition = transform.position;
+            destination = currentNode.transform.position;
 
-                currentNode = nodeQueue.Dequeue();
-
-                timeCounter = 0;
-                timeToReachTarget = currentNode.timeToGet;
-                startPosition = transform.position;
-                destination = currentNode.transform.position;
-
-                currentNode.atStartEvent.Invoke();
-                return true;
-            }
-            else
-            {
-                //currentNode.atEndEvent.Invoke();
-                currentNode = null;
-            }
+            currentNode.atStartEvent.Invoke();
+            return true;
         }
         return false;
-
     }
+
+    //Comprueba si la cámara está disponible para moverse.
     public bool HasArrived()
     {
         return arrived;
     }
+
+    //Añade un nodo a las transiciones de la cámara.
+    public void addNode(CameraNode node)
+    {
+        nodeQueue.Enqueue(node);
+    }
+
     IEnumerator NodeTransition()
     {
         //En espera
@@ -326,5 +344,6 @@ public class CameraController : MonoBehaviour
         //Finalizar nodo.
         currentNode.atEndEvent.Invoke();
         arrived = true;
+        usingNode = false;
     }
 }
