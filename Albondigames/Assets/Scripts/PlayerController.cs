@@ -8,11 +8,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Vector3 moveDir;
     private float MOVEMENT_SPEED = 10f;
+    private float CLIMBING_SPEED = 10f;
     private BoxCollider2D bx2d;
     [SerializeField] private LayerMask lm;
-    string solo = "Space";
+    [SerializeField] private LayerMask ladm;
 
     //GAME CONTROL BOOLEANS
+    // MOVEMENT
+    public bool canClimb = false;
     // LEVEL 1
     public bool jToMove = false; //
     public bool canMove = true; //
@@ -37,14 +40,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!invertedControls) {
+        if (!canClimb){
+            if(!invertedControls) {
             
-            if ((moveDCounterOn && moveDCounter> 0) | (moveACounterOn && moveACounter > 0) ){
+                if ((moveDCounterOn && moveDCounter> 0) | (moveACounterOn && moveACounter > 0) ){
                 
-                if(moveDCounterOn && Input.GetKeyDown(KeyCode.D)){
-                moveDCounter--;
+                    if(moveDCounterOn && Input.GetKeyDown(KeyCode.D)){
+                        moveDCounter--;
                 } else  if(moveACounterOn && Input.GetKeyDown(KeyCode.A)){
-                moveACounter--;
+                        moveACounter--;
                 }  
                 } else {
                     moveDCounterOn = false;
@@ -52,9 +56,9 @@ public class PlayerController : MonoBehaviour
                     moveDCounter = 5;
                     moveACounter = 5;
                     HandleMovement();
-                    if(IsGrounded() && Input.GetKey(KeyCode.Space) && canMove) {
-                    float jumpVelocity = 12f;
-                    rb2d.velocity = Vector2.up * jumpVelocity;
+                        if(IsGrounded() && Input.GetKey(KeyCode.Space) && canMove) {
+                            float jumpVelocity = 12f;
+                            rb2d.velocity = Vector2.up * jumpVelocity;
                 }
                 
         }
@@ -65,18 +69,25 @@ public class PlayerController : MonoBehaviour
                 float jumpVelocity = 12f;
                 rb2d.velocity = Vector2.up * jumpVelocity;
             }
-        
-            }
+        }
+    } else if (canClimb){
+        if(!invertedControls){
+            HandleClimbMovement();
+        } else if (invertedControls) {
+            HandleInvertedClimbMovement();
+        }
     }
 
-    private void FixedUpdate() {
     }
+
+
 
     public void Punch(){
 
         //TO DO
 
     }
+
 
     public void Burp(){
    if(Input.GetKeyDown(KeyCode.E)) {
@@ -102,8 +113,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-   private bool IsGrounded(){
+    private bool IsGrounded(){
         float xtraheight = .1f;
         RaycastHit2D rcht =  Physics2D.Raycast(bx2d.bounds.center, Vector2.down, bx2d.bounds.extents.y + xtraheight, lm);
         Color rc;
@@ -116,7 +126,25 @@ public class PlayerController : MonoBehaviour
         return rcht.collider != null;
    }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag.Equals("Ladder"))
+        {
+            canClimb = true;
+        } 
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+                if (col.gameObject.tag.Equals("Ladder"))
+        {
+            canClimb = false;
+        } 
+    }
+
     private void HandleMovement(){
+        rb2d.gravityScale = 2;
+
         if (canPunch){
             Punch();
         }
@@ -150,8 +178,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-private void HandleInvertedMovement(){
-      
+    private void HandleInvertedMovement(){
+      rb2d.gravityScale = 2;
+
 if (canPunch){
             Punch();
         }
@@ -187,14 +216,55 @@ if (canPunch){
 
     }
 
-private void HandleClimbMovement(){
+    private void HandleClimbMovement(){
 
+rb2d.gravityScale = 0;
+if(Input.GetKeyDown(KeyCode.W)){
+            rb2d.velocity = new Vector2( 0, MOVEMENT_SPEED);
+}
+else if (Input.GetKeyDown(KeyCode.S)){
+                rb2d.velocity = new Vector2( 0, -MOVEMENT_SPEED);
+
+}
+ else if(Input.GetKeyDown(KeyCode.A)){
+               rb2d.velocity = new Vector2( -MOVEMENT_SPEED, 0);
+
+}
+ else if(Input.GetKeyDown(KeyCode.D)){
+               rb2d.velocity = new Vector2( MOVEMENT_SPEED, 0);
+
+} else {
+ rb2d.velocity = new Vector2(  rb2d.velocity.x, rb2d.velocity.y);
 
 
 }
 
-private void HandleInvertedClimbMovement(){
 
+}
+
+    private void HandleInvertedClimbMovement(){
+
+
+rb2d.gravityScale = 0;
+if(Input.GetKeyDown(KeyCode.S)){
+            rb2d.velocity = new Vector2( 0, MOVEMENT_SPEED);
+}
+else if (Input.GetKeyDown(KeyCode.W)){
+                rb2d.velocity = new Vector2( 0, -MOVEMENT_SPEED);
+
+}
+ else if(Input.GetKeyDown(KeyCode.D)){
+               rb2d.velocity = new Vector2( -MOVEMENT_SPEED, 0);
+
+}
+ else if(Input.GetKeyDown(KeyCode.A)){
+               rb2d.velocity = new Vector2( MOVEMENT_SPEED, 0);
+
+} else {
+ rb2d.velocity = new Vector2(  rb2d.velocity.x, rb2d.velocity.y);
+
+
+}
 
 
 }
