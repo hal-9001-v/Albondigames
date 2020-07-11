@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    public Dialogue currentDialogue;
+
     public GameObject myTextObject;
     private TextMeshProUGUI myText;
 
@@ -16,11 +18,16 @@ public class DialogueManager : MonoBehaviour
 
     public HiddenState hiddenState;
     public TypeState typeState;
-    public AutoTypeState autoTypeState;
     public IdleState idleState;
+
+    public AutoTypeState autoTypeState;
+    public TimedIdleState timedIdleState;
 
     private Coroutine typingChild;
     private bool lineIsCompleted;
+
+    //TECLA CON LA QUE INTERACTUAR
+    private KeyCode interactionKey = KeyCode.Z;
 
     void Awake()
     {
@@ -31,8 +38,10 @@ public class DialogueManager : MonoBehaviour
         //Creating States
         hiddenState = new HiddenState(this);
         typeState = new TypeState(this);
-        autoTypeState = new AutoTypeState(this);
         idleState = new IdleState(this);
+
+        autoTypeState = new AutoTypeState(this);
+        timedIdleState = new TimedIdleState(this);
 
 
     }
@@ -46,6 +55,8 @@ public class DialogueManager : MonoBehaviour
     {
         if (free)
         {
+            currentDialogue = dialogue;
+
             foreach (string line in dialogue.text)
             {
                 linesQueue.Enqueue(line);
@@ -56,16 +67,21 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void triggerAutoDialogue(Dialogue dialogue) {
+    public void triggerAutoDialogue(Dialogue dialogue)
+    {
         if (free)
         {
+            currentDialogue = dialogue;
+
+            timedIdleState.delayTime = dialogue.endDelay;
+
             foreach (string line in dialogue.text)
             {
                 linesQueue.Enqueue(line);
             }
             delay = dialogue.delay;
 
-            hiddenState.exit();
+            hiddenState.exitToAuto();
         }
     }
 
@@ -90,6 +106,10 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeText()
     {
+        //Letters to pass before it sounds again
+        int PERIOD = 5;
+        int counter = 0;
+
         currentLine = linesQueue.Dequeue();
 
         lineIsCompleted = false;
@@ -100,7 +120,14 @@ public class DialogueManager : MonoBehaviour
         {
             myText.text += c;
 
+
             yield return new WaitForSeconds(delay);
+
+            if (counter == PERIOD)
+            {
+                //SONIDO
+            }
+            counter++;
         }
 
         lineIsCompleted = true;
@@ -147,13 +174,16 @@ public class DialogueManager : MonoBehaviour
         {
             dm.free = false;
             dm.showText();
+            dm.currentDialogue.atStartActions.Invoke();
             dm.typeState.enter();
 
         }
 
-        public void exitToAuto() {
+        public void exitToAuto()
+        {
             dm.free = false;
             dm.showText();
+            dm.currentDialogue.atStartActions.Invoke();
             dm.autoTypeState.enter();
 
         }
@@ -161,10 +191,12 @@ public class DialogueManager : MonoBehaviour
     public class TypeState : IState
     {
         DialogueManager dm;
+        KeyCode interactionKey;
 
         public TypeState(DialogueManager dm)
         {
             this.dm = dm;
+            this.interactionKey = dm.interactionKey;
         }
 
         //Start typing
@@ -180,9 +212,10 @@ public class DialogueManager : MonoBehaviour
         {
             yield return null;
 
-            while (!Input.GetKeyDown(KeyCode.Z))
+            while (!Input.GetKeyDown(interactionKey))
             {
-                if (dm.isEndOfLine()) {
+                if (dm.isEndOfLine())
+                {
                     break;
                 }
                 yield return null;
@@ -221,7 +254,7 @@ public class DialogueManager : MonoBehaviour
         {
             yield return null;
 
-            while (dm.isEndOfLine())
+            while (!dm.isEndOfLine())
             {
                 yield return null;
             }
@@ -231,7 +264,7 @@ public class DialogueManager : MonoBehaviour
 
         public void exit()
         {
-            dm.hiddenState.enter();
+            dm.timedIdleState.enter();
         }
     }
 
@@ -239,16 +272,18 @@ public class DialogueManager : MonoBehaviour
     public class IdleState : IState
     {
         DialogueManager dm;
+        KeyCode interactionKey;
 
         public IdleState(DialogueManager dm)
         {
             this.dm = dm;
+            this.interactionKey = dm.interactionKey;
+
         }
 
         //Start Looking for input
         public void enter()
         {
-            Debug.Log("ENTERING IDLE");
             dm.StartCoroutine(Execute());
 
         }
@@ -258,7 +293,7 @@ public class DialogueManager : MonoBehaviour
         {
             yield return null;
 
-            while (!Input.GetKeyDown(KeyCode.Z))
+            while (!Input.GetKeyDown(interactionKey))
             {
                 yield return null;
             }
@@ -275,6 +310,46 @@ public class DialogueManager : MonoBehaviour
                 dm.typeState.enter();
         }
     }
+
+    public class TimedIdleState : IState
+    {
+        DialogueManager dm;
+
+        public float delayTime = 1f;
+
+        public TimedIdleState(DialogueManager dm)
+        {
+            this.dm = dm;
+        }
+
+        //Start Looking for input
+        public void enter()
+        {
+            dm.StartCoroutine(Execute());
+
+        }
+
+        //Check for input so a new line will appear or dialogue will end
+        public IEnumerator Execute()
+        {
+            yield return new WaitForSeconds(delayTime);
+            exit();
+
+        }
+
+        //Go to Hidden if no more lines exist or type a new line
+        public void exit()
+        {
+            if (dm.isEmpty())
+            {
+                dm.hiddenState.enter();
+                dm.currentDialogue.atEndActions.Invoke();
+            }
+            else
+                dm.autoTypeState.enter();
+        }
+    }
+
 
     private interface IState
     {
