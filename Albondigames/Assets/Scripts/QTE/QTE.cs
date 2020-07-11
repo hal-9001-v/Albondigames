@@ -13,6 +13,10 @@ public class QTE : MonoBehaviour
 
     private QTESystem mySystem;
 
+    public UnityEvent atStartActions;
+    public UnityEvent atEndActions;
+    public UnityEvent atFailureActions;
+
     private void Start()
     {
         mySystem = GameObject.FindObjectOfType<QTESystem>();
