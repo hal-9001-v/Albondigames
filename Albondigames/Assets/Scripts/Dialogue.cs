@@ -16,7 +16,7 @@ public class Dialogue : MonoBehaviour
 
     private void triggerDialogue() {
         //Try to trigger this dialogue
-        myDialogueManager.triggerDialogue(this);
+        myDialogueManager.triggerAutoDialogue(this);
         
     }
 

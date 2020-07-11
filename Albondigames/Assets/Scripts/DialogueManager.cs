@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
 
     public HiddenState hiddenState;
     public TypeState typeState;
+    public AutoTypeState autoTypeState;
     public IdleState idleState;
 
     private Coroutine typingChild;
@@ -30,6 +31,7 @@ public class DialogueManager : MonoBehaviour
         //Creating States
         hiddenState = new HiddenState(this);
         typeState = new TypeState(this);
+        autoTypeState = new AutoTypeState(this);
         idleState = new IdleState(this);
 
 
@@ -42,6 +44,19 @@ public class DialogueManager : MonoBehaviour
 
     public void triggerDialogue(Dialogue dialogue)
     {
+        if (free)
+        {
+            foreach (string line in dialogue.text)
+            {
+                linesQueue.Enqueue(line);
+            }
+            delay = dialogue.delay;
+
+            hiddenState.exit();
+        }
+    }
+
+    public void triggerAutoDialogue(Dialogue dialogue) {
         if (free)
         {
             foreach (string line in dialogue.text)
@@ -105,47 +120,6 @@ public class DialogueManager : MonoBehaviour
         return lineIsCompleted;
     }
 
-    public class AutoTypeState : IState
-    {
-        DialogueManager dm;
-
-        public State(DialogueManager dm)
-        {
-            this.dm = dm;
-        }
-
-        //Start typing
-        public void enter()
-        {
-            dm.nextSentence();
-
-            dm.StartCoroutine(Execute());
-        }
-
-        //Check for input so full sentence will appear.
-        public IEnumerator Execute()
-        {
-            yield return null;
-
-            while (!Input.GetKeyDown(KeyCode.Z))
-            {
-                if (dm.isEndOfLine())
-                {
-                    break;
-                }
-                yield return null;
-            }
-
-            dm.loadCurrentLine();
-            exit();
-        }
-
-        public void exit()
-        {
-            dm.idleState.enter();
-        }
-    }
-
     public class HiddenState : IState
     {
         DialogueManager dm;
@@ -174,6 +148,13 @@ public class DialogueManager : MonoBehaviour
             dm.free = false;
             dm.showText();
             dm.typeState.enter();
+
+        }
+
+        public void exitToAuto() {
+            dm.free = false;
+            dm.showText();
+            dm.autoTypeState.enter();
 
         }
     }
@@ -216,6 +197,44 @@ public class DialogueManager : MonoBehaviour
             dm.idleState.enter();
         }
     }
+
+
+    public class AutoTypeState : IState
+    {
+        DialogueManager dm;
+
+        public AutoTypeState(DialogueManager dm)
+        {
+            this.dm = dm;
+        }
+
+        //Start typing
+        public void enter()
+        {
+            dm.nextSentence();
+
+            dm.StartCoroutine(Execute());
+        }
+
+        //Check for input so full sentence will appear.
+        public IEnumerator Execute()
+        {
+            yield return null;
+
+            while (dm.isEndOfLine())
+            {
+                yield return null;
+            }
+
+            exit();
+        }
+
+        public void exit()
+        {
+            dm.hiddenState.enter();
+        }
+    }
+
 
     public class IdleState : IState
     {
