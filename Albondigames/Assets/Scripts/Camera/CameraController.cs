@@ -26,26 +26,33 @@ public class CameraController : MonoBehaviour
     public GameObject transitionCanvas;
     //Instancia del jugador.
     public GameObject playerFollowed;
+    public bool followingPlayer;
     public Vector2 relativeFollowing;
 
     public Limits limits;
     public UnityEvent inTransition;
 
     private new Camera camera;
-    private bool followingPlayer;
     private float startingSize;
     private float aspectRatio;
 
     //Modo cinemático.
     public CameraNode[] nodes;
+    public CameraZoomNode[] zoomNodes;
 
     private Queue<CameraNode> nodeQueue;
+    private Queue<CameraZoomNode> zoomNodeQueue;
     private CameraNode currentNode;
+    private CameraZoomNode currentZoomNode;
     private Vector3 destination;
     private Vector3 startPosition;
+    private float startZoom;
+    private float currentZoom;
+    private float destinationZoom;
     private bool arrived;
     private bool transition;
     private bool usingNode;
+    private bool usingZoomNode;
     private float timeToReachTarget;
     private float timeCounter;
 
@@ -57,7 +64,6 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {   //Inicializacion.
-        followingPlayer = playerFollowed ? true : false;
         startingSize = camera.orthographicSize;
         aspectRatio = (float) camera.pixelWidth / camera.pixelHeight;
         if (inTransition == null)
@@ -68,9 +74,16 @@ public class CameraController : MonoBehaviour
         {
             nodeQueue.Enqueue(node);
         }
+        zoomNodeQueue = new Queue<CameraZoomNode>();
+        foreach (CameraZoomNode node in zoomNodes)
+        {
+            zoomNodeQueue.Enqueue(node);
+        }
         arrived = true;
         usingNode = false;
+        usingZoomNode = false;
         transition = false;
+        currentZoom = 1;
     }
 
     private void FixedUpdate()
@@ -78,21 +91,37 @@ public class CameraController : MonoBehaviour
         if (!arrived && !transition)
         {
             timeCounter += Time.deltaTime / timeToReachTarget;
-            if (Vector3.Distance(destination, transform.position) < 0.05)
+            if (!usingZoomNode)
             {
-                transform.position = destination;
-                if (usingNode) StartCoroutine(NodeTransition());
-                else arrived = true;
+                if (Vector3.Distance(destination, transform.position) < 0.05)
+                {
+                    transform.position = destination;
+                    if (usingNode) StartCoroutine(NodeTransition());
+                    else arrived = true;
+                }
+                else
+                {
+                    transform.position = Vector3.Lerp(startPosition, destination, timeCounter);
+                    if (followingPlayer)
+                    {
+                        destination = new Vector3(playerFollowed.transform.position.x + relativeFollowing.x,
+                            playerFollowed.transform.position.y + relativeFollowing.y, startPosition.z);
+                    }
+                    destination = FitToLimits(destination);
+                }
             }
             else
             {
-                transform.position = Vector3.Lerp(startPosition, destination, timeCounter);
-                if (followingPlayer)
+                if (Mathf.Abs(destinationZoom - currentZoom) < Time.deltaTime / timeToReachTarget)
                 {
-                    destination = new Vector3(playerFollowed.transform.position.x + relativeFollowing.x,
-                        playerFollowed.transform.position.y + relativeFollowing.y, startPosition.z);
+                    SetZoom(destinationZoom);
+                    StartCoroutine(NodeZoomTransition());
                 }
-                destination = FitToLimits(destination);
+                else
+                {
+                    currentZoom = Mathf.Lerp(startZoom, destinationZoom, timeCounter);
+                    SetZoom(currentZoom);
+                }
             }
         }
     }
@@ -101,7 +130,7 @@ public class CameraController : MonoBehaviour
     {
         //Para que se siga correctamente al personaje, su movimiento
         //deberá ser realizado mediante FixedUpdate (físicas).
-        if (followingPlayer && arrived)
+        if (followingPlayer && (arrived || usingZoomNode))
         {
             transform.position = new Vector3(playerFollowed.transform.position.x + relativeFollowing.x,
                 playerFollowed.transform.position.y + relativeFollowing.y, transform.position.z);
@@ -167,11 +196,18 @@ public class CameraController : MonoBehaviour
     }
 
     //Establece un Zoom a la cámara (valores de 0 a 1 alejan el objetivo).
-    public bool SetZoom(float zoom)
+    public void SetZoom(float zoom)
     {
-        if (zoom <= 0) return false;
-        camera.orthographicSize = startingSize * (1 / zoom);
-        return true;
+        if (zoom > 0)
+        {
+            camera.orthographicSize = startingSize * (1 / zoom);
+            currentZoom = zoom;
+        }
+    }
+
+    public void SetRelativeFollowing(Vector2 rel)
+    {
+        relativeFollowing = rel;
     }
 
     //TRANSICIONES
@@ -242,6 +278,23 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public void GoToNextZoomNode()
+    {
+        if (arrived && zoomNodeQueue.Count != 0)
+        {
+            arrived = false;
+            usingZoomNode = true;
+            currentZoomNode = zoomNodeQueue.Dequeue();
+
+            timeCounter = 0;
+            timeToReachTarget = currentZoomNode.timeToGet;
+            startZoom = currentZoom;
+            destinationZoom = currentZoomNode.zoom;
+
+            currentZoomNode.atStartEvent.Invoke();
+        }
+    }
+
     //Comprueba si la cámara está disponible para moverse.
     public bool HasArrived()
     {
@@ -252,6 +305,11 @@ public class CameraController : MonoBehaviour
     public void AddNode(CameraNode node)
     {
         nodeQueue.Enqueue(node);
+    }
+
+    public void AddZoomNode(CameraZoomNode node)
+    {
+        zoomNodeQueue.Enqueue(node);
     }
 
     IEnumerator StartTransition(float seconds, GameObject canvas, RawImage image)
@@ -329,10 +387,25 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(currentNode.delay);
 
         //Finalizar nodo.
-        print("Llegado");
         arrived = true;
         usingNode = false;
         transition = false;
         currentNode.atEndEvent.Invoke();
     }
+
+    IEnumerator NodeZoomTransition()
+    {
+        //En espera
+        transition = true;
+        currentZoomNode.delayEvent.Invoke();
+        yield return new WaitForSeconds(currentZoomNode.delay);
+
+        //Finalizar nodo.
+        arrived = true;
+        usingZoomNode = false;
+        transition = false;
+        currentZoomNode.atEndEvent.Invoke();
+    }
+
+
 }

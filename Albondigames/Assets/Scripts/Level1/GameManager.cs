@@ -13,12 +13,13 @@ public class GameManager : MonoBehaviour
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        StartCoroutine(WaitCamera());
+        //StartCoroutine(WaitCamera());
     }
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
     IEnumerator WaitCamera()
@@ -28,5 +29,16 @@ public class GameManager : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         camera.GoToNextNode();
+    }
+
+    //Eventos
+    public void StopPlayer()
+    {
+        player.canMove = false;
+    }
+
+    public void MovePlayer()
+    {
+        player.canMove = true;
     }
 }

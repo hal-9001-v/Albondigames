@@ -2,18 +2,12 @@
 
 class Trigger : MonoBehaviour
 {
-    private Triggerable t;
     [Range(0, 10)]
     public float range;
 
-    private void Start()
-    {
-        t = GetComponent<Triggerable>();
-    }
-
     public void triggerAction()
     {
-        t.trigger();
+        GetComponent<Triggerable>().trigger();
     }
 
 
