@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject myTextObject;
 
     public GameObject myImageObject;
-    private SpriteRenderer myRawImage;
+    private SpriteRenderer mySpriteRenderer;
 
     private Queue<string> linesQueue;
     private string currentLine;
@@ -45,7 +45,7 @@ public class DialogueManager : MonoBehaviour
     {
         //Initializing
         myText = myTextObject.GetComponent<TextMeshProUGUI>();
-        myRawImage = myImageObject.GetComponent<SpriteRenderer>();
+        mySpriteRenderer = myImageObject.GetComponent<SpriteRenderer>();
         myNameText = myNameObject.GetComponent<TextMeshProUGUI>();
 
         linesQueue = new Queue<string>();
@@ -108,14 +108,14 @@ public class DialogueManager : MonoBehaviour
     {
         myNameText.enabled = true;
         myText.enabled = true;
-        myRawImage.enabled = true;
+        mySpriteRenderer.enabled = true;
     }
 
     public void hideText()
     {
         myNameText.enabled = false;
         myText.enabled = false;
-        myRawImage.enabled = false;
+        mySpriteRenderer.enabled = false;
     }
 
     public bool isEmpty()

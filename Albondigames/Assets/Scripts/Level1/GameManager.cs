@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
          player = FindObjectOfType<PlayerController>();
 
@@ -100,4 +102,15 @@ public class GameManager : MonoBehaviour
     {
         print("Wig");
     }
+    public void loadCreditScene()
+    {
+        SceneManager.LoadScene("CreditScene");
+
+    }
+    public void loadNegroScene()
+    {
+        SceneManager.LoadScene("Negro");
+
+    }
+
 }

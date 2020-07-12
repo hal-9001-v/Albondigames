@@ -1752,7 +1752,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223897480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 56.156113, y: 0.3859959, z: -175.84335}
+  m_LocalPosition: {x: 56.156113, y: 0.3859959, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 892182097}
@@ -16578,6 +16578,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 4.102618
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562445307485354988, guid: bd05bc25cb4a29b42b6ba4706b71ddfd,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562445307485354988, guid: bd05bc25cb4a29b42b6ba4706b71ddfd,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562445307485354988, guid: bd05bc25cb4a29b42b6ba4706b71ddfd,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562445307485354988, guid: bd05bc25cb4a29b42b6ba4706b71ddfd,
+        type: 3}
+      propertyPath: oneUse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562445307485354988, guid: bd05bc25cb4a29b42b6ba4706b71ddfd,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1865134584}
+    - target: {fileID: 5562445307485354988, guid: bd05bc25cb4a29b42b6ba4706b71ddfd,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: kill
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562445307485354988, guid: bd05bc25cb4a29b42b6ba4706b71ddfd,
+        type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5562445307485354989, guid: bd05bc25cb4a29b42b6ba4706b71ddfd,
         type: 3}

@@ -11,6 +11,7 @@ public class CutSceneNode : Triggerable
     public bool peeAnimation;
     public bool lieAnimation;
     public bool getUpAnimation;
+    public bool liedAnimation;
 
     public float timeDoingAnimation;
 
@@ -31,6 +32,7 @@ public class CutSceneNode : Triggerable
     bool peeing;
     bool lying;
     bool gettingUp;
+    bool lied;
 
     float timeCounter = 0;
 
@@ -52,7 +54,7 @@ public class CutSceneNode : Triggerable
     private void FixedUpdate()
     {
 
-        if (peeing || lying || gettingUp)
+        if (peeing || lying || gettingUp ||lied)
         {
             timeCounter += Time.deltaTime / timeToReachTarget;
 
@@ -63,10 +65,11 @@ public class CutSceneNode : Triggerable
 
                 myPlayerController.isPeeing = false;
                 myPlayerController.isLieing = false;
-                
+                myPlayerController.isLed = false;
                 myPlayerController.isGettingUp = false;
 
                 atEndOfAnimationEvent.Invoke();
+
 
             }
         }
@@ -94,7 +97,7 @@ public class CutSceneNode : Triggerable
 
                 atEndOfMovementEvent.Invoke();
 
-                if (peeAnimation || lieAnimation || getUpAnimation)
+                if (peeAnimation || lieAnimation || getUpAnimation||liedAnimation)
                     stillAnimation();
             }
         }
@@ -140,8 +143,14 @@ public class CutSceneNode : Triggerable
         if (gettingUp) {
 
         myPlayerController.isGettingUp = true;
-        } else {
+        }
+        if (lied)
+        {
 
+
+            myPlayerController.isLed = true;
+
+  
         }
     }
 
