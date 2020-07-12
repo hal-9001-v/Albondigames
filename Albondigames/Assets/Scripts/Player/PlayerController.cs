@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     float jumpVelocity = 20f;
     private bool inmune = false;
     bool b = false;
-
+    public int level = 0;
     public int hp = 3;
     //GAME CONTROL BOOLEANS
     // MOVEMENT
@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour
 
     public void updateStats()
     {
+        ps.level = level;
     }
 
 
@@ -164,8 +165,7 @@ public class PlayerController : MonoBehaviour
         int NUMBEROFDEATH = 6;
         int selectedScene;
 
-        selectedScene = Random.Range(3, 6);
-
+        selectedScene = ps.level;
         rb2d.velocity = Vector2.zero;
         
         canMove = false;
@@ -175,7 +175,19 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         
-        SceneManager.LoadScene(selectedScene);
+        if(selectedScene == 1){
+        SceneManager.LoadScene("End1");
+
+        } else if (selectedScene == 2) {
+        SceneManager.LoadScene("End2");
+
+
+        } else if (selectedScene == 3) {
+        SceneManager.LoadScene("End3");
+
+        }
+
+    
     }
 
     public void kill() {
@@ -555,9 +567,15 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void finalJump(){
+
+        
+
+    }
 
     public void nextScene()
     {
+        level++;
         updateStats();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Debug.Log("Changing Room");

@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject myTextObject;
 
     public GameObject myImageObject;
-    private RawImage myRawImage;
+    private SpriteRenderer myRawImage;
 
     private Queue<string> linesQueue;
     private string currentLine;
@@ -45,7 +45,7 @@ public class DialogueManager : MonoBehaviour
     {
         //Initializing
         myText = myTextObject.GetComponent<TextMeshProUGUI>();
-        myRawImage = myImageObject.GetComponent<RawImage>();
+        myRawImage = myImageObject.GetComponent<SpriteRenderer>();
         myNameText = myNameObject.GetComponent<TextMeshProUGUI>();
 
         linesQueue = new Queue<string>();

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
       if (camera != null){
         StartCoroutine(WaitCamera());
       }
+    }
 
 
     IEnumerator WaitCamera()
@@ -51,9 +52,21 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(ps.level);
     }
 
-    public void loadNextScene(){
+    public void loadNextSceneEnd1(){
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Level1");
+
+
+    }
+    public void loadNextSceneEnd2(){
+
+        SceneManager.LoadScene("Level2");
+
+
+    }
+    public void loadNextSceneEnd3(){
+
+        SceneManager.LoadScene("Level3");
 
 
     }

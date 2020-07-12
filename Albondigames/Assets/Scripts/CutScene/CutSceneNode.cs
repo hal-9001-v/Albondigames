@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -139,7 +138,10 @@ public class CutSceneNode : Triggerable
         }
 
         if (gettingUp) {
-            myPlayerController.isGettingUp = true;
+
+        myPlayerController.isGettingUp = true;
+        } else {
+
         }
     }
 
