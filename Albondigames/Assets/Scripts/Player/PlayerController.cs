@@ -566,7 +566,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Changing Room");
 
     }
+    public void invertControls()
+    {
+        this.invertedControls =! invertedControls;
 
+    }
 
 }
 
