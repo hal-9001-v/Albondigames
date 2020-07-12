@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6936012299663655574}
   m_Layer: 0
   m_Name: ACAB
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 929225639346145730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 929225640341785908}
   m_Father: {fileID: 0}
@@ -52,7 +52,7 @@ MonoBehaviour:
   moveSpeed: 12
   hp: 50000
   dmgCooldown: 1
-  hitForce: 10
+  hitForce: 5
   isHit: 0
   knockDownTime: 0.5
 --- !u!61 &2511500577507025599
@@ -68,7 +68,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.079256296, y: 0.7148571}
+  m_Offset: {x: 0.02604884, y: 0.8173876}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -79,7 +79,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.8785143, y: 8.889164}
+  m_Size: {x: 0.5530008, y: 1.257699}
   m_EdgeRadius: 0
 --- !u!50 &2180573450363515756
 Rigidbody2D:
@@ -115,7 +115,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06866944, y: 0.6474209}
+  m_Offset: {x: 0.025552034, y: 0.7840482}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -126,7 +126,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.7352145, y: 8.372841}
+  m_Size: {x: 0.45295858, y: 1.1900041}
   m_EdgeRadius: 0
 --- !u!1 &929225640341785911
 GameObject:
@@ -138,6 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 929225640341785908}
   - component: {fileID: 929225640341785906}
+  - component: {fileID: 3568610608650494658}
   m_Layer: 0
   m_Name: ACABSprite
   m_TagString: Enemy
@@ -154,7 +155,7 @@ Transform:
   m_GameObject: {fileID: 929225640341785911}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.75, z: 0}
-  m_LocalScale: {x: 23.025, y: 65.90906, z: 23.025}
+  m_LocalScale: {x: 1, y: 1, z: 23.025}
   m_Children: []
   m_Father: {fileID: 929225639346145731}
   m_RootOrder: 0
@@ -195,10 +196,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_SortingLayerID: 975971069
+  m_SortingLayer: 1
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 1721498637485225284, guid: 6f3c5609565c0c44ca68c98aa16b7b04,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -209,3 +211,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3568610608650494658
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929225640341785911}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7ee844cf31181294aadc1900529befff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

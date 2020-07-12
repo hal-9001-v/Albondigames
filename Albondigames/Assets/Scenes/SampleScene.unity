@@ -393,6 +393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7c2102d9b5aef42b1b69687ab11be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  initialPos: {x: 0, y: 0, z: 0}
+  randomPoint: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -787,12 +790,12 @@ PrefabInstance:
     - target: {fileID: 3840639023500709758, guid: 8e7d71ed816cab0478356440d1688e08,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.7
+      value: 23.3
       objectReference: {fileID: 0}
     - target: {fileID: 3840639023500709758, guid: 8e7d71ed816cab0478356440d1688e08,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.7
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 3840639023500709758, guid: 8e7d71ed816cab0478356440d1688e08,
         type: 3}
@@ -1104,12 +1107,12 @@ PrefabInstance:
     - target: {fileID: 3840639023500709758, guid: 8e7d71ed816cab0478356440d1688e08,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.1
+      value: 11.7
       objectReference: {fileID: 0}
     - target: {fileID: 3840639023500709758, guid: 8e7d71ed816cab0478356440d1688e08,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.7
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 3840639023500709758, guid: 8e7d71ed816cab0478356440d1688e08,
         type: 3}

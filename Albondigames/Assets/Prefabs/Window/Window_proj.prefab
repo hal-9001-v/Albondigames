@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4586331169175781021}
   - component: {fileID: 4586331169175781008}
   - component: {fileID: 2455405967266657017}
+  - component: {fileID: 4038218066491333941}
   m_Layer: 0
   m_Name: Window_proj
   m_TagString: EnemyBullet
@@ -70,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 975971069
-  m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingLayerID: -718173731
+  m_SortingLayer: 3
+  m_SortingOrder: 49
   m_Sprite: {fileID: 2686636952566528399, guid: d5dd441dc8c34b844be36a3f77490421,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallSpeed: 0.02
   lifeTime: 5
+  throwing: 0
 --- !u!95 &4586331169175781008
 Animator:
   serializedVersion: 3
@@ -144,3 +146,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0459423, y: 1.4568138}
   m_EdgeRadius: 0
+--- !u!114 &4038218066491333941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586331169175781020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4f6f475a8e1c2418dfd16a05161624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
