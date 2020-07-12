@@ -5,15 +5,15 @@ using UnityEngine;
 public class CamShake : MonoBehaviour
 {
 
-    Transform target;
-    Vector3 initialPos;
+    public Transform target;
+    public Vector3 initialPos;
     float pendingShakeDuration = 0f;
     bool isShaking = false;
     float intensity = 0.5f;
+    public Vector3 randomPoint;
     void Start()
     {
         target = GetComponent<Transform>();
-        initialPos = target.localPosition;
     }
 
 
@@ -26,6 +26,7 @@ public class CamShake : MonoBehaviour
     }
 
      private void Update() {
+         if(!isShaking) initialPos = target.localPosition;
          if(pendingShakeDuration >0 && !isShaking){
             StartCoroutine(DoShake());
          }
@@ -37,12 +38,12 @@ public class CamShake : MonoBehaviour
         var startTime = Time.realtimeSinceStartup;
         while(Time.realtimeSinceStartup < startTime + pendingShakeDuration){
 
-            var randomPoint = new Vector3(Random.Range(-1,1f) * intensity, Random.Range(-1f,1f) * intensity, initialPos.z);
-            target.localPosition = randomPoint;
+             randomPoint = new Vector3(Random.Range(-1,1f) * intensity, Random.Range(0f,1f) * intensity, 0);
+            target.localPosition += randomPoint;
             yield return null;
 
         }
-
+        
         target.localPosition = initialPos;
         pendingShakeDuration = 0f;
         isShaking = false;
