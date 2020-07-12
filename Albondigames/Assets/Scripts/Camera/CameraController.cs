@@ -1,7 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -33,7 +31,7 @@ public class CameraController : MonoBehaviour
     public Limits limits;
     public UnityEvent inTransition;
 
-    private Camera camera;
+    private new Camera camera;
     private bool followingPlayer;
     private float startingSize;
     private float aspectRatio;
@@ -46,6 +44,7 @@ public class CameraController : MonoBehaviour
     private Vector3 destination;
     private Vector3 startPosition;
     private bool arrived;
+    private bool transition;
     private bool usingNode;
     private float timeToReachTarget;
     private float timeCounter;
@@ -71,11 +70,12 @@ public class CameraController : MonoBehaviour
         }
         arrived = true;
         usingNode = false;
+        transition = false;
     }
 
     private void FixedUpdate()
     {
-        if (!arrived)
+        if (!arrived && !transition)
         {
             timeCounter += Time.deltaTime / timeToReachTarget;
             if (Vector3.Distance(destination, transform.position) < 0.05)
@@ -112,41 +112,28 @@ public class CameraController : MonoBehaviour
     }
     
     //Getters y Setters
-    public bool DoFollowPlayer(bool follow, float seconds)
+    public void DoFollowPlayer(float seconds)
     {
-        if (arrived)
+        if (arrived && playerFollowed && !followingPlayer)
         {
-            if (playerFollowed)
+            followingPlayer = true;
+            if (seconds > 0)
             {
-                if (!followingPlayer && follow)
-                {
-                    if (seconds <= 0)
-                    {
-                        followingPlayer = follow;
-                    }
-                    else
-                    {
-                        followingPlayer = true;
-                        arrived = false;
-                        timeCounter = 0;
-                        timeToReachTarget = seconds;
-                        startPosition = transform.position;
-                        destination = new Vector3(playerFollowed.transform.position.x + relativeFollowing.x,
-                            playerFollowed.transform.position.y + relativeFollowing.y, startPosition.z);
-                    }
-                    return true;
-                }
-                else
-                {
-                    followingPlayer = follow;
-                    return true;
-                }
+                arrived = false;
+                timeCounter = 0;
+                timeToReachTarget = seconds;
+                startPosition = transform.position;
+                destination = new Vector3(playerFollowed.transform.position.x + relativeFollowing.x,
+                    playerFollowed.transform.position.y + relativeFollowing.y, startPosition.z);
             }
-            return false;
         }
-        else
+    }
+
+    public void DoNotFollowPlayer()
+    {
+        if (arrived && playerFollowed && followingPlayer)
         {
-            return false;
+            followingPlayer = false;
         }
     }
 
@@ -213,6 +200,60 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    //EVENTO DE TRANSICIONES.
+    //Establece evento de transicion.
+    public void setTransition(UnityAction action)
+    {
+        inTransition.RemoveAllListeners();
+        inTransition.AddListener(action);
+    }
+
+    //Añade evento de transicion.
+    public void addTransition(UnityAction action)
+    {
+        inTransition.AddListener(action);
+    }
+
+    //Elimina eventos de transicion.
+    public void removeTransition(UnityAction action)
+    {
+        inTransition.RemoveAllListeners();
+    }
+
+    //MODO CINEMÁTICO.
+    //Desactiva el seguimiento de la cámara y realiza una transición
+    //a una posición dada en los segundos indicados en el nodo.
+    //Devuelve true si ha podido ejecutarse, false en caso contrario.
+    public void GoToNextNode()
+    {
+        if (arrived && nodeQueue.Count != 0)
+        {
+            followingPlayer = false;
+            arrived = false;
+            usingNode = true;
+            currentNode = nodeQueue.Dequeue();
+
+            timeCounter = 0;
+            timeToReachTarget = currentNode.timeToGet;
+            startPosition = transform.position;
+            destination = currentNode.transform.position;
+
+            currentNode.atStartEvent.Invoke();
+        }
+    }
+
+    //Comprueba si la cámara está disponible para moverse.
+    public bool HasArrived()
+    {
+        return arrived;
+    }
+
+    //Añade un nodo a las transiciones de la cámara.
+    public void AddNode(CameraNode node)
+    {
+        nodeQueue.Enqueue(node);
+    }
+
     IEnumerator StartTransition(float seconds, GameObject canvas, RawImage image)
     {
         while (image.color.a < 1)
@@ -234,26 +275,6 @@ public class CameraController : MonoBehaviour
             yield return new WaitForSeconds(Time.deltaTime);
         }
         Destroy(canvas);
-    }
-
-    //EVENTO DE TRANSICIONES.
-    //Establece evento de transicion.
-    public void setTransition(UnityAction action)
-    {
-        inTransition.RemoveAllListeners();
-        inTransition.AddListener(action);
-    }
-
-    //Añade evento de transicion.
-    public void addTransition(UnityAction action)
-    {
-        inTransition.AddListener(action);
-    }
-
-    //Elimina eventos de transicion.
-    public void removeTransition(UnityAction action)
-    {
-        inTransition.RemoveAllListeners();
     }
 
     //Ajusta un Vector3 de posición a unos límites relativos a la cámara.
@@ -300,51 +321,18 @@ public class CameraController : MonoBehaviour
         return resultado;
     }
 
-    //MODO CINEMÁTICO.
-    //Desactiva el seguimiento de la cámara y realiza una transición
-    //a una posición dada en los segundos indicados en el nodo.
-    //Devuelve true si ha podido ejecutarse, false en caso contrario.
-    public bool GoToNextNode()
-    {
-        if (arrived && nodeQueue.Count != 0)
-        {
-            followingPlayer = false;
-            arrived = false;
-            usingNode = true;
-            currentNode = nodeQueue.Dequeue();
-
-            timeCounter = 0;
-            timeToReachTarget = currentNode.timeToGet;
-            startPosition = transform.position;
-            destination = currentNode.transform.position;
-
-            currentNode.atStartEvent.Invoke();
-            return true;
-        }
-        return false;
-    }
-
-    //Comprueba si la cámara está disponible para moverse.
-    public bool HasArrived()
-    {
-        return arrived;
-    }
-
-    //Añade un nodo a las transiciones de la cámara.
-    public void addNode(CameraNode node)
-    {
-        nodeQueue.Enqueue(node);
-    }
-
     IEnumerator NodeTransition()
     {
         //En espera
+        transition = true;
         currentNode.delayEvent.Invoke();
         yield return new WaitForSeconds(currentNode.delay);
 
         //Finalizar nodo.
-        currentNode.atEndEvent.Invoke();
+        print("Llegado");
         arrived = true;
         usingNode = false;
+        transition = false;
+        currentNode.atEndEvent.Invoke();
     }
 }

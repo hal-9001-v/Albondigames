@@ -1,29 +1,32 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private CameraController camera;
+    private PlayerController player;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        StartCoroutine(WaitCamera());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+    }
+
+    IEnumerator WaitCamera()
+    {
+        while (!camera.HasArrived())
         {
-            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().GoToNextNode();
+            yield return new WaitForEndOfFrame();
         }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().GoToNextNode();
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().DoFollowPlayer(true, 3);
-        }
+        camera.GoToNextNode();
     }
 }
