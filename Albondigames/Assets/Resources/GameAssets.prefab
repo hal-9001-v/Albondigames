@@ -57,6 +57,6 @@ MonoBehaviour:
   - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  punchArray:
-  - {fileID: 0}
-  - {fileID: 0}
+  ps:
+  - {fileID: 4605870289476673694, guid: b863fda91c06a124aa21899f2ae2d09b, type: 3}
+  - {fileID: 7190177415685471686, guid: 88765393ccef6084795a08d1b0d83e1b, type: 3}

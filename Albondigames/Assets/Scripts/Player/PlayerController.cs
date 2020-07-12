@@ -11,8 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask lm;
     [SerializeField] private LayerMask ladm;
      PlayerStats ps;
+    ParticleSystem blood;
     public Punch[] punchArray = new Punch[2];
     private SpriteRenderer spr;
+    public CamShake shaker;
     //Character attributes
     private float MOVEMENT_SPEED = 10f;
     private float xtraheight = .1f;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public int hp = 3;
     //GAME CONTROL BOOLEANS
     // MOVEMENT
+    private bool canBurp = true;
     public bool canClimb = false;
     public bool isMoving = false;
     public bool isGrounded = true;
@@ -56,6 +59,7 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         bx2d = GetComponent<BoxCollider2D>();
         spr = GetComponent<SpriteRenderer>();
+        shaker = FindObjectOfType<CamShake>();
         if (ps == null)
             ps = FindObjectOfType<PlayerStats>();
         initVars();
@@ -119,21 +123,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    
 
     public void TakeDamage()
     {
         if (!inmune)
         {
             //SoundManager.PlaySound(SoundManager.Sound.mariOomph, 0.5f);
-
+            shaker.Shake(0.25f);
+            blood = GameAssets.i.ps[0];
+            Instantiate(blood, transform.localPosition, transform.rotation);
             hp -= 1;
             StartCoroutine(Inmunity());
         }
 
         if (hp <= 0)
         {
-            die();
+            StartCoroutine(Die());
         }
     }
 
@@ -144,22 +150,22 @@ public class PlayerController : MonoBehaviour
         inmune = false;
     }
 
-
-    public void die()
-    {
+    IEnumerator Die(){
 
         rb2d.velocity = Vector2.zero;
-
+        gameObject.SetActive(false);
         Debug.LogWarning("Player Died");
-
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-
     }
+  
+   
 
     public void Burp()
     {
-        if (Input.GetKeyDown(KeyCode.E) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.E) && isGrounded && canBurp)
         {
+            canBurp = false;
             float r = Random.Range(1, 5);
             Debug.Log(r);
             switch (r)
@@ -190,10 +196,12 @@ public class PlayerController : MonoBehaviour
     {
         isBurping = true;
         canMove = false;
+        shaker.Shake(0.5f);
         yield return new WaitForSeconds(0.75f);
         canMove = true;
         isBurping = false;
         inmune = false;
+        canBurp = true;
     }
 
     private bool IsGrounded()
@@ -245,6 +253,7 @@ public class PlayerController : MonoBehaviour
     }
     void FalconPunch()
     {
+        canPunch = false;
         b = true;
         inmune = true;
         if(left){
@@ -255,6 +264,14 @@ public class PlayerController : MonoBehaviour
         punchArray[selPunch].SetActive(b);
         }
         StartCoroutine(PunchWait());
+        StartCoroutine(PunchShake());
+    }
+
+    IEnumerator PunchShake(){
+
+        yield return new WaitForSeconds(0.6f);
+        shaker.Shake(0.25f);
+
     }
 
     void AnimationHandler()
@@ -282,6 +299,7 @@ public class PlayerController : MonoBehaviour
         canMove = true;
         isPunching = false;
         inmune = false;
+        canPunch = true;
         punchArray[selPunch].SetActive(b);
     }
 

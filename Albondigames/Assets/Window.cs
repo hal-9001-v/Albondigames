@@ -11,6 +11,7 @@ public class Window : MonoBehaviour
     void Start()
     {
         lastShoot = Time.time;
+        proj.SetActive(true);
     }
 
     // Update is called once per frame
@@ -25,7 +26,7 @@ public class Window : MonoBehaviour
 
     void Shoot()
     {
-        proj =  Instantiate(proj, transform.position + new Vector3(4.75f,-5,0), transform.rotation);
+        Instantiate(proj, transform.position + new Vector3(4.75f,-5,0), transform.rotation);
 
     }
 }
