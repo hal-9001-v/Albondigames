@@ -11,6 +11,24 @@ public static class SoundManager {
        eructo2,
        eructo3,
        eructo4,
+       alarma,
+       caidaEscalera,
+       caidaLibre,
+       mear,
+       qte,
+       rataDmg,
+       rataDeath,
+       takeDmg,
+       jump,
+       charDeath,
+       acabDmg,
+       throwing,
+       bullet,
+       punch,
+       golpetaso,
+
+
+
     }
 
     private static GameObject oneShotGameObject;

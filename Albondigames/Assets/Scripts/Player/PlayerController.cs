@@ -12,9 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask ladm;
      PlayerStats ps;
     ParticleSystem blood;
-    public Punch punchArray;
-    [HideInInspector]
-    public SpriteRenderer spr;
+    public Punch[] punchArray = new Punch[2];
+    private SpriteRenderer spr;
     public CamShake shaker;
     //Character attributes
     private float MOVEMENT_SPEED = 10f;
@@ -64,7 +63,8 @@ public class PlayerController : MonoBehaviour
         if (ps == null)
             ps = FindObjectOfType<PlayerStats>();
         initVars();
-       punchArray.SetActive(b);
+       punchArray[0].SetActive(b);
+       punchArray[1].SetActive(b);
        
     }
 
@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
                  HandleMovement();
                 if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
                 {
+                    SoundManager.PlaySound(SoundManager.Sound.jump, 0.5f);
                     rb2d.velocity = Vector2.up * jumpVelocity;
                 }
                 }
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour
                 HandleInvertedMovement();
                 if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
                 {
+                    SoundManager.PlaySound(SoundManager.Sound.jump, 0.5f);
                     rb2d.velocity = Vector2.up * jumpVelocity;
                 }
             }
@@ -129,7 +131,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!inmune)
         {
-            //SoundManager.PlaySound(SoundManager.Sound.mariOomph, 0.5f);
+            SoundManager.PlaySound(SoundManager.Sound.takeDmg, 0.5f);
+
             shaker.Shake(0.25f);
             blood = GameAssets.i.ps[0];
             Instantiate(blood, transform.localPosition, transform.rotation);
@@ -155,6 +158,7 @@ public class PlayerController : MonoBehaviour
         rb2d.velocity = Vector2.zero;
         gameObject.SetActive(false);
         Debug.LogWarning("Player Died");
+        SoundManager.PlaySound(SoundManager.Sound.charDeath, 0.5f);
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
@@ -229,15 +233,22 @@ public class PlayerController : MonoBehaviour
 
         if (col.gameObject.tag.Equals("Enemy"))
         {
+        if(!inmune)   SoundManager.PlaySound(SoundManager.Sound.golpetaso, 0.5f);
 
             TakeDamage();
+
         }
 
         if (col.gameObject.tag.Equals("EnemyBullet"))
         {
             TakeDamage();
+            SoundManager.PlaySound(SoundManager.Sound.bullet, 0.5f);
             Destroy(col.gameObject);
+
         }  
+
+    
+
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -252,18 +263,47 @@ public class PlayerController : MonoBehaviour
         canPunch = false;
         b = true;
         inmune = true;
-      
-        punchArray.SetActive(b);
+        if(left){
+            selPunch = 1;
+            StartCoroutine(PunchRoutine(selPunch));
+        } else{
+            selPunch = 0;
+            StartCoroutine(PunchRoutine(selPunch));
+        }
         StartCoroutine(PunchWait());
         StartCoroutine(PunchShake());
+    }
+
+    IEnumerator PunchRoutine(int i){
+
+        yield return new WaitForSeconds(0.6f);
+        punchArray[selPunch].SetActive(true);
+
+
+    }  
+     IEnumerator PunchWait()
+    {
+        b = false;
+        isPunching = true;
+        canMove = false;
+        yield return new WaitForSeconds(0.75f);
+        canMove = true;
+        isPunching = false;
+        inmune = false;
+        canPunch = true;
+        punchArray[selPunch].SetActive(b);
     }
 
     IEnumerator PunchShake(){
 
         yield return new WaitForSeconds(0.6f);
+        SoundManager.PlaySound(SoundManager.Sound.punch, 0.3f);
         shaker.Shake(0.25f);
-
+        
+        
     }
+
+  
 
     void AnimationHandler()
     {
@@ -281,18 +321,7 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded()) { isGrounded = true; } else { isGrounded = false; }
 
     }
-    IEnumerator PunchWait()
-    {
-        b = false;
-        isPunching = true;
-        canMove = false;
-        yield return new WaitForSeconds(0.75f);
-        canMove = true;
-        isPunching = false;
-        inmune = false;
-        canPunch = true;
-        punchArray.SetActive(b);
-    }
+ 
 
 
     private void HandleMovement()
