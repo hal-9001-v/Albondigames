@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ladder
+  - Enemy
+  - Punch
+  - Platforms
   layers:
   - Default
   - TransparentFX
@@ -18,9 +22,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Platforms
+  - Ladder
   - 
   - 
   - 
@@ -40,4 +44,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1772450289
+    locked: 0
+  - name: Foreground
+    uniqueID: 975971069
+    locked: 0
+  - name: Character
+    uniqueID: 3578892447
+    locked: 0
+  - name: GUI
+    uniqueID: 2068765521
     locked: 0
