@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
       if (camera != null){
         StartCoroutine(WaitCamera());
       }
-    }
+
 
     IEnumerator WaitCamera()
     {
@@ -32,12 +32,12 @@ public class GameManager : MonoBehaviour
     //Eventos
     public void StopPlayer()
     {
-        player.canMove = false;
+        if (player != null) player.canMove = false;
     }
 
     public void MovePlayer()
     {
-        player.canMove = true;
+        if (player != null) player.canMove = true;
     }
     public void MoverCamara1()
     {
@@ -65,12 +65,12 @@ public class GameManager : MonoBehaviour
     }
      public void JToMove()
     {
-        player.jToMove = true;
+        if (player != null) player.jToMove = true;
     }
 
     public void DToMove()
     {
-        player.jToMove = false;
+        if (player != null) player.jToMove = false;
     }
 
     public void DontLookAtMe()

@@ -10,6 +10,7 @@ TagManager:
   - EnemyBullet
   - Platform
   - Platforms
+  - Coche
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Coche
   - 
   - 
   - 
