@@ -8,8 +8,8 @@ public class Anim : MonoBehaviour
     PlayerController player;
     void Awake(){
 
-        animator = FindObjectOfType<Animator>();
-        player = FindObjectOfType<PlayerController>();
+        animator = GetComponent<Animator>();
+        player = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame

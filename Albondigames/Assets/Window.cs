@@ -30,7 +30,7 @@ public class Window : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(proj, transform.position + new Vector3(4.75f,-5,0), transform.rotation);
+        Instantiate(proj, transform.position + new Vector3(1.5f,-2,0), transform.rotation);
         //Debug.Log(Vector2.Distance(gameObject.transform.position, player.transform.position));
 
         if(Vector2.Distance(gameObject.transform.position, player.transform.position) < 50f){
