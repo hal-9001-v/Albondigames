@@ -51,9 +51,6 @@ public class PlayerController : MonoBehaviour
     public bool invertedControls = false;//
     public bool canPunch = true;//
 
-
-
-
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();

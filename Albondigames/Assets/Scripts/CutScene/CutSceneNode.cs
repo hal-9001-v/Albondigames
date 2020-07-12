@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +10,8 @@ public class CutSceneNode : Triggerable
     public bool endRight;
 
     public bool peeAnimation;
-    public bool fallAnimation;
+    public bool lieAnimation;
+    public bool getUpAnimation;
 
     public float timeDoingAnimation;
 
@@ -28,7 +30,8 @@ public class CutSceneNode : Triggerable
 
     bool moving;
     bool peeing;
-    bool falling;
+    bool lying;
+    bool gettingUp;
 
     float timeCounter = 0;
 
@@ -50,17 +53,19 @@ public class CutSceneNode : Triggerable
     private void FixedUpdate()
     {
 
-        if (peeing || falling)
+        if (peeing || lying || gettingUp)
         {
             timeCounter += Time.deltaTime / timeToReachTarget;
 
             if (timeCounter > timeDoingAnimation)
             {
                 peeing = false;
-                falling = false;
+                lying = false;
 
                 myPlayerController.isPeeing = false;
-                myPlayerController.isFalling = false;
+                myPlayerController.isLieing = false;
+                
+                myPlayerController.isGettingUp = false;
 
                 atEndOfAnimationEvent.Invoke();
 
@@ -90,7 +95,7 @@ public class CutSceneNode : Triggerable
 
                 atEndOfMovementEvent.Invoke();
 
-                if (peeAnimation || fallAnimation)
+                if (peeAnimation || lieAnimation || getUpAnimation)
                     stillAnimation();
             }
         }
@@ -119,9 +124,22 @@ public class CutSceneNode : Triggerable
             myPlayerController.isPeeing = true;
         }
 
-        if (falling)
+        if (lying)
         {
-            myPlayerController.isFalling = true;
+            myPlayerController.isLieing = true;
+            myPlayerController.isGrounded = true;
+            myPlayerController.isClimbing = false;
+
+            Animator a = myPlayerController.gameObject.GetComponent<Animator>();
+
+            a.SetBool("Lieing", true);
+            a.SetBool("Grounded",true);//ç
+            a.SetBool("Climbing", false);
+
+        }
+
+        if (gettingUp) {
+            myPlayerController.isGettingUp = true;
         }
     }
 
@@ -145,8 +163,12 @@ public class CutSceneNode : Triggerable
             peeing = true;
 
 
-        if (fallAnimation)
-            falling = true;
+        if (lieAnimation)
+            lying = true;
+
+        if (getUpAnimation)
+            gettingUp = true;
+
 
         timeCounter = 0;
     }
