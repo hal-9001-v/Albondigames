@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6223554988410661959}
-  - component: {fileID: 6223554988410661958}
-  - component: {fileID: 6223554988410661957}
+  - component: {fileID: 7844479726400930798}
+  - component: {fileID: 3073230258627941415}
   m_Layer: 0
   m_Name: DistanceDialogue
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6223554988410661958
+--- !u!114 &7844479726400930798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,13 +41,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6223554988410661956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4292d56872581440808963b93f5372b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b9d35c50e593aa4d8a010259bbc0766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speaker: 
   text: []
-  delay: 0.1
+  delay: 0
   autoDialogue: 0
+  locked: 0
   endDelay: 0.5
   atStartActions:
     m_PersistentCalls:
@@ -55,7 +56,7 @@ MonoBehaviour:
   atEndActions:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6223554988410661957
+--- !u!114 &3073230258627941415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b91134a251748b4c9f82744f3259e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
+  range: 0
   automatic: 0
   onlyOnce: 0
   interactionKey: 122

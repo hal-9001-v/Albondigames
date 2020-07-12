@@ -7,20 +7,19 @@ class DistanceTrigger : Trigger
     public bool automatic;
     public bool onlyOnce;
 
-    Vector3 playerPosition;
+    GameObject player;
 
     public KeyCode interactionKey;
 
     private void Start()
     {
-        //playerPosition = FindGameObjectOfType()
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
     {
-        if (Vector2.Distance(new Vector2(playerPosition.x, playerPosition.y), new Vector2(playerPosition.x, playerPosition.y)) < range)
+        if (Vector2.Distance(new Vector2(player.transform.position.x, player.transform.position.y), new Vector2(transform.position.x, transform.position.y)) < range)
         {
-
             if (automatic)
             {
                 if (onlyOnce && !done)
