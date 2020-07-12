@@ -24,11 +24,7 @@ public class GameAssets : MonoBehaviour
 
     public Sprite[] hpArray;
 
-<<<<<<< HEAD
     public ParticleSystem[] ps;
-=======
-    
->>>>>>> montaje
     [System.Serializable]
     public class SoundAudioClip {
 

@@ -11,13 +11,8 @@ public class RatBehaviour : MonoBehaviour
     private Vector2 moveDirection;
     public float chaseDistance = 5;
     public float moveSpeed = 5;
-<<<<<<< HEAD
     public int hp = 6;
     ParticleSystem blood;
-=======
-    public int hp = 3;
-
->>>>>>> montaje
     public float dmgCooldown = 1f;
     private float lastHit;
     public float hitForce = 3;
@@ -75,23 +70,17 @@ public class RatBehaviour : MonoBehaviour
     {
         yield return null;
         Destroy(gameObject);
-<<<<<<< HEAD
         SoundManager.PlaySound(SoundManager.Sound.rataDeath, 0.5f);
-=======
->>>>>>> montaje
     }
 
     IEnumerator takeDamage()
     {
-<<<<<<< HEAD
         blood = GameAssets.i.ps[1];
         
             Instantiate(blood, transform.localPosition + new Vector3(0,2,0), transform.rotation);
         
            
         SoundManager.PlaySound(SoundManager.Sound.rataDmg, 0.5f);
-=======
->>>>>>> montaje
         hp -= 1;
         isHit = true;
         yield return new WaitForSeconds(knockDownTime);

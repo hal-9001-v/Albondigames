@@ -41,23 +41,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1995829435568910788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: d4292d56872581440808963b93f5372b, type: 3}
-=======
-  m_Script: {fileID: 11500000, guid: 6b9d35c50e593aa4d8a010259bbc0766, type: 3}
->>>>>>> montaje
   m_Name: 
   m_EditorClassIdentifier: 
   speaker: 
   text: []
-<<<<<<< HEAD
   delay: 0.1
   autoDialogue: 0
-=======
-  delay: 0
-  autoDialogue: 0
-  locked: 0
->>>>>>> montaje
   endDelay: 0.5
   atStartActions:
     m_PersistentCalls:

@@ -52,7 +52,6 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: ce9b809cdb0283a4994b96b86df9627f, type: 3}
   - sound: 3
     audioClip: {fileID: 8300000, guid: d1d251a114fdaf84389bfd998bc56a6a, type: 3}
-<<<<<<< HEAD
   - sound: 4
     audioClip: {fileID: 8300000, guid: 92f3c430c5183fe4792aae7d6a22d78c, type: 3}
   - sound: 5
@@ -85,18 +84,12 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 98753c613624e52499d2d8d2af711cd2, type: 3}
   - sound: 3
     audioClip: {fileID: 8300000, guid: d1d251a114fdaf84389bfd998bc56a6a, type: 3}
-=======
->>>>>>> montaje
   hpArray:
   - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-<<<<<<< HEAD
   ps:
   - {fileID: 4605870289476673694, guid: b863fda91c06a124aa21899f2ae2d09b, type: 3}
   - {fileID: 6835205976182648405, guid: 1b563c3f707ee6641b115f1856ed616e, type: 3}
   - {fileID: 3152114164868151810, guid: cdfb64628dd95ac479e7a097bde3d26d, type: 3}
-=======
-  punch: {fileID: 2539447205491517403, guid: c197faa7d8b261c44b46629efce6d8e2, type: 3}
->>>>>>> montaje
