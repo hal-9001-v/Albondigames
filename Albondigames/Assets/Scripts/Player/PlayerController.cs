@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     //Unity Components
     private Rigidbody2D rb2d;
+<<<<<<< HEAD
     private BoxCollider2D bx2d;
     [SerializeField] private LayerMask lm;
     [SerializeField] private LayerMask ladm;
@@ -20,13 +21,34 @@ public class PlayerController : MonoBehaviour
     private float xtraheight = .1f;
     private float midAirControl = 5f;
     float jumpVelocity = 20f;
+=======
+    private Vector3 moveDir;
+    private BoxCollider2D bx2d;
+    [SerializeField] private LayerMask lm;
+    [SerializeField] private LayerMask ladm;
+    public PlayerStats ps;
+    public Punch punch;
+    private SpriteRenderer spr;
+    //Character attributes
+    private float MOVEMENT_SPEED = 10f;
+    private float CLIMBING_SPEED = 10f;
+    private float xtraheight = .1f;
+    private float midAirControl = 4f;
+    float jumpVelocity = 15f;
+>>>>>>> montaje
     private bool inmune = false;
     bool b = false;
 
     public int hp = 3;
+<<<<<<< HEAD
     //GAME CONTROL BOOLEANS
     // MOVEMENT
     private bool canBurp = true;
+=======
+    public int dmg = 1;
+    //GAME CONTROL BOOLEANS
+    // MOVEMENT
+>>>>>>> montaje
     public bool canClimb = false;
     public bool isMoving = false;
     public bool isGrounded = true;
@@ -40,18 +62,32 @@ public class PlayerController : MonoBehaviour
     public bool isGettingUp = false;
     public bool isClimbing = false;
     public bool isWalking = false;
+<<<<<<< HEAD
      bool left = false;
      int selPunch;
+=======
+>>>>>>> montaje
 
     // LEVEL 1
     public bool jToMove = false; //
     public bool canMove = true; //
+<<<<<<< HEAD
+=======
+    public bool moveDCounterOn = false;//
+    public int moveDCounter = 0;//
+>>>>>>> montaje
 
     // LEVEL 2
     public bool invertedControls = false;//
     public bool canPunch = true;//
 
 
+<<<<<<< HEAD
+=======
+    // LEVEL 3
+    public bool moveACounterOn = false;//
+    public int moveACounter = 0;//
+>>>>>>> montaje
 
 
     private void Awake()
@@ -59,6 +95,7 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         bx2d = GetComponent<BoxCollider2D>();
         spr = GetComponent<SpriteRenderer>();
+<<<<<<< HEAD
         shaker = FindObjectOfType<CamShake>();
         if (ps == null)
             ps = FindObjectOfType<PlayerStats>();
@@ -66,6 +103,15 @@ public class PlayerController : MonoBehaviour
        punchArray[0].SetActive(b);
        punchArray[1].SetActive(b);
        
+=======
+
+        if (ps == null)
+            ps = FindObjectOfType<PlayerStats>();
+
+        punch = FindObjectOfType<Punch>();
+        initVars();
+        punch.SetActive(b);
+>>>>>>> montaje
     }
 
     // Update is called once per frame
@@ -76,6 +122,7 @@ public class PlayerController : MonoBehaviour
         if (!canClimb)
         {
             if (!invertedControls)
+<<<<<<< HEAD
             { 
                  HandleMovement();
                 if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
@@ -86,12 +133,47 @@ public class PlayerController : MonoBehaviour
                 }
 
             
+=======
+            {
+
+                if ((moveDCounterOn && moveDCounter > 0) | (moveACounterOn && moveACounter > 0))
+                {
+
+                    if (moveDCounterOn && Input.GetKeyDown(KeyCode.D))
+                    {
+                        moveDCounter--;
+                    }
+                    else if (moveACounterOn && Input.GetKeyDown(KeyCode.A))
+                    {
+                        moveACounter--;
+                    }
+                }
+                else
+                {
+                    moveDCounterOn = false;
+                    moveACounterOn = false;
+                    moveDCounter = 5;
+                    moveACounter = 5;
+                    HandleMovement();
+                    if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
+                    {
+                        rb2d.velocity = Vector2.up * jumpVelocity;
+                    }
+
+                }
+
+            }
+>>>>>>> montaje
             else
             {
                 HandleInvertedMovement();
                 if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
                 {
+<<<<<<< HEAD
                     SoundManager.PlaySound(SoundManager.Sound.jump, 0.5f);
+=======
+                    float jumpVelocity = 20f;
+>>>>>>> montaje
                     rb2d.velocity = Vector2.up * jumpVelocity;
                 }
             }
@@ -125,24 +207,37 @@ public class PlayerController : MonoBehaviour
 
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> montaje
 
     public void TakeDamage()
     {
         if (!inmune)
         {
+<<<<<<< HEAD
             SoundManager.PlaySound(SoundManager.Sound.takeDmg, 0.5f);
 
             shaker.Shake(0.25f);
             blood = GameAssets.i.ps[0];
             Instantiate(blood, transform.localPosition, transform.rotation);
+=======
+            //SoundManager.PlaySound(SoundManager.Sound.mariOomph, 0.5f);
+
+>>>>>>> montaje
             hp -= 1;
             StartCoroutine(Inmunity());
         }
 
         if (hp <= 0)
         {
+<<<<<<< HEAD
             StartCoroutine(Die());
+=======
+            die();
+>>>>>>> montaje
         }
     }
 
@@ -153,6 +248,7 @@ public class PlayerController : MonoBehaviour
         inmune = false;
     }
 
+<<<<<<< HEAD
     IEnumerator Die(){
 
         rb2d.velocity = Vector2.zero;
@@ -170,6 +266,24 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && isGrounded && canBurp)
         {
             canBurp = false;
+=======
+
+    public void die()
+    {
+
+        rb2d.velocity = Vector2.zero;
+
+        Debug.LogWarning("Player Died");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
+    }
+
+    public void Burp()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && isGrounded)
+        {
+>>>>>>> montaje
             float r = Random.Range(1, 5);
             Debug.Log(r);
             switch (r)
@@ -200,12 +314,18 @@ public class PlayerController : MonoBehaviour
     {
         isBurping = true;
         canMove = false;
+<<<<<<< HEAD
         shaker.Shake(0.5f);
+=======
+>>>>>>> montaje
         yield return new WaitForSeconds(0.75f);
         canMove = true;
         isBurping = false;
         inmune = false;
+<<<<<<< HEAD
         canBurp = true;
+=======
+>>>>>>> montaje
     }
 
     private bool IsGrounded()
@@ -233,11 +353,15 @@ public class PlayerController : MonoBehaviour
 
         if (col.gameObject.tag.Equals("Enemy"))
         {
+<<<<<<< HEAD
         if(!inmune)   SoundManager.PlaySound(SoundManager.Sound.golpetaso, 0.5f);
+=======
+>>>>>>> montaje
 
             TakeDamage();
 
         }
+<<<<<<< HEAD
 
         if (col.gameObject.tag.Equals("EnemyBullet"))
         {
@@ -249,6 +373,8 @@ public class PlayerController : MonoBehaviour
 
     
 
+=======
+>>>>>>> montaje
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -260,6 +386,7 @@ public class PlayerController : MonoBehaviour
     }
     void FalconPunch()
     {
+<<<<<<< HEAD
         canPunch = false;
         b = true;
         inmune = true;
@@ -305,6 +432,14 @@ public class PlayerController : MonoBehaviour
 
   
 
+=======
+        b = true;
+        inmune = true;
+        punch.SetActive(b);
+        StartCoroutine(PunchWait());
+    }
+
+>>>>>>> montaje
     void AnimationHandler()
     {
 
@@ -321,7 +456,21 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded()) { isGrounded = true; } else { isGrounded = false; }
 
     }
+<<<<<<< HEAD
  
+=======
+    IEnumerator PunchWait()
+    {
+        b = false;
+        isPunching = true;
+        canMove = false;
+        yield return new WaitForSeconds(0.75f);
+        canMove = true;
+        isPunching = false;
+        inmune = false;
+        punch.SetActive(b);
+    }
+>>>>>>> montaje
 
 
     private void HandleMovement()
@@ -340,9 +489,13 @@ public class PlayerController : MonoBehaviour
         Burp();
         if (Input.GetKey(KeyCode.A) && canMove)
         {
+<<<<<<< HEAD
             left = true;
             spr.flipX = true;
             
+=======
+            spr.flipX = true;
+>>>>>>> montaje
             if (IsGrounded())
             {
                 isWalking = true;
@@ -356,9 +509,13 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.D) && !jToMove && canMove)
         {
+<<<<<<< HEAD
             left = false;
             spr.flipX = false;
 
+=======
+            spr.flipX = false;
+>>>>>>> montaje
             if (IsGrounded())
             {
                 isWalking = true;
@@ -372,7 +529,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.J) && jToMove && canMove)
         {
+<<<<<<< HEAD
             left = false;
+=======
+>>>>>>> montaje
             spr.flipX = false;
             if (IsGrounded())
             {
@@ -397,7 +557,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInvertedMovement()
     {
+<<<<<<< HEAD
        rb2d.gravityScale = 3;
+=======
+        rb2d.gravityScale = 3;
+>>>>>>> montaje
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -411,12 +575,18 @@ public class PlayerController : MonoBehaviour
         Burp();
         if (Input.GetKey(KeyCode.D) && canMove)
         {
+<<<<<<< HEAD
             left = true;
             spr.flipX = true;
             
             if (IsGrounded())
             {
                 isWalking = true;
+=======
+            spr.flipX = true;
+            if (IsGrounded())
+            {
+>>>>>>> montaje
                 rb2d.velocity = new Vector2(-MOVEMENT_SPEED, rb2d.velocity.y);
             }
             else
@@ -427,12 +597,18 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.A) && !jToMove && canMove)
         {
+<<<<<<< HEAD
             left = false;
             spr.flipX = false;
 
             if (IsGrounded())
             {
                 isWalking = true;
+=======
+            spr.flipX = false;
+            if (IsGrounded())
+            {
+>>>>>>> montaje
                 rb2d.velocity = new Vector2(MOVEMENT_SPEED, rb2d.velocity.y);
             }
             else
@@ -443,11 +619,16 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.J) && jToMove && canMove)
         {
+<<<<<<< HEAD
             left = false;
             spr.flipX = false;
             if (IsGrounded())
             {
                 isWalking = true;
+=======
+            if (IsGrounded())
+            {
+>>>>>>> montaje
                 rb2d.velocity = new Vector2(MOVEMENT_SPEED, rb2d.velocity.y);
             }
             else
@@ -460,10 +641,17 @@ public class PlayerController : MonoBehaviour
         {
             if (IsGrounded())
             {
+<<<<<<< HEAD
                 isWalking = false;
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
         } 
+=======
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            }
+        }
+
+>>>>>>> montaje
     }
 
     private void HandleClimbMovement()

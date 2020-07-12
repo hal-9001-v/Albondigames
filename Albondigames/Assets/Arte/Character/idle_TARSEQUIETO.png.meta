@@ -144,12 +144,20 @@ TextureImporter:
       name: idle_TARSEQUIETO_0
       rect:
         serializedVersion: 2
+<<<<<<< HEAD
         x: 13
+=======
+        x: 5
+>>>>>>> montaje
         y: 3
         width: 48
         height: 122
       alignment: 0
+<<<<<<< HEAD
       pivot: {x: 0.5, y: 0.5}
+=======
+      pivot: {x: 0, y: 0}
+>>>>>>> montaje
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -165,12 +173,20 @@ TextureImporter:
       name: idle_TARSEQUIETO_1
       rect:
         serializedVersion: 2
+<<<<<<< HEAD
         x: 73
+=======
+        x: 64
+>>>>>>> montaje
         y: 3
         width: 48
         height: 122
       alignment: 0
+<<<<<<< HEAD
       pivot: {x: 0.5, y: 0.5}
+=======
+      pivot: {x: 0, y: 0}
+>>>>>>> montaje
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

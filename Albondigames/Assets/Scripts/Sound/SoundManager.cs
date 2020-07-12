@@ -11,6 +11,7 @@ public static class SoundManager {
        eructo2,
        eructo3,
        eructo4,
+<<<<<<< HEAD
        alarma,
        caidaEscalera,
        caidaLibre,
@@ -29,6 +30,8 @@ public static class SoundManager {
 
 
 
+=======
+>>>>>>> montaje
     }
 
     private static GameObject oneShotGameObject;

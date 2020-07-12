@@ -5,11 +5,19 @@ using UnityEngine;
 public class WindowProj : MonoBehaviour
 {
     public float fallSpeed = 0.4f;
+<<<<<<< HEAD
     public float lifeTime = 1;
 
    public void SetActive(bool b){
 
         gameObject.SetActive(b);
+=======
+    public float lifeTime = 5;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+>>>>>>> montaje
 
     }
 
@@ -25,6 +33,9 @@ public class WindowProj : MonoBehaviour
         yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> montaje
 }
