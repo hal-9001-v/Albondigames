@@ -66,6 +66,10 @@ public class RatBehaviour : MonoBehaviour
 
     }
 
+    public void kill() {
+        StartCoroutine(die());
+    }
+
     IEnumerator die()
     {
         yield return null;

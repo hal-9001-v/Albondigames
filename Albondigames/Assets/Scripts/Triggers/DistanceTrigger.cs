@@ -13,21 +13,23 @@ class DistanceTrigger : Trigger
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindObjectOfType<PlayerController>().gameObject;
     }
 
     private void Update()
     {
+
+        if (onlyOnce && done)
+            return;
+
         if (Vector2.Distance(new Vector2(player.transform.position.x, player.transform.position.y), new Vector2(transform.position.x, transform.position.y)) < range)
         {
             if (automatic)
             {
-                if (onlyOnce && !done)
-                {
+                    Debug.Log("Hoi");
                     triggerAction();
                     done = true;
                     return;
-                }
             }
 
             //!Automatic
