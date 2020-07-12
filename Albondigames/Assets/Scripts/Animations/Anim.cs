@@ -26,7 +26,7 @@ public class Anim : MonoBehaviour
         animator.SetBool("Lieing", player.isLieing);
         animator.SetBool("Lied", player.isLed);
         animator.SetBool("GettingUp", player.isGettingUp);
-        animator.SetBool("Climbing", player.isClimbing | player.isMoving);
+        animator.SetBool("Climbing", (player.isClimbing | player.isMoving) && player.canClimb);
         animator.SetBool("IdleClimbing", player.canClimb);//
     }
 }

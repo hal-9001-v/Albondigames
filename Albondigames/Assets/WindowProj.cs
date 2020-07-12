@@ -6,7 +6,7 @@ public class WindowProj : MonoBehaviour
 {
     public float fallSpeed = 0.4f;
     public float lifeTime = 1;
-
+    public bool throwing = false;
    public void SetActive(bool b){
 
         gameObject.SetActive(b);
@@ -22,8 +22,11 @@ public class WindowProj : MonoBehaviour
 
     IEnumerator Dissapear(float lifeTime)
     {
+        throwing = true;
         yield return new WaitForSeconds(lifeTime);
+        throwing = false;
         Destroy(gameObject);
+
     }
 
 

@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9176227781275010487}
   - component: {fileID: 9176227781275010484}
+  - component: {fileID: 4485943132043596431}
+  - component: {fileID: 3092748534620488799}
+  - component: {fileID: 7320261611186463908}
   m_Layer: 0
   m_Name: Rat_sprt
   m_TagString: Untagged
@@ -70,7 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 125f6bd525a1e8d428e5f4095286a7a8, type: 3}
+  m_Sprite: {fileID: 8312061054118343276, guid: 6fe278df3092d3e469830498ea7eb68b,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,6 +85,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4485943132043596431
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176227781275010486}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e438631d21543de4c9d0c94f53d03d01, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3092748534620488799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176227781275010486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0efe360df4c24bd43a6a9b25d18b8f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &7320261611186463908
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176227781275010486}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.07465947, y: -0.16893011}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.21, y: 1.3}
+    newSize: {x: 3.32, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.78744006, y: 0.9668592}
+  m_EdgeRadius: 0
 --- !u!1 &9176227781988629895
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,10 +151,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9176227781988629893}
-  - component: {fileID: 9176227781988629892}
-  - component: {fileID: 9176227781988629890}
-  - component: {fileID: 9176227781988629891}
-  - component: {fileID: 5365520708648588412}
+  - component: {fileID: 8370057958063422702}
+  - component: {fileID: 2665942661266505968}
+  - component: {fileID: 1623337612599877053}
+  - component: {fileID: 5289106888950424257}
   m_Layer: 0
   m_Name: Rat
   m_TagString: Enemy
@@ -110,13 +171,13 @@ Transform:
   m_GameObject: {fileID: 9176227781988629895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.96, y: 2.85, z: -1.5445312}
-  m_LocalScale: {x: 2.1235, y: 2.1235, z: 2.1235}
+  m_LocalScale: {x: 4, y: 4, z: 2.1235}
   m_Children:
   - {fileID: 9176227781275010487}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9176227781988629892
+--- !u!114 &8370057958063422702
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,14 +190,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerGO: {fileID: 0}
-  chaseDistance: 15
-  moveSpeed: 8
+  chaseDistance: 8
+  moveSpeed: 5
   hp: 5
   dmgCooldown: 1
-  hitForce: 6
+  hitForce: 2
   isHit: 0
   knockDownTime: 0.5
---- !u!50 &9176227781988629890
+--- !u!61 &2665942661266505968
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176227781988629895}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.059612036, y: -0.1266762}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.21, y: 1.3}
+    newSize: {x: 3.32, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.79762745, y: 0.9206977}
+  m_EdgeRadius: 0
+--- !u!50 &1623337612599877053
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -157,55 +244,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &9176227781988629891
-BoxCollider2D:
+--- !u!114 &5289106888950424257
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9176227781988629895}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0000009536743, y: 0.18054593}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.0629349, y: 6.416382}
-  m_EdgeRadius: 0
---- !u!61 &5365520708648588412
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9176227781988629895}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.040201187, y: 0.116281986}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.7688484, y: 6.15438}
-  m_EdgeRadius: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb3e3b5455917a43a03d5d9b89773fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
