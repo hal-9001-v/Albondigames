@@ -175,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 7895708017057647975}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.88, y: 0.92, z: -0.29625103}
-  m_LocalScale: {x: 8.218809, y: 8.218809, z: 8.218809}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 7895708016416592943}
   - {fileID: 7895708016773833302}
@@ -219,7 +219,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -716074849
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5394822052013080416, guid: e561c32d4569eaa4b9fe95791d54b602,
     type: 3}
@@ -254,8 +254,9 @@ MonoBehaviour:
   punchArray:
   - {fileID: 7895708016416592976}
   - {fileID: 7895708016773833303}
+  spr: {fileID: 0}
+  shaker: {fileID: 0}
   hp: 3
-  dmg: 1
   canClimb: 0
   isMoving: 0
   isGrounded: 1
@@ -271,12 +272,8 @@ MonoBehaviour:
   isWalking: 0
   jToMove: 0
   canMove: 1
-  moveDCounterOn: 0
-  moveDCounter: 0
   invertedControls: 0
   canPunch: 1
-  moveACounterOn: 0
-  moveACounter: 0
 --- !u!50 &7895708017057647980
 Rigidbody2D:
   serializedVersion: 4
