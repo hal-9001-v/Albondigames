@@ -144,6 +144,7 @@ public class QTESystem : MonoBehaviour
         {
             mySystem.readyState.enter();
             mySystem.currentQTE.atEndActions.Invoke();
+        }
     }
 
     public class SpamState : IState
@@ -300,7 +301,5 @@ public class QTESystem : MonoBehaviour
 
         IEnumerator Execute();
 
-
     }
-
 }

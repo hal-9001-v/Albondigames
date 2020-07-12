@@ -385,7 +385,7 @@ public class CameraController : MonoBehaviour
         transition = true;
         currentNode.delayEvent.Invoke();
         yield return new WaitForSeconds(currentNode.delay);
-
+        
         //Finalizar nodo.
         arrived = true;
         usingNode = false;
