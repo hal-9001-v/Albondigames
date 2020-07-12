@@ -269,4 +269,8 @@ public class LettersOnScreen : MonoBehaviour
         WASJ.enabled = false;
     }
 
+    public void changeTime(float times)
+    {
+        time = times;
+    }
 }
