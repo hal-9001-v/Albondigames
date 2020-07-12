@@ -19,6 +19,8 @@ public class Anim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+         
+
         animator.SetBool("Moving",player.isWalking);//
         animator.SetBool("Grounded", player.isGrounded);//
         animator.SetBool("Burping", player.isBurping);//

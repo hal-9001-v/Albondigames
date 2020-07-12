@@ -7,16 +7,16 @@ public class PlayerController : MonoBehaviour
 {
     //Unity Components
     private Rigidbody2D rb2d;
-    private Vector3 moveDir;
     private BoxCollider2D bx2d;
     [SerializeField] private LayerMask lm;
     [SerializeField] private LayerMask ladm;
-    public PlayerStats ps;
-    public Punch punch;
+     PlayerStats ps;
+    ParticleSystem blood;
+    public Punch[] punchArray = new Punch[2];
     private SpriteRenderer spr;
+    public CamShake shaker;
     //Character attributes
     private float MOVEMENT_SPEED = 10f;
-    private float CLIMBING_SPEED = 10f;
     private float xtraheight = .1f;
     private float midAirControl = 5f;
     float jumpVelocity = 20f;
@@ -24,9 +24,9 @@ public class PlayerController : MonoBehaviour
     bool b = false;
 
     public int hp = 3;
-    public int dmg = 1;
     //GAME CONTROL BOOLEANS
     // MOVEMENT
+    private bool canBurp = true;
     public bool canClimb = false;
     public bool isMoving = false;
     public bool isGrounded = true;
@@ -40,21 +40,18 @@ public class PlayerController : MonoBehaviour
     public bool isGettingUp = false;
     public bool isClimbing = false;
     public bool isWalking = false;
+     bool left = false;
+     int selPunch;
 
     // LEVEL 1
     public bool jToMove = false; //
     public bool canMove = true; //
-    public bool moveDCounterOn = false;//
-    public int moveDCounter = 0;//
 
     // LEVEL 2
     public bool invertedControls = false;//
     public bool canPunch = true;//
 
 
-    // LEVEL 3
-    public bool moveACounterOn = false;//
-    public int moveACounter = 0;//
 
 
     private void Awake()
@@ -62,11 +59,13 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         bx2d = GetComponent<BoxCollider2D>();
         spr = GetComponent<SpriteRenderer>();
+        shaker = FindObjectOfType<CamShake>();
         if (ps == null)
             ps = FindObjectOfType<PlayerStats>();
-        punch = FindObjectOfType<Punch>();
         initVars();
-        punch.SetActive(b);
+       punchArray[0].SetActive(b);
+       punchArray[1].SetActive(b);
+       
     }
 
     // Update is called once per frame
@@ -77,41 +76,20 @@ public class PlayerController : MonoBehaviour
         if (!canClimb)
         {
             if (!invertedControls)
-            {
-
-                if ((moveDCounterOn && moveDCounter > 0) | (moveACounterOn && moveACounter > 0))
+            { 
+                 HandleMovement();
+                if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
                 {
-
-                    if (moveDCounterOn && Input.GetKeyDown(KeyCode.D))
-                    {
-                        moveDCounter--;
-                    }
-                    else if (moveACounterOn && Input.GetKeyDown(KeyCode.A))
-                    {
-                        moveACounter--;
-                    }
+                    rb2d.velocity = Vector2.up * jumpVelocity;
                 }
-                else
-                {
-                    moveDCounterOn = false;
-                    moveACounterOn = false;
-                    moveDCounter = 5;
-                    moveACounter = 5;
-                    HandleMovement();
-                    if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
-                    {
-                        rb2d.velocity = Vector2.up * jumpVelocity;
-                    }
-
                 }
 
-            }
+            
             else
             {
                 HandleInvertedMovement();
                 if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
                 {
-                    float jumpVelocity = 12f;
                     rb2d.velocity = Vector2.up * jumpVelocity;
                 }
             }
@@ -145,21 +123,23 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    
 
     public void TakeDamage()
     {
         if (!inmune)
         {
             //SoundManager.PlaySound(SoundManager.Sound.mariOomph, 0.5f);
-
+            shaker.Shake(0.25f);
+            blood = GameAssets.i.ps[0];
+            Instantiate(blood, transform.localPosition, transform.rotation);
             hp -= 1;
             StartCoroutine(Inmunity());
         }
 
         if (hp <= 0)
         {
-            die();
+            StartCoroutine(Die());
         }
     }
 
@@ -170,22 +150,22 @@ public class PlayerController : MonoBehaviour
         inmune = false;
     }
 
-
-    public void die()
-    {
+    IEnumerator Die(){
 
         rb2d.velocity = Vector2.zero;
-
+        gameObject.SetActive(false);
         Debug.LogWarning("Player Died");
-
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-
     }
+  
+   
 
     public void Burp()
     {
-        if (Input.GetKeyDown(KeyCode.E) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.E) && isGrounded && canBurp)
         {
+            canBurp = false;
             float r = Random.Range(1, 5);
             Debug.Log(r);
             switch (r)
@@ -216,10 +196,12 @@ public class PlayerController : MonoBehaviour
     {
         isBurping = true;
         canMove = false;
+        shaker.Shake(0.5f);
         yield return new WaitForSeconds(0.75f);
         canMove = true;
         isBurping = false;
         inmune = false;
+        canBurp = true;
     }
 
     private bool IsGrounded()
@@ -251,6 +233,15 @@ public class PlayerController : MonoBehaviour
             TakeDamage();
 
         }
+
+        if (col.gameObject.tag.Equals("EnemyBullet"))
+        {
+            TakeDamage();
+            Destroy(col.gameObject);
+        }  
+
+    
+
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -262,10 +253,25 @@ public class PlayerController : MonoBehaviour
     }
     void FalconPunch()
     {
+        canPunch = false;
         b = true;
         inmune = true;
-        punch.SetActive(b);
+        if(left){
+            selPunch = 1;
+        punchArray[selPunch].SetActive(b);
+        } else{
+            selPunch = 0;
+        punchArray[selPunch].SetActive(b);
+        }
         StartCoroutine(PunchWait());
+        StartCoroutine(PunchShake());
+    }
+
+    IEnumerator PunchShake(){
+
+        yield return new WaitForSeconds(0.6f);
+        shaker.Shake(0.25f);
+
     }
 
     void AnimationHandler()
@@ -293,7 +299,8 @@ public class PlayerController : MonoBehaviour
         canMove = true;
         isPunching = false;
         inmune = false;
-        punch.SetActive(b);
+        canPunch = true;
+        punchArray[selPunch].SetActive(b);
     }
 
 
@@ -313,7 +320,9 @@ public class PlayerController : MonoBehaviour
         Burp();
         if (Input.GetKey(KeyCode.A) && canMove)
         {
+            left = true;
             spr.flipX = true;
+            
             if (IsGrounded())
             {
                 isWalking = true;
@@ -327,7 +336,9 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.D) && !jToMove && canMove)
         {
+            left = false;
             spr.flipX = false;
+
             if (IsGrounded())
             {
                 isWalking = true;
@@ -341,6 +352,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.J) && jToMove && canMove)
         {
+            left = false;
             spr.flipX = false;
             if (IsGrounded())
             {
@@ -365,7 +377,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInvertedMovement()
     {
-        rb2d.gravityScale = 3;
+       rb2d.gravityScale = 3;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -379,9 +391,12 @@ public class PlayerController : MonoBehaviour
         Burp();
         if (Input.GetKey(KeyCode.D) && canMove)
         {
+            left = true;
             spr.flipX = true;
+            
             if (IsGrounded())
             {
+                isWalking = true;
                 rb2d.velocity = new Vector2(-MOVEMENT_SPEED, rb2d.velocity.y);
             }
             else
@@ -392,9 +407,12 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.A) && !jToMove && canMove)
         {
+            left = false;
             spr.flipX = false;
+
             if (IsGrounded())
             {
+                isWalking = true;
                 rb2d.velocity = new Vector2(MOVEMENT_SPEED, rb2d.velocity.y);
             }
             else
@@ -405,8 +423,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.J) && jToMove && canMove)
         {
+            left = false;
+            spr.flipX = false;
             if (IsGrounded())
             {
+                isWalking = true;
                 rb2d.velocity = new Vector2(MOVEMENT_SPEED, rb2d.velocity.y);
             }
             else
@@ -419,10 +440,10 @@ public class PlayerController : MonoBehaviour
         {
             if (IsGrounded())
             {
+                isWalking = false;
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
-        }
-
+        } 
     }
 
     private void HandleClimbMovement()

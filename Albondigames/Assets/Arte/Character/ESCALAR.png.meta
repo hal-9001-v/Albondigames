@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 457137a333db5444c9997d097da10926
+guid: 3673b6bee74d14a4389ecdd3c8ef3a7e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 974096244520303552
-    second: idle_TARSEQUIETO_0
+      213: 758998134415950423
+    second: ESCALAR_0
   - first:
-      213: -3186893175498922427
-    second: idle_TARSEQUIETO_1
+      213: 4331409582649004516
+    second: ESCALAR_1
+  - first:
+      213: 4920848033411768286
+    second: ESCALAR_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -141,43 +144,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: idle_TARSEQUIETO_0
+      name: ESCALAR_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 3
-        width: 48
-        height: 122
+        x: 5
+        y: 0
+        width: 54
+        height: 128
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cbbca79f5fa48d00800000000000000
-      internalID: 974096244520303552
+      spriteID: 7520c0b28c0888a00800000000000000
+      internalID: 758998134415950423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: idle_TARSEQUIETO_1
+      name: ESCALAR_1
       rect:
         serializedVersion: 2
-        x: 73
-        y: 3
-        width: 48
-        height: 122
+        x: 64
+        y: 0
+        width: 54
+        height: 128
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5462541ba81e5c3d0800000000000000
-      internalID: -3186893175498922427
+      spriteID: 4e1548e01124c1c30800000000000000
+      internalID: 4331409582649004516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ESCALAR_2
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 0
+        width: 54
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edf1031f63d5a4440800000000000000
+      internalID: 4920848033411768286
       vertices: []
       indices: 
       edges: []
