@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         GameObject go = GameObject.FindGameObjectWithTag("Player");
 
-        if (player != null)
+        if (player == null)
             player = go.GetComponent<PlayerController>();
         //StartCoroutine(WaitCamera());
     }

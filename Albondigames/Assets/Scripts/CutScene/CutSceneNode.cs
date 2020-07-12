@@ -74,6 +74,12 @@ public class CutSceneNode : Triggerable
 
             if (Vector3.Distance(destination, target.position) > 2)
             {
+            
+                destination.y = target.position.y;
+                startPosition.y = target.position.y;
+
+                
+
                 target.position = Vector2.Lerp(startPosition, destination, timeCounter);
 
             }
@@ -126,18 +132,9 @@ public class CutSceneNode : Triggerable
         startPosition = target.position;
 
         timeCounter = 0;
+        destination = transform.position;
 
-        if (keepY)
-        {
-            Vector2 v = transform.position;
-            v.y = target.position.y;
 
-            destination = v;
-        }
-        else
-        {
-            destination = transform.position;
-        }
 
 
     }
