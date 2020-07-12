@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
      PlayerStats ps;
     ParticleSystem blood;
     public Punch[] punchArray = new Punch[2];
-    private SpriteRenderer spr;
+    public SpriteRenderer spr;
     public CamShake shaker;
     //Character attributes
     private float MOVEMENT_SPEED = 10f;
