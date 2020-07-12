@@ -13,19 +13,18 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-        GameObject go = GameObject.FindGameObjectWithTag("Player");
+         player = FindObjectOfType<PlayerController>();
 
-        if (player == null)
-            player = go.GetComponent<PlayerController>();
+      if (camera != null){
         StartCoroutine(WaitCamera());
-
+      }
     }
 
     IEnumerator WaitCamera()
     {
         while (!camera.HasArrived())
         {
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
         camera.GoToNextNode();
     }
@@ -52,6 +51,18 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(ps.level);
     }
 
+    public void loadNextScene(){
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+
+    }
+    
+    public void quit(){
+
+        Application.Quit();
+
+    }
      public void JToMove()
     {
         player.jToMove = true;

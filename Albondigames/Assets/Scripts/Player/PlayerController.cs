@@ -171,7 +171,7 @@ public class PlayerController : MonoBehaviour
         canMove = false;
 
         Debug.LogWarning("Player Died");
-        SoundManager.PlaySound(SoundManager.Sound.charDeath, 0.5f);
+        SoundManager.PlaySound(SoundManager.Sound.charDeath, 0.1f);
 
         yield return new WaitForSeconds(0.5f);
         
