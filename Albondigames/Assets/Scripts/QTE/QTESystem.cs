@@ -142,8 +142,9 @@ public class QTESystem : MonoBehaviour
 
         public void exit()
         {
-            mySystem.currentQTE.atEndActions.Invoke();
             mySystem.readyState.enter();
+            mySystem.currentQTE.atEndActions.Invoke();
+
 
         }
 
