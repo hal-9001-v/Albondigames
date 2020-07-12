@@ -69,6 +69,14 @@ public class PlayerController : MonoBehaviour
         ps.level = SceneManager.GetActiveScene().buildIndex;
 
     }
+    
+    public void ChangeBurp(){
+
+        canBurp = !canBurp;
+
+    }
+
+    
 
     // Update is called once per frame
     void Update()

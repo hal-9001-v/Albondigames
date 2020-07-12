@@ -15,6 +15,7 @@ public class RatBehaviour : MonoBehaviour
     ParticleSystem blood;
     public float dmgCooldown = 1f;
     private float lastHit;
+    public bool alive = true;
     public float hitForce = 3;
     public bool isHit = false;
     public float knockDownTime = 0.5f;
@@ -23,6 +24,7 @@ public class RatBehaviour : MonoBehaviour
     {
         playerGO = GameObject.FindObjectOfType<PlayerController>();
         moveDirection = Vector2.zero;
+        alive = true;
     }
 
     // Update is called once per frame
@@ -67,21 +69,26 @@ public class RatBehaviour : MonoBehaviour
     }
 
     public void kill() {
+
+                blood = GameAssets.i.ps[1];
+
+        Instantiate(blood, transform.localPosition + new Vector3(0,2,0), transform.rotation);
         StartCoroutine(die());
     }
 
     IEnumerator die()
     {
+        alive = false;
         yield return null;
         Destroy(gameObject);
-        SoundManager.PlaySound(SoundManager.Sound.rataDeath, 0.5f);
+        SoundManager.PlaySound(SoundManager.Sound.rataDeath, 0.2f);
     }
 
     IEnumerator takeDamage()
     {
-        blood = GameAssets.i.ps[1];
-        
-            Instantiate(blood, transform.localPosition + new Vector3(0,2,0), transform.rotation);
+                blood = GameAssets.i.ps[1];
+
+        Instantiate(blood, transform.localPosition + new Vector3(0,2,0), transform.rotation);
         
            
         SoundManager.PlaySound(SoundManager.Sound.rataDmg, 0.5f);
