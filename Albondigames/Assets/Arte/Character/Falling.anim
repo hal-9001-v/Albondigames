@@ -37,16 +37,16 @@ AnimationClip:
     - time: 0.48333332
       value: {fileID: -8767777810672004351, guid: 9e2b03c05e7d6304ba067ce7a71b809e,
         type: 3}
-    - time: 0.6666667
+    - time: 0.5833333
       value: {fileID: 3981166409574007604, guid: 9e2b03c05e7d6304ba067ce7a71b809e,
         type: 3}
-    - time: 1.2666667
+    - time: 0.75
       value: {fileID: -8006948694868342938, guid: 9e2b03c05e7d6304ba067ce7a71b809e,
         type: 3}
-    - time: 1.6166667
+    - time: 0.9
       value: {fileID: -8259107825561090108, guid: 9e2b03c05e7d6304ba067ce7a71b809e,
         type: 3}
-    - time: 1.7333333
+    - time: 1.0166667
       value: {fileID: 8384398779500487962, guid: 9e2b03c05e7d6304ba067ce7a71b809e,
         type: 3}
     - time: 6.383333
