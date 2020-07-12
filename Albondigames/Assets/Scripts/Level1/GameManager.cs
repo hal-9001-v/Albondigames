@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
 
         if (player == null)
             player = go.GetComponent<PlayerController>();
-        //StartCoroutine(WaitCamera());
+        StartCoroutine(WaitCamera());
+
     }
 
     IEnumerator WaitCamera()
@@ -43,11 +44,36 @@ public class GameManager : MonoBehaviour
     {
         camera.MoveCamera(new Vector2(1070, 360), 1);
     }
-
+ 
     public void loadPreviousScene()
     {
         PlayerStats ps = FindObjectOfType<PlayerStats>();
 
         SceneManager.LoadScene(ps.level);
+    }
+
+     public void JToMove()
+    {
+        player.jToMove = true;
+    }
+
+    public void DToMove()
+    {
+        player.jToMove = false;
+    }
+
+    public void DontLookAtMe()
+    {
+        camera.MoveCamera(new Vector2(-6.68f, -0.69f), 2);
+    }
+
+    public void DontLookAtMe2()
+    {
+        camera.MoveCamera(new Vector2(-10.68f, -0.69f), 2);
+    }
+
+    public void printWig()
+    {
+        print("Wig");
     }
 }
