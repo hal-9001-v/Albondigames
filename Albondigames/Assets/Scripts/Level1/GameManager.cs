@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -12,14 +13,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        GameObject go  = GameObject.FindGameObjectWithTag("Player");
+            
+            if(player != null)
+            player = go.GetComponent<PlayerController>();
         //StartCoroutine(WaitCamera());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator WaitCamera()
@@ -40,5 +38,11 @@ public class GameManager : MonoBehaviour
     public void MovePlayer()
     {
         player.canMove = true;
+    }
+
+    public void loadPreviousScene() {
+        PlayerStats ps = FindObjectOfType<PlayerStats>();
+
+        SceneManager.LoadScene(ps.level);
     }
 }

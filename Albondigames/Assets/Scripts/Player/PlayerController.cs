@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D bx2d;
     [SerializeField] private LayerMask lm;
     [SerializeField] private LayerMask ladm;
-     PlayerStats ps;
+    PlayerStats ps;
     ParticleSystem blood;
     public Punch[] punchArray = new Punch[2];
     public SpriteRenderer spr;
@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour
     public bool isGettingUp = false;
     public bool isClimbing = false;
     public bool isWalking = false;
-     bool left = false;
-     int selPunch;
+    bool left = false;
+    int selPunch;
 
     // LEVEL 1
     public bool jToMove = false; //
@@ -63,9 +63,11 @@ public class PlayerController : MonoBehaviour
         if (ps == null)
             ps = FindObjectOfType<PlayerStats>();
         initVars();
-       punchArray[0].SetActive(b);
-       punchArray[1].SetActive(b);
-       
+        punchArray[0].SetActive(b);
+        punchArray[1].SetActive(b);
+
+        ps.level = SceneManager.GetActiveScene().buildIndex;
+
     }
 
     // Update is called once per frame
@@ -76,16 +78,16 @@ public class PlayerController : MonoBehaviour
         if (!canClimb)
         {
             if (!invertedControls)
-            { 
-                 HandleMovement();
+            {
+                HandleMovement();
                 if (IsGrounded() && Input.GetKey(KeyCode.Space) && canMove)
                 {
                     SoundManager.PlaySound(SoundManager.Sound.jump, 0.5f);
                     rb2d.velocity = Vector2.up * jumpVelocity;
                 }
-                }
+            }
 
-            
+
             else
             {
                 HandleInvertedMovement();
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
 
     void initVars()
     {
-        hp = ps.hp;
+        hp = 3;
 
     }
 
@@ -121,11 +123,9 @@ public class PlayerController : MonoBehaviour
 
     public void updateStats()
     {
-        ps.hp = hp;
-
     }
 
-    
+
 
     public void TakeDamage()
     {
@@ -153,17 +153,29 @@ public class PlayerController : MonoBehaviour
         inmune = false;
     }
 
-    IEnumerator Die(){
+    IEnumerator Die()
+    {
+
+        int NUMBEROFDEATH = 6;
+        int selectedScene;
+
+        selectedScene = Random.Range(3, 6);
 
         rb2d.velocity = Vector2.zero;
-        gameObject.SetActive(false);
+        
+        canMove = false;
+
         Debug.LogWarning("Player Died");
         SoundManager.PlaySound(SoundManager.Sound.charDeath, 0.5f);
+
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        
+        SceneManager.LoadScene(selectedScene);
     }
-  
-   
+
+    public void kill() {
+        StartCoroutine(Die());
+    }
 
     public void Burp()
     {
@@ -233,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
         if (col.gameObject.tag.Equals("Enemy"))
         {
-        if(!inmune)   SoundManager.PlaySound(SoundManager.Sound.golpetaso, 0.5f);
+            if (!inmune) SoundManager.PlaySound(SoundManager.Sound.golpetaso, 0.5f);
 
             TakeDamage();
 
@@ -245,9 +257,9 @@ public class PlayerController : MonoBehaviour
             SoundManager.PlaySound(SoundManager.Sound.bullet, 0.5f);
             Destroy(col.gameObject);
 
-        }  
+        }
 
-    
+
 
     }
 
@@ -263,10 +275,13 @@ public class PlayerController : MonoBehaviour
         canPunch = false;
         b = true;
         inmune = true;
-        if(left){
+        if (left)
+        {
             selPunch = 1;
             StartCoroutine(PunchRoutine(selPunch));
-        } else{
+        }
+        else
+        {
             selPunch = 0;
             StartCoroutine(PunchRoutine(selPunch));
         }
@@ -274,14 +289,15 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(PunchShake());
     }
 
-    IEnumerator PunchRoutine(int i){
+    IEnumerator PunchRoutine(int i)
+    {
 
         yield return new WaitForSeconds(0.6f);
         punchArray[selPunch].SetActive(true);
 
 
-    }  
-     IEnumerator PunchWait()
+    }
+    IEnumerator PunchWait()
     {
         b = false;
         isPunching = true;
@@ -294,16 +310,17 @@ public class PlayerController : MonoBehaviour
         punchArray[selPunch].SetActive(b);
     }
 
-    IEnumerator PunchShake(){
+    IEnumerator PunchShake()
+    {
 
         yield return new WaitForSeconds(0.6f);
         SoundManager.PlaySound(SoundManager.Sound.punch, 0.3f);
         shaker.Shake(0.25f);
-        
-        
+
+
     }
 
-  
+
 
     void AnimationHandler()
     {
@@ -321,7 +338,7 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded()) { isGrounded = true; } else { isGrounded = false; }
 
     }
- 
+
 
 
     private void HandleMovement()
@@ -342,7 +359,7 @@ public class PlayerController : MonoBehaviour
         {
             left = true;
             spr.flipX = true;
-            
+
             if (IsGrounded())
             {
                 isWalking = true;
@@ -397,7 +414,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInvertedMovement()
     {
-       rb2d.gravityScale = 3;
+        rb2d.gravityScale = 3;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -413,7 +430,7 @@ public class PlayerController : MonoBehaviour
         {
             left = true;
             spr.flipX = true;
-            
+
             if (IsGrounded())
             {
                 isWalking = true;
@@ -463,7 +480,7 @@ public class PlayerController : MonoBehaviour
                 isWalking = false;
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
-        } 
+        }
     }
 
     private void HandleClimbMovement()
@@ -532,6 +549,16 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+
+    public void nextScene()
+    {
+        updateStats();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Debug.Log("Changing Room");
+
+    }
+
 
 }
 
