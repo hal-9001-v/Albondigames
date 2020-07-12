@@ -67,6 +67,8 @@ public class PlayerController : MonoBehaviour
         punch = FindObjectOfType<Punch>();
         initVars();
         punch.SetActive(b);
+
+       
     }
 
     // Update is called once per frame
