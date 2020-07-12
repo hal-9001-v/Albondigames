@@ -142,11 +142,9 @@ public class QTESystem : MonoBehaviour
 
         public void exit()
         {
-            mySystem.currentQTE.atEndActions.Invoke();
             mySystem.readyState.enter();
-
+            mySystem.currentQTE.atEndActions.Invoke();
         }
-
     }
 
     public class SpamState : IState
@@ -178,8 +176,6 @@ public class QTESystem : MonoBehaviour
             mySystem.currentQTE.atStartActions.Invoke();
 
             mySystem.StartCoroutine(Execute());
-
-
         }
 
         public IEnumerator Execute()
@@ -253,7 +249,6 @@ public class QTESystem : MonoBehaviour
         {
             //Time to press enogugh times
             avaliableTime = mySystem.currentQTE.avaliableTime;
-
             mySystem.currentQTE.atStartActions.Invoke();
 
             mySystem.StartCoroutine(Execute());

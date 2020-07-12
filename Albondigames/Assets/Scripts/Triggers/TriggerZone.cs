@@ -9,11 +9,17 @@ public class TriggerZone : MonoBehaviour
     public UnityEvent onEnter;
     public UnityEvent onExit;
 
-    void OnTriggerEnter2D(Collider2D col)
+    private bool used = false;
+
+void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag.Equals("Player"))
         {
-            onEnter.Invoke();
+            if (!used)
+            {
+                if (oneUse) used = true;
+                onEnter.Invoke();
+            }
         }
     }
 

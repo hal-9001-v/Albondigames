@@ -41,4 +41,34 @@ public class GameManager : MonoBehaviour
     {
         player.canMove = true;
     }
+
+    public void MoverCamara1()
+    {
+        camera.MoveCamera(new Vector2(50,60),20);
+    }
+
+    public void JToMove()
+    {
+        player.jToMove = true;
+    }
+
+    public void DToMove()
+    {
+        player.jToMove = false;
+    }
+
+    public void DontLookAtMe()
+    {
+        camera.MoveCamera(new Vector2(-6.68f, -0.69f), 2);
+    }
+
+    public void DontLookAtMe2()
+    {
+        camera.MoveCamera(new Vector2(-10.68f, -0.69f), 2);
+    }
+
+    public void printWig()
+    {
+        print("Wig");
+    }
 }

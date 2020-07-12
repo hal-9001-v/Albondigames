@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3841481166734134840}
   - component: {fileID: 5584256055386583381}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Repisa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7853020360210927269}
   - component: {fileID: 8742174047457471683}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Repisa Borde 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4851629418195050076}
   - component: {fileID: 6830346955300922575}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Repisa Centro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
