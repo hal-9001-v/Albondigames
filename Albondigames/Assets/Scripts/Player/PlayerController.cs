@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask ladm;
      PlayerStats ps;
     ParticleSystem blood;
-    public Punch[] punchArray = new Punch[2];
-    private SpriteRenderer spr;
+    public Punch punchArray;
+    [HideInInspector]
+    public SpriteRenderer spr;
     public CamShake shaker;
     //Character attributes
     private float MOVEMENT_SPEED = 10f;
@@ -63,8 +64,7 @@ public class PlayerController : MonoBehaviour
         if (ps == null)
             ps = FindObjectOfType<PlayerStats>();
         initVars();
-       punchArray[0].SetActive(b);
-       punchArray[1].SetActive(b);
+       punchArray.SetActive(b);
        
     }
 
@@ -231,7 +231,6 @@ public class PlayerController : MonoBehaviour
         {
 
             TakeDamage();
-
         }
 
         if (col.gameObject.tag.Equals("EnemyBullet"))
@@ -239,9 +238,6 @@ public class PlayerController : MonoBehaviour
             TakeDamage();
             Destroy(col.gameObject);
         }  
-
-    
-
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -256,13 +252,8 @@ public class PlayerController : MonoBehaviour
         canPunch = false;
         b = true;
         inmune = true;
-        if(left){
-            selPunch = 1;
-        punchArray[selPunch].SetActive(b);
-        } else{
-            selPunch = 0;
-        punchArray[selPunch].SetActive(b);
-        }
+      
+        punchArray.SetActive(b);
         StartCoroutine(PunchWait());
         StartCoroutine(PunchShake());
     }
@@ -300,7 +291,7 @@ public class PlayerController : MonoBehaviour
         isPunching = false;
         inmune = false;
         canPunch = true;
-        punchArray[selPunch].SetActive(b);
+        punchArray.SetActive(b);
     }
 
 

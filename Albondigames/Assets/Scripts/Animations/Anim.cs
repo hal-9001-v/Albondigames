@@ -11,15 +11,10 @@ public class Anim : MonoBehaviour
         animator = FindObjectOfType<Animator>();
         player = FindObjectOfType<PlayerController>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
     {
-         
 
         animator.SetBool("Moving",player.isWalking);//
         animator.SetBool("Grounded", player.isGrounded);//
