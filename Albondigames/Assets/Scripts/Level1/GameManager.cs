@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        //StartCoroutine(WaitCamera());
+        StartCoroutine(WaitCamera());
     }
 
     // Update is called once per frame
