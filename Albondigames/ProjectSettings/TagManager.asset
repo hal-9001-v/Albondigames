@@ -9,6 +9,7 @@ TagManager:
   - Punch
   - EnemyBullet
   - Platform
+  - Platforms
   layers:
   - Default
   - TransparentFX
@@ -57,6 +58,9 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 3578892447
+    locked: 0
+  - name: ForeForeGround
+    uniqueID: 3576793565
     locked: 0
   - name: GUI
     uniqueID: 2068765521
