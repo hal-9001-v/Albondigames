@@ -41,4 +41,11 @@ public class GameManager : MonoBehaviour
     {
         player.canMove = true;
     }
+    public void MoverCamara1()
+    {
+        camera.MoveCamera(new Vector2(1070, 360), 1);
+    }
+
+
+
 }
