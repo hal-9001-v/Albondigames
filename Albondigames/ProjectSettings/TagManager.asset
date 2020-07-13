@@ -11,6 +11,7 @@ TagManager:
   - Platform
   - Platforms
   - Coche
+  - Hostia
   layers:
   - Default
   - TransparentFX
@@ -65,4 +66,7 @@ TagManager:
     locked: 0
   - name: GUI
     uniqueID: 2068765521
+    locked: 0
+  - name: Pause
+    uniqueID: 1276929839
     locked: 0

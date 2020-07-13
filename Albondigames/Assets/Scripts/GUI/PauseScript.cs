@@ -38,6 +38,15 @@ public class PauseScript : MonoBehaviour
 
         }
     }
-        
+        public void Quit(){
+            Application.Quit();
+        }
+        public void pauseToggle(){
+            en = false;
+            pmui.SetActive(false);
+            AudioListener.pause = false;
+            Time.timeScale = 1;
+
+        }
         
 }

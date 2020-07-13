@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         }
         camera.GoToNextNode();
     }
-
+    
     //Eventos
     public void StopPlayer()
     {
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     }
     public void MoverCamara1()
     {
-        camera.MoveCamera(new Vector2(1070, 360), 1);
+        camera.MoveCamera(new Vector2(269, 68), 1);
     }
  
     public void loadPreviousScene()
@@ -69,6 +69,13 @@ public class GameManager : MonoBehaviour
     public void loadNextSceneEnd3(){
 
         SceneManager.LoadScene("Level3");
+
+
+    }
+
+    public void loadMenu(){
+
+        SceneManager.LoadScene("MainMenu");
 
 
     }

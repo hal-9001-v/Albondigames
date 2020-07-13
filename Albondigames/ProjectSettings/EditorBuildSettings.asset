@@ -24,6 +24,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Final.unity
     guid: 9234dc5f54a7f354baad5664d40d614c
   - enabled: 1
+    path: Assets/Scenes/CreditScene.unity
+    guid: 8d867772a86c0014db1bf7afda097c8d
+  - enabled: 1
+    path: Assets/Scenes/Negro.unity
+    guid: 365601a2668e97a4ca2b1221251b841e
+  - enabled: 1
     path: Assets/Scenes/End1.unity
     guid: 1f1b8ee3fd937ba499e7e4aa3dfe3b29
   - enabled: 1
@@ -32,10 +38,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/End3.unity
     guid: f45846540b89ce94398413eb39177a1f
-  - enabled: 1
-    path: Assets/Scenes/CreditScene.unity
-    guid: 8d867772a86c0014db1bf7afda097c8d
-  - enabled: 1
-    path: Assets/Scenes/Negro.unity
-    guid: 365601a2668e97a4ca2b1221251b841e
   m_configObjects: {}

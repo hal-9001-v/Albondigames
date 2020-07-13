@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     public bool isWalking = false;
     bool left = false;
     int selPunch;
-
+    public Vector3 balconPos;
     // LEVEL 1
     public bool jToMove = false; //
     public bool canMove = true; //
@@ -78,6 +78,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(IsGrounded()){
+            balconPos = gameObject.transform.position;
+        }
         if (isRunning) { MOVEMENT_SPEED = 15f; } else { MOVEMENT_SPEED = 10f; }
         AnimationHandler();
         if (!canClimb)
@@ -162,6 +166,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Die()
     {
 
+        spr.enabled = false;
         int NUMBEROFDEATH = 6;
         int selectedScene;
 
@@ -259,6 +264,12 @@ public class PlayerController : MonoBehaviour
         {
             canClimb = true;
         }
+
+          if (col.gameObject.tag.Equals("Hostia"))
+        {
+            SoundManager.PlaySound(SoundManager.Sound.punch, 0.5f);
+        }
+
 
         if (col.gameObject.tag.Equals("Enemy"))
         {
@@ -567,12 +578,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void finalJump(){
-
+    public void BalconDamage(){
         
+        TakeDamage();
+        gameObject.transform.position = balconPos;
 
     }
 
+    
     public void nextScene()
     {
         level++;
