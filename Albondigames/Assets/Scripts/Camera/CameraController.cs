@@ -219,6 +219,7 @@ public class CameraController : MonoBehaviour
             GameObject canvas = Instantiate(transitionCanvas, new Vector3(), Quaternion.identity);
             canvas.GetComponent<Canvas>().worldCamera = Camera.current;
             RawImage image = canvas.GetComponentInChildren<RawImage>();
+            image.transform.localScale = new Vector3 (500,500, image.transform.localScale.z);
             image.color = new Color(0, 0, 0, 0);
             StartCoroutine(StartTransition(seconds, canvas, image));
         }

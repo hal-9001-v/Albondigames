@@ -112,11 +112,16 @@ public class GameManager : MonoBehaviour
     public void loadCreditScene()
     {
         SceneManager.LoadScene("CreditScene");
-
     }
     public void loadNegroScene()
     {
         SceneManager.LoadScene("Negro");
+
+    }
+
+    public void loadLogoScene1()
+    {
+        SceneManager.LoadScene("LogoScene1");
 
     }
 
