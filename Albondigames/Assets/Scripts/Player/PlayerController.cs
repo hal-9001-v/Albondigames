@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     //Unity Components
-    private Rigidbody2D rb2d;
+    public Rigidbody2D rb2d;
     private BoxCollider2D bx2d;
     [SerializeField] private LayerMask lm;
     [SerializeField] private LayerMask ladm;

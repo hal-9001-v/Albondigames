@@ -142,13 +142,14 @@ public class DialogueManager : MonoBehaviour
         foreach (char c in currentLine.ToCharArray())
         {
             myText.text += c;
+            SoundManager.PlaySound(SoundManager.Sound.beep, 0.5f);
 
 
             yield return new WaitForSeconds(delay);
 
             if (counter == PERIOD)
             {
-                //SONIDO
+                //No vicente aqui no era
             }
             counter++;
         }

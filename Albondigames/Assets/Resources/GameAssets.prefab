@@ -82,8 +82,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: a740795d492c54c4fa51eaed8531ceeb, type: 3}
   - sound: 18
     audioClip: {fileID: 8300000, guid: 98753c613624e52499d2d8d2af711cd2, type: 3}
-  - sound: 3
-    audioClip: {fileID: 8300000, guid: d1d251a114fdaf84389bfd998bc56a6a, type: 3}
+  - sound: 19
+    audioClip: {fileID: 8300000, guid: 9fbd30f12b1a8164a91830da07eca945, type: 3}
   hpArray:
   - {fileID: 21300000, guid: e6623e8e8718b634bb2e207bc251182d, type: 3}
   - {fileID: 21300000, guid: 8d9e64903fcf66d4499f334f549ffd09, type: 3}

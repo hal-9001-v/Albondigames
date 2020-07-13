@@ -26,7 +26,7 @@ public static class SoundManager {
        bullet,
        punch,
        golpetaso,
-
+        beep,
 
 
     }
