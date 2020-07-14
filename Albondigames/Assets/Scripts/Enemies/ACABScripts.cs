@@ -77,7 +77,7 @@ public class ACABScripts : MonoBehaviour
         ParticleSystem blood;
         blood = GameAssets.i.ps[2];
         
-            Instantiate(blood, transform.localPosition + new Vector3(0,2,0), transform.rotation);
+            Instantiate(blood, transform.position + new Vector3(0,2,0), transform.rotation);
         SoundManager.PlaySound(SoundManager.Sound.acabDmg, 0.5f);
         hp -= 1;
         isHit = true;

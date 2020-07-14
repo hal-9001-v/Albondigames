@@ -13,4 +13,13 @@ public class SpawnEnemys : MonoBehaviour
             go.active = true;
         }
     }
+
+    public void DeSpawn(){
+
+        foreach(GameObject go in goList)
+        {
+            go.active = false;
+        }
+
+    }
 }

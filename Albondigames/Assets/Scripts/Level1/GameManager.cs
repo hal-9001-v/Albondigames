@@ -35,12 +35,18 @@ public class GameManager : MonoBehaviour
     //Eventos
     public void StopPlayer()
     {
-        if (player != null) player.canMove = false;
+        if (player != null) {
+            player.canMove = false;
+            player.ChangeBurp();
+        }
     }
 
     public void MovePlayer()
     {
-        if (player != null) player.canMove = true;
+        if (player != null){
+         player.canMove = true;
+        player.ChangeBurp();
+        }
     }
     public void MoverCamara1()
     {
@@ -97,12 +103,12 @@ public class GameManager : MonoBehaviour
 
     public void DontLookAtMe()
     {
-        camera.MoveCamera(new Vector2(-6.68f, -0.69f), 2);
+        camera.MoveCamera(new Vector2(-6.68f, -0.69f), 0.5f);
     }
 
     public void DontLookAtMe2()
     {
-        camera.MoveCamera(new Vector2(-10.68f, -0.69f), 2);
+        camera.MoveCamera(new Vector2(-10.68f, -0.69f), 0.5f);
     }
 
     public void printWig()
@@ -122,6 +128,29 @@ public class GameManager : MonoBehaviour
     public void loadLogoScene1()
     {
         SceneManager.LoadScene("LogoScene1");
+
+    }
+
+    //Sound Play
+    public void PlaySoundDoorSlam(){
+        SoundManager.PlaySound(SoundManager.Sound.doorSlam,0.5f);
+    }
+     public void PlaySoundQTE(){
+        SoundManager.PlaySound(SoundManager.Sound.qteClick,0.5f);
+    }
+     public void PlayLadder(){
+        SoundManager.PlaySound(SoundManager.Sound.caidaEscalera,0.05f);
+    }
+
+    public void PlayPee(){
+        StartCoroutine(PeeWait());
+    }
+
+    IEnumerator PeeWait(){
+
+        yield return new WaitForSeconds(4f);
+
+        SoundManager.PlaySound(SoundManager.Sound.mear,2f);
 
     }
 

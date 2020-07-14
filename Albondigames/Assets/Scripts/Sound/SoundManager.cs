@@ -27,6 +27,8 @@ public static class SoundManager {
        punch,
        golpetaso,
         beep,
+        doorSlam,
+        qteClick,
 
 
     }

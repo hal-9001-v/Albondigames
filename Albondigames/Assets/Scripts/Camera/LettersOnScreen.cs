@@ -21,6 +21,8 @@ public class LettersOnScreen : MonoBehaviour
     private SpriteRenderer SPACE_Press;
     private SpriteRenderer SHIFT;
     private SpriteRenderer SHIFT_Press;
+    private SpriteRenderer Z;
+    private SpriteRenderer Z_Press;
 
     private bool changing = false;
     private bool state = false;
@@ -31,9 +33,13 @@ public class LettersOnScreen : MonoBehaviour
     private bool EEnabled = false;
     private bool SPACEEnabled = false;
     private bool SHIFTEnabled = false;
+    private bool ZEnabled = false;
 
-    void Start()
-    {
+
+     private void Awake() {
+        
+    
+    
         canvas = Instantiate(canvasObject, new Vector3(), Quaternion.identity);
         A = GameObject.Find("A").GetComponent<SpriteRenderer>();
         A_Press = GameObject.Find("A_Press").GetComponent<SpriteRenderer>();
@@ -49,6 +55,8 @@ public class LettersOnScreen : MonoBehaviour
         SPACE_Press = GameObject.Find("SPACE_Press").GetComponent<SpriteRenderer>();
         SHIFT = GameObject.Find("SHIFT").GetComponent<SpriteRenderer>();
         SHIFT_Press = GameObject.Find("SHIFT_Press").GetComponent<SpriteRenderer>();
+        Z = GameObject.Find("Z").GetComponent<SpriteRenderer>();
+        Z_Press = GameObject.Find("Z_Press").GetComponent<SpriteRenderer>();
         A.enabled = false;
         A_Press.enabled = false;
         CTRL.enabled = false;
@@ -63,11 +71,16 @@ public class LettersOnScreen : MonoBehaviour
         SPACE_Press.enabled = false;
         SHIFT.enabled = false;
         SHIFT_Press.enabled = false;
+        Z.enabled = false;
+        Z_Press.enabled = false;
+
     }
 
+    
     // Update is called once per frame
     void Update()
     {
+        
         if (!canvas.GetComponent<Canvas>().worldCamera)
         {
             canvas.GetComponent<Canvas>().worldCamera = Camera.main;
@@ -119,6 +132,11 @@ public class LettersOnScreen : MonoBehaviour
                     SHIFT.enabled = true;
                     SHIFT_Press.enabled = false;
                 }
+                 if (ZEnabled)
+                {
+                    Z.enabled = true;
+                    Z_Press.enabled = false;
+                }
             }
             else
             {
@@ -156,6 +174,11 @@ public class LettersOnScreen : MonoBehaviour
                 {
                     SHIFT.enabled = false;
                     SHIFT_Press.enabled = true;
+                }
+                if (ZEnabled)
+                {
+                    Z.enabled = false;
+                    Z_Press.enabled = true;
                 }
             }
         }
@@ -237,12 +260,27 @@ public class LettersOnScreen : MonoBehaviour
         SHIFTEnabled = true;
     }
 
+    
+
     public void hideSHIFT()
     {
         changing = false;
         SHIFTEnabled = false;
         SHIFT.enabled = false;
         SHIFT_Press.enabled = false;
+    }
+     public void showZ()
+    {
+        changing = true;
+        ZEnabled = true;
+    }
+
+     public void hideZ()
+    {
+        changing = false;
+        ZEnabled = false;
+        Z.enabled = false;
+        Z_Press.enabled = false;
     }
 
     public void showWASD()

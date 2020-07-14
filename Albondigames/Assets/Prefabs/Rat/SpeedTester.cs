@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SpeedTester : MonoBehaviour
 {
-    Rigidbody2D rb2d;
-    RatBehaviour rbh;
+    public Rigidbody2D rb2d;
+    public RatBehaviour rbh;
+    public bool isMoving;
     // Start is called before the first frame update
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -16,14 +17,19 @@ public class SpeedTester : MonoBehaviour
         rbh = GetComponent<RatBehaviour>();
     }
    
-    public bool TestSpeed(){
+   /// <summary>
+   /// Update is called every frame, if the MonoBehaviour is enabled.
+   /// </summary>
+   void Update()
+   {
+      if(rbh.alive){
+        if(rb2d.velocity != new Vector2(0,0)){
+            isMoving = true;
 
-        if(rbh.alive){
-        if(rb2d.velocity.x != 0){
-
-            return true;
-
-        } else return false;
-        }else return false;
-    }
-}
+        } else {
+          isMoving = false;
+            }
+        }
+    } 
+   }
+  

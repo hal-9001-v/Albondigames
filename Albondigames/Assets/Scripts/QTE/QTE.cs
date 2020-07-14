@@ -21,7 +21,7 @@ public class QTE : Triggerable
     public UnityEvent atStartActions;
     public UnityEvent atEndActions;
     public UnityEvent atFailureActions;
-
+    
     private void Awake()
     {
         mySystem = GameObject.FindObjectOfType<QTESystem>();

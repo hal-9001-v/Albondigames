@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     public void ChangeBurp(){
 
         canBurp = !canBurp;
-
+    
     }
 
     

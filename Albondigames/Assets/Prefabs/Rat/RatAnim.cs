@@ -9,13 +9,13 @@ public class RatAnim : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         speed = FindObjectOfType<SpeedTester>();
+         speed = GetComponentInParent<SpeedTester>();
          animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool("Moving", speed.TestSpeed());//
+        animator.SetBool("Moving", speed.isMoving);//
     }
 }

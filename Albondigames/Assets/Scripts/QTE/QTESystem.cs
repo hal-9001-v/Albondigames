@@ -288,7 +288,7 @@ public class QTESystem : MonoBehaviour
 
         }
 
-
+    
     }
 
     private interface IState

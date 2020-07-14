@@ -32,8 +32,8 @@ public class RatBehaviour : MonoBehaviour
     {
         if (!isHit)
         {
-            if (Mathf.Abs(playerGO.transform.position.x - gameObject.transform.position.x) <= Mathf.Abs(chaseDistance))
-            {
+            if (Mathf.Abs(playerGO.transform.position.x - gameObject.transform.position.x) <= Mathf.Abs(chaseDistance) && Mathf.Abs(playerGO.transform.position.y - gameObject.transform.position.y) <= Mathf.Abs(chaseDistance))
+            { 
                 if (playerGO.transform.position.x - gameObject.transform.position.x < 0)
                 {
                     moveDirection.x = -1;
@@ -72,7 +72,7 @@ public class RatBehaviour : MonoBehaviour
 
                 blood = GameAssets.i.ps[1];
 
-        Instantiate(blood, transform.localPosition + new Vector3(0,2,0), transform.rotation);
+        Instantiate(blood, transform.position + new Vector3(0,2,0), transform.rotation);
         StartCoroutine(die());
     }
 
@@ -88,7 +88,7 @@ public class RatBehaviour : MonoBehaviour
     {
                 blood = GameAssets.i.ps[1];
 
-        Instantiate(blood, transform.localPosition + new Vector3(0,2,0), transform.rotation);
+        Instantiate(blood, transform.position + new Vector3(0,2,0), transform.rotation);
         
            
         SoundManager.PlaySound(SoundManager.Sound.rataDmg, 0.5f);

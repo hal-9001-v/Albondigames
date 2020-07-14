@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3840639023094277898}
   - component: {fileID: 3840639023094277899}
   - component: {fileID: 172532703086624813}
-  - component: {fileID: 6321281845775972822}
+  - component: {fileID: 3679154010541717615}
   m_Layer: 0
   m_Name: Window_sprt
   m_TagString: Untagged
@@ -103,7 +103,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6321281845775972822
+--- !u!114 &3679154010541717615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,9 +112,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3840639023094277901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e6ff671bcb05148a150aa3c48f9293, type: 3}
+  m_Script: {fileID: 11500000, guid: f96120ddf2fa47246a315efac9820eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  window: {fileID: 0}
 --- !u!1 &3840639023500709744
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolDown: 3
   proj: {fileID: 4586331169175781021, guid: 6cca9428e654c734f9f00487004d925f, type: 3}
+  isThrowing: 0
 --- !u!61 &4508702685195856130
 BoxCollider2D:
   m_ObjectHideFlags: 0
