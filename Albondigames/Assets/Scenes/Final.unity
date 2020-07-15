@@ -1222,7 +1222,7 @@ PrefabInstance:
     - target: {fileID: 6738243644199251313, guid: e6ab758eab5b763478da8e87c66fdf08,
         type: 3}
       propertyPath: atEndActions.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
-      value: 1
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6ab758eab5b763478da8e87c66fdf08, type: 3}
@@ -2256,6 +2256,7 @@ MonoBehaviour:
   - {fileID: 704519582}
   - {fileID: 510006586}
   zoomNodes: []
+  checkPointBool: 0
 --- !u!81 &1567134851
 AudioListener:
   m_ObjectHideFlags: 0

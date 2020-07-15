@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         if (player != null) {
             player.canMove = false;
             player.ChangeBurp();
-        }
+            player.canPunch = false;        }
     }
 
     public void MovePlayer()
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
         if (player != null){
          player.canMove = true;
         player.ChangeBurp();
+        player.canPunch = true;
         }
     }
     public void MoverCamara1()
@@ -62,8 +63,9 @@ public class GameManager : MonoBehaviour
 
     public void loadNextSceneEnd1(){
 
+        
         SceneManager.LoadScene("Level1");
-
+        
 
     }
     public void loadNextSceneEnd2(){
@@ -81,16 +83,30 @@ public class GameManager : MonoBehaviour
 
     public void loadMenu(){
 
-        SceneManager.LoadScene("MainMenu");
-
+StartCoroutine(loadMenuEnum());
 
     }
+
+    IEnumerator loadMenuEnum(){
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("MainMenu");
+
+        }
     
     public void quit(){
 
-        Application.Quit();
+StartCoroutine(QuitEnum());
 
     }
+
+    IEnumerator QuitEnum(){
+                  camera.TransitionToBlack(1.5f);
+
+        yield return new WaitForSeconds(2);
+        Application.Quit();
+
+        }
+
      public void JToMove()
     {
         if (player != null) player.jToMove = true;
@@ -117,7 +133,15 @@ public class GameManager : MonoBehaviour
     }
     public void loadCreditScene()
     {
+        StartCoroutine(loadCreditEnum());
+    }
+
+    IEnumerator loadCreditEnum(){
+        
+        yield return new WaitForSeconds(2);{
         SceneManager.LoadScene("CreditScene");
+
+        }
     }
     public void loadNegroScene()
     {
@@ -127,9 +151,16 @@ public class GameManager : MonoBehaviour
 
     public void loadLogoScene1()
     {
-        SceneManager.LoadScene("LogoScene1");
+        StartCoroutine(loadLogo1Enum());
 
     }
+
+     IEnumerator loadLogo1Enum(){
+         camera.TransitionToBlack(1.5f);
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("LogoScene1");
+
+        }
 
     //Sound Play
     public void PlaySoundDoorSlam(){

@@ -28,11 +28,11 @@ public class Dialogue : Triggerable
     public override void trigger()
     {
         //Try to trigger this dialogue
-        if (!autoDialogue)
+        if (!autoDialogue && myDialogueManager != null)
         {
             myDialogueManager.triggerDialogue(this);
         }
-        else
+        else if (myDialogueManager != null)
         {
             myDialogueManager.triggerAutoDialogue(this);
         }

@@ -55,15 +55,19 @@ public class CameraController : MonoBehaviour
     private bool usingZoomNode;
     private float timeToReachTarget;
     private float timeCounter;
-
+public bool checkPointBool;
     void Awake()
-    {   //Nada más emplearse se comprueba si es viable el GameObject asociado.
+    {   
+         checkPointBool = true;
+        //Nada más emplearse se comprueba si es viable el GameObject asociado.
         camera = GetComponent<Camera>();
         if (!camera) { Destroy(this); }
     }
 
     void Start()
-    {   //Inicializacion.
+    
+    {
+   //Inicializacion.
         startingSize = camera.orthographicSize;
         aspectRatio = (float) camera.pixelWidth / camera.pixelHeight;
         if (inTransition == null)
@@ -85,7 +89,7 @@ public class CameraController : MonoBehaviour
         transition = false;
         currentZoom = 1;
     }
-
+    
     private void FixedUpdate()
     {
         if (!arrived && !transition)
@@ -216,6 +220,7 @@ public class CameraController : MonoBehaviour
     {
         if (transitionCanvas)
         {
+            playerFollowed.SetActive(false);
             GameObject canvas = Instantiate(transitionCanvas, new Vector3(), Quaternion.identity);
             canvas.GetComponent<Canvas>().worldCamera = Camera.current;
             RawImage image = canvas.GetComponentInChildren<RawImage>();
@@ -261,9 +266,10 @@ public class CameraController : MonoBehaviour
     //Desactiva el seguimiento de la cámara y realiza una transición
     //a una posición dada en los segundos indicados en el nodo.
     //Devuelve true si ha podido ejecutarse, false en caso contrario.
+
     public void GoToNextNode()
     {
-        if (arrived && nodeQueue.Count != 0)
+        if (arrived && nodeQueue.Count != 0 && checkPointBool)
         {
             followingPlayer = false;
             arrived = false;

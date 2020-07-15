@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour
     public Punch[] punchArray = new Punch[2];
     public SpriteRenderer spr;
     public CamShake shaker;
+    public CameraController camera;
     //Character attributes
+    private Vector3 moveDir;
     private float MOVEMENT_SPEED = 10f;
     private float xtraheight = .1f;
     private float midAirControl = 5f;
@@ -51,29 +53,74 @@ public class PlayerController : MonoBehaviour
     public bool invertedControls = false;//
     public bool canPunch = true;//
 
+
+    //CheckPoints
+    public bool lvl1CheckPointReached = false;
+    public bool lvl2CheckPointReached = false;
+    public bool lvl3CheckPointReached = false;
+
+    public GameObject[] PD1;
+
     private void Awake()
     {
+        camera = FindObjectOfType<CameraController>();
+        PD1 = GameObject.FindGameObjectsWithTag("START");
         rb2d = GetComponent<Rigidbody2D>();
         bx2d = GetComponent<BoxCollider2D>();
         spr = GetComponent<SpriteRenderer>();
         shaker = FindObjectOfType<CamShake>();
         if (ps == null)
             ps = FindObjectOfType<PlayerStats>();
+            
         initVars();
         punchArray[0].SetActive(b);
         punchArray[1].SetActive(b);
 
         ps.level = SceneManager.GetActiveScene().buildIndex;
 
+
+
+    
     }
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+    int i = 0;
+    if(lvl1CheckPointReached && ps.level==1){
+        camera.checkPointBool = false;
+        foreach (GameObject g in PD1){
+            if(PD1 != null) PD1[i].SetActive(false);
+            i++;
+        }
+        gameObject.transform.position = new Vector3(20f, -2.14f, gameObject.transform.position.z);
+    } 
+    if (lvl2CheckPointReached && ps.level == 2 ){
+            foreach (GameObject g in PD1){
+            if(PD1 != null) PD1[i].SetActive(false);
+            i++;
+        }        gameObject.transform.position = new Vector3(85f, -3f, gameObject.transform.position.z);
+    }
+    if(lvl3CheckPointReached  && ps.level==3){
+         foreach (GameObject g in PD1){
+            if(PD1 != null) PD1[i].SetActive(false);
+            i++;
+        }
+        gameObject.transform.position = new Vector3(26.2f, -1.65f, gameObject.transform.position.z);
+    }
+    }
+    
     
     public void ChangeBurp(){
 
         canBurp = !canBurp;
-    
+
     }
 
-    
+  
 
     // Update is called once per frame
     void Update()
@@ -111,6 +158,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!invertedControls)
             {
+
                 HandleClimbMovement();
             }
             else if (invertedControls)
@@ -123,8 +171,10 @@ public class PlayerController : MonoBehaviour
 
     void initVars()
     {
-        hp = 3;
-
+    hp = 3;
+    lvl1CheckPointReached= ps.lvl1CheckPointReached;
+    lvl2CheckPointReached= ps.lvl2CheckPointReached;
+    lvl3CheckPointReached =  ps.lvl3CheckPointReached;
     }
 
     //TO DO
@@ -133,6 +183,9 @@ public class PlayerController : MonoBehaviour
     public void updateStats()
     {
         ps.level = level;
+        ps.lvl1CheckPointReached = lvl1CheckPointReached;
+        ps.lvl2CheckPointReached = lvl2CheckPointReached;
+        ps.lvl3CheckPointReached = lvl3CheckPointReached;
     }
 
 
@@ -164,35 +217,51 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator Die()
-    {
-
+    {   
         spr.enabled = false;
         int NUMBEROFDEATH = 6;
         int selectedScene;
 
-        selectedScene = ps.level;
+        
         rb2d.velocity = Vector2.zero;
         
         canMove = false;
 
-        Debug.LogWarning("Player Died");
+        //Debug.LogWarning("Player Died");
         SoundManager.PlaySound(SoundManager.Sound.charDeath, 0.1f);
 
         yield return new WaitForSeconds(0.5f);
-        
-        if(selectedScene == 1){
+
+        if( ps.level == 1){
         SceneManager.LoadScene("End1");
-
-        } else if (selectedScene == 2) {
+        } else if ( ps.level == 2) {
         SceneManager.LoadScene("End2");
-
-
-        } else if (selectedScene == 3) {
+        } else if ( ps.level == 3) {
         SceneManager.LoadScene("End3");
-
+        } else {
+        SceneManager.LoadScene("End1");
         }
 
     
+    }
+
+  public void ActivateCheckpoint(){
+        int selectedScene;
+
+        selectedScene = ps.level;
+
+        if(selectedScene == 1){
+        ps.lvl1CheckPointReached = true;
+        lvl1CheckPointReached = true;
+        } else if (selectedScene == 2) {
+        ps.lvl2CheckPointReached = true;
+        lvl2CheckPointReached = true;;
+
+        } else if (selectedScene == 3) {
+            ps.lvl3CheckPointReached = true;
+            lvl3CheckPointReached = true;
+        }
+        
     }
 
     public void kill() {
@@ -514,67 +583,70 @@ public class PlayerController : MonoBehaviour
     private void HandleClimbMovement()
     {
 
+        float moveX = 0;
+        float moveY = 0;
+        MOVEMENT_SPEED = 10;
         rb2d.gravityScale = 0;
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            rb2d.velocity = new Vector2(0, MOVEMENT_SPEED);
+        if (Input.GetKey(KeyCode.W))
+        {            
+            moveY = 10f;
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
-            rb2d.velocity = new Vector2(0, -MOVEMENT_SPEED);
-
+            moveY = -10f;
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            rb2d.velocity = new Vector2(-MOVEMENT_SPEED, 0);
-
+            moveX = -10f;
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
-            rb2d.velocity = new Vector2(MOVEMENT_SPEED, 0);
-
+            moveX = 10f;
         }
-        else
-        {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
+       
+
+        moveDir = new Vector3 (moveX,moveY).normalized;
 
 
-        }
+    }
 
-
-
-
+    /// <summary>
+    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void FixedUpdate()
+    {
+        if(canClimb)
+        rb2d.velocity = moveDir*MOVEMENT_SPEED;
     }
 
     private void HandleInvertedClimbMovement()
     {
 
+       
+        float moveX = 0;
+        float moveY = 0;
+        MOVEMENT_SPEED = 10;
         rb2d.gravityScale = 0;
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            rb2d.velocity = new Vector2(0, MOVEMENT_SPEED);
+        if (Input.GetKey(KeyCode.S))
+        {            
+            moveY = 10f;
         }
-        else if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKey(KeyCode.W))
         {
-            rb2d.velocity = new Vector2(0, -MOVEMENT_SPEED);
-
+            moveY = -10f;
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
-            rb2d.velocity = new Vector2(-MOVEMENT_SPEED, 0);
-
+            moveX = -10f;
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
-            rb2d.velocity = new Vector2(MOVEMENT_SPEED, 0);
-
+            moveX = 10f;
         }
-        else
-        {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
+       
 
+        moveDir = new Vector3 (moveX,moveY).normalized;
 
-        }
 
     }
 
