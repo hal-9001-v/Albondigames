@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         if (player != null) {
             player.canMove = false;
-            player.ChangeBurp();
+            player.canBurp = false;
             player.canPunch = false;        }
     }
 
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         if (player != null){
          player.canMove = true;
-        player.ChangeBurp();
+        player.canBurp = true;
         player.canPunch = true;
         }
     }
@@ -88,7 +88,7 @@ StartCoroutine(loadMenuEnum());
     }
 
     IEnumerator loadMenuEnum(){
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene("MainMenu");
 
         }

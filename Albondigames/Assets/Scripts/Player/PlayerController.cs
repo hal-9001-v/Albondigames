@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     public int hp = 3;
     //GAME CONTROL BOOLEANS
     // MOVEMENT
-    private bool canBurp = true;
+    public bool canBurp = true;
     public bool canClimb = false;
     public bool isMoving = false;
     public bool isGrounded = true;
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public bool isClimbing = false;
     public bool isWalking = false;
     bool left = false;
+    bool forceWalk = false;
     int selPunch;
     public Vector3 balconPos;
     // LEVEL 1
@@ -125,7 +126,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if(IsGrounded()){
             balconPos = gameObject.transform.position;
         }
@@ -367,7 +368,8 @@ public class PlayerController : MonoBehaviour
             canClimb = false;
         }
     }
-    void FalconPunch()
+
+public void FalconPunch()
     {
         canPunch = false;
         b = true;
@@ -386,6 +388,12 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(PunchShake());
     }
 
+public void PunchAnim(float f){
+
+    
+        StartCoroutine(PunchWaitAnim(f));
+
+}
     IEnumerator PunchRoutine(int i)
     {
 
@@ -404,6 +412,19 @@ public class PlayerController : MonoBehaviour
         isPunching = false;
         inmune = false;
         canPunch = true;
+        punchArray[selPunch].SetActive(b);
+    }
+
+    IEnumerator PunchWaitAnim(float f)
+    {
+        b = false;
+        yield return new WaitForSeconds(f);
+        StartCoroutine(PunchShake());
+        isPunching = true;
+        canMove = false;
+        yield return new WaitForSeconds(0.75f);
+        isPunching = false;
+        inmune = false;
         punchArray[selPunch].SetActive(b);
     }
 
@@ -503,9 +524,12 @@ public class PlayerController : MonoBehaviour
         {
             if (IsGrounded())
             {
-                isWalking = false;
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
             }
+        }
+
+        if(rb2d.velocity.x == 0 && !forceWalk){
+            isWalking = false;
         }
     }
 
@@ -672,6 +696,40 @@ public class PlayerController : MonoBehaviour
 
     }
 
+
+    public void GetUpAnimationHelper(){
+
+        StartCoroutine(GetUpAnimationHelperNumerator());
+
+    }
+
+    IEnumerator GetUpAnimationHelperNumerator(){
+        yield return new WaitForSeconds(1f);
+        isLieing = true;
+        yield return new WaitForSeconds(1.5f);
+        Debug.Log("lmao");
+        isLed = true;
+                yield return new WaitForSeconds(6f);
+        Debug.Log("lmao2");
+        isGettingUp = true;
+        isLed = false;
+        isLieing = false;
+
+        
+    }
+
+    public void ForceWalk(){
+        forceWalk = true;
+    
+    }
+
+    public void StopForceWalk(){
+
+        forceWalk = false;
+
+    }
+
+   
 }
 
 
