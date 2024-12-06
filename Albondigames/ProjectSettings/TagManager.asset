@@ -49,11 +49,11 @@ TagManager:
   - name: Bg
     uniqueID: 3508259585
     locked: 0
-  - name: Player
-    uniqueID: 3772550717
-    locked: 0
   - name: Enemies
     uniqueID: 1553615209
+    locked: 0
+  - name: Player
+    uniqueID: 3772550717
     locked: 0
   - name: Projectiles
     uniqueID: 2057485619

@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\FollowCamera.cs" />
      <Compile Include="Assets\Scripts\Bullets\BulletController.cs" />
      <Compile Include="Assets\Scripts\Bullets\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\Dialogue\Dialogue.cs" />
@@ -71,7 +72,6 @@
      <Compile Include="Assets\Scripts\GuiScript.cs" />
      <Compile Include="Assets\Scripts\Map Generator\lvlGen.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\gui.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />

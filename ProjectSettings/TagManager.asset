@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - AuxCollider
+  - EnemyBullet
+  - Muebles
+  - Item
+  - Enemy
+  - Bullet
+  - Boss
+  - limit
+  - zone
+  - Fixed Enemy
+  - BossRoom
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Enemy
+  - FixedEnemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: SceneElements
+    uniqueID: 2941646503
+    locked: 0
+  - name: MueblesBG
+    uniqueID: 842111105
+    locked: 0
+  - name: Enemies
+    uniqueID: 1136687327
+    locked: 0
+  - name: Player
+    uniqueID: 416530271
+    locked: 0
+  - name: Muebles
+    uniqueID: 1073061769
+    locked: 0
+  - name: Bullets
+    uniqueID: 1980529589
+    locked: 0
+  - name: UI
+    uniqueID: 1150673589
+    locked: 0

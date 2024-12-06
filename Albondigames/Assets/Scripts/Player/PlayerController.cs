@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb= GetComponent<Rigidbody2D>();
+        hp = 5;
     }
 
     // Update is called once per frame
@@ -80,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
     void Shoot(float x, float y)
     {
-        GameObject bullet = Instantiate(bulletGO, transform.position, transform.rotation) as GameObject;
+        GameObject bullet = Instantiate(bulletGO, transform.position + new Vector3(-0.2f, -0.5f, 0.0f), transform.rotation) as GameObject;
         bullet.GetComponent<BulletController>().damage = this.bulletDamage;
         bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector3(
@@ -92,6 +93,8 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int dam)
     {
+        Debug.Log("BOOM");
+
         if (!inmune)
         {
             hp -= dam;
@@ -106,9 +109,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Inmunity()
     {
-        inmune = false;
-        yield return new WaitForSeconds(0.75f);
         inmune = true;
+        yield return new WaitForSeconds(0.75f);
+        inmune = false;
     }
 
     IEnumerator Die()

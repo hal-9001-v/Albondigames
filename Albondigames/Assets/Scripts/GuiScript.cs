@@ -2,44 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gui : MonoBehaviour
+public class GuiScript : MonoBehaviour
 {
 
      Animator anim;
+    public PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+
+        if (player.hp == 5)
+        {
+
+            anim.SetInteger("State", 100);
+        }
+        if (player.hp == 4)
         {
             
            anim.SetInteger("State", 75);
         }
-        if (Input.GetKey(KeyCode.E))
+        if (player.hp == 3)
         {
 
             anim.SetInteger("State", 50);
         }
-        if (Input.GetKey(KeyCode.R))
+        if (player.hp == 2)
         {
 
             anim.SetInteger("State", 25);
         }
-        if (Input.GetKey(KeyCode.T))
+        if (player.hp == 1)
         {
 
             anim.SetInteger("State", 0);
         }
-        if (Input.GetKey(KeyCode.Y))
+        if (player.hp == 0)
         {
 
             anim.SetInteger("State", -5);
         }
+
 
     }
 }

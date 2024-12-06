@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public int damage;
+    public int damage = 1;
     void Start()
     {
         
@@ -18,14 +18,18 @@ public class EnemyBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.gameObject.tag.Equals("Player"))
+        if (!hitInfo.gameObject.tag.Equals("Enemy") && !hitInfo.gameObject.tag.Equals("AuxCollider") )
         {
-            PlayerController player = hitInfo.GetComponent<PlayerController>();
-            if (player != null)
+            if (hitInfo.gameObject.tag.Equals("Player"))
             {
-                player.TakeDamage(damage);
+                PlayerController player = hitInfo.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    player.TakeDamage(damage);
+                }
+
             }
             Destroy(this.gameObject);
         }
-    }
+        }
 }

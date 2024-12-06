@@ -1,0 +1,1497 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1259572150805523699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5342065020697060769}
+  - component: {fileID: 8303826632147775411}
+  - component: {fileID: 5906604703383405341}
+  m_Layer: 0
+  m_Name: InteractionEspejo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5342065020697060769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259572150805523699}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.89, y: -3.65, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 418872648548052983}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8303826632147775411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259572150805523699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Maricarmen
+  lines:
+  - "(Vaya pintas llevo, en fin...A ver que pe\xF1a viene hoy...)"
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5906604703383405341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259572150805523699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99410edf17a60c4a97f6899527de3c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Automatic: 0
+  onlyOnce: 0
+  range: 0.6
+--- !u!1 &1394355283806353758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1498489235215779933}
+  - component: {fileID: 8843501989859542452}
+  - component: {fileID: 4407683371317186868}
+  m_Layer: 0
+  m_Name: SimpleDialogue5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1498489235215779933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394355283806353758}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8843501989859542452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394355283806353758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Maricarmen
+  lines:
+  - "Pues mira como sea como el s\xE1bado anterior que te piraste y me dejaste sola  "
+  - 'a cargo de todo le dan por culo y chapo el local. '
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2557423897847911487}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4407683371317186868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394355283806353758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1758302776916358203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5757231634276693547}
+  - component: {fileID: 4541719373436684546}
+  - component: {fileID: 7128391567242118468}
+  m_Layer: 0
+  m_Name: SimpleDialogue9
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5757231634276693547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758302776916358203}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4541719373436684546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758302776916358203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Maricarmen
+  lines:
+  - Vale, pero deja de llamarme Mari.
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2769526333987070359}
+        m_MethodName: triggerThisDialogueAfterSomeTime
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7128391567242118468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758302776916358203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2065709957154028465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8812801835748695652}
+  - component: {fileID: 312260341565949608}
+  - component: {fileID: 4666399848402522802}
+  m_Layer: 0
+  m_Name: 'SimpleDialogue11 '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8812801835748695652
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065709957154028465}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 418872648548052983}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &312260341565949608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065709957154028465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Maricarmen
+  lines:
+  - Vale, pero deja de llamarme Mari de una puta vez.
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4666399848402522802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065709957154028465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2146297766346532630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3933470043771725060}
+  - component: {fileID: 4740429470462187588}
+  - component: {fileID: 5211589416924122045}
+  m_Layer: 0
+  m_Name: Inicio(1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3933470043771725060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146297766346532630}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -14.51, y: -3.54, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4740429470462187588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146297766346532630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Maricarmen
+  lines:
+  - "(Otro puto s\xE1bado... cuando ten\xEDa 17 me encantaban)"
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6217664456297352327}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5211589416924122045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146297766346532630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99410edf17a60c4a97f6899527de3c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Automatic: 1
+  onlyOnce: 1
+  range: 3.1
+--- !u!1 &3069957497119188186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8662055082893312528}
+  - component: {fileID: 3435380225434090950}
+  - component: {fileID: 4858344082656554444}
+  m_Layer: 0
+  m_Name: SimpleDialogue4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8662055082893312528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069957497119188186}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3435380225434090950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069957497119188186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Pastafari
+  lines:
+  - "\xBFQu\xE9 tal Mari? \xBFPreparada para otra noche m\xE1s de fiest\xF3n?"
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4407683371317186868}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4858344082656554444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3069957497119188186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3349729664205163127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3349729664205163126}
+  m_Layer: 0
+  m_Name: Intro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3349729664205163126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3349729664205163127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.394307, y: 0.10343239, z: -276.7979}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2598420048224557043}
+  - {fileID: 418872648548052983}
+  - {fileID: 3349729664788609460}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3349729664788609461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3349729664788609460}
+  m_Layer: 0
+  m_Name: "Cinem\xE1tica"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3349729664788609460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3349729664788609461}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2388688186003868076}
+  - {fileID: 5589788488579042161}
+  m_Father: {fileID: 3349729664205163126}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3938081699945683174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8213940817692374200}
+  - component: {fileID: 398112528013112514}
+  - component: {fileID: 4288991455303953341}
+  m_Layer: 0
+  m_Name: InteractionPastafari
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8213940817692374200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938081699945683174}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -15.45, y: -3.73, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 418872648548052983}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &398112528013112514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938081699945683174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Pastafari
+  lines:
+  - Venga anda ve a los reservados...
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4666399848402522802}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4288991455303953341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938081699945683174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99410edf17a60c4a97f6899527de3c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Automatic: 0
+  onlyOnce: 0
+  range: 1.3
+--- !u!1 &5600933735629237157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2367431659837044517}
+  - component: {fileID: 3721916178589450585}
+  - component: {fileID: 775330388615964675}
+  m_Layer: 0
+  m_Name: 'SimpleDialogue2 '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2367431659837044517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600933735629237157}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3721916178589450585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600933735629237157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Pastafari
+  lines:
+  - Mariiii
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5717206463190025430}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &775330388615964675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600933735629237157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5968538152906823838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1462947413135771728}
+  - component: {fileID: 2532167839739337129}
+  - component: {fileID: 581469706838923396}
+  m_Layer: 0
+  m_Name: SimpleDialogue8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1462947413135771728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968538152906823838}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2532167839739337129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968538152906823838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Pastafari
+  lines:
+  - 'Si... los ricachones romanos son siempre los primeros en emborracharse. '
+  - " Ve a ver qu\xE9 pasa que yo estoy muy... enredado. "
+  - "Ll\xE9vate la escoba y el Vasooka para abrirte paso entre los borrachos."
+  - 'Los dioses son seres muy agresivos cuando beben. '
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7128391567242118468}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &581469706838923396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5968538152906823838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6140077684919275426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9015851180582283107}
+  - component: {fileID: 912846130752920848}
+  - component: {fileID: 2769526333987070359}
+  m_Layer: 0
+  m_Name: SimpleDialogue10
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9015851180582283107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140077684919275426}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912846130752920848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140077684919275426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.05
+  dialogueName: Pastafari
+  lines:
+  - ...
+  - ...
+  - "lo que t\xFA digas Mari"
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2769526333987070359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140077684919275426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6697208515761157713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2684486308390567592}
+  - component: {fileID: 5097541560134776114}
+  - component: {fileID: 6035638775194103826}
+  m_Layer: 0
+  m_Name: SimpleDialogue7
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2684486308390567592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6697208515761157713}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5097541560134776114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6697208515761157713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Maricarmen
+  lines:
+  - "\xBF\xBFYa??"
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 581469706838923396}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6035638775194103826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6697208515761157713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6980877677403351411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 418872648548052983}
+  m_Layer: 0
+  m_Name: Interacciones Extra
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &418872648548052983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980877677403351411}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.394307, y: 0.10343239, z: -276.7979}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8213940817692374200}
+  - {fileID: 8812801835748695652}
+  - {fileID: 5342065020697060769}
+  m_Father: {fileID: 3349729664205163126}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7574777596184346660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6867060823761477045}
+  - component: {fileID: 748527140684339967}
+  - component: {fileID: 5717206463190025430}
+  m_Layer: 0
+  m_Name: SimpleDialogue3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6867060823761477045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574777596184346660}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &748527140684339967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574777596184346660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Maricarmen
+  lines:
+  - (Y encima este pavo apesta a tomate)
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4858344082656554444}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5717206463190025430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574777596184346660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7830306870485876853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8888550167012686589}
+  - component: {fileID: 3720962266383856222}
+  - component: {fileID: 6217664456297352327}
+  m_Layer: 0
+  m_Name: 'SimpleDialogue1 '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8888550167012686589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830306870485876853}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -14.864307, y: -2.9034324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3720962266383856222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830306870485876853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Maricarmen
+  lines:
+  - "(Y aqu\xED estoy\u2026 prepar\xE1ndome para  limpiar potas de pe\xF1a muy rara,
+    en fin)"
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 775330388615964675}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6217664456297352327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830306870485876853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8368778231796305955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3068933853642766083}
+  - component: {fileID: 1386703153094769127}
+  - component: {fileID: 2557423897847911487}
+  m_Layer: 0
+  m_Name: SimpleDialogue6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3068933853642766083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8368778231796305955}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.094307, y: -2.6534324, z: 135.66705}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2598420048224557043}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1386703153094769127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8368778231796305955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2c15e49e8de1a40bc37c99f27bccf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 0.03
+  dialogueName: Pastafari
+  lines:
+  - "Mariii no te pongas as\xED mujer\u2026 ya te he pedido perd\xF3n\u2026 Bueno
+    venga, termina de "
+  - 'prepararte que ya hemos abierto. Creo que ya hay algo de   '
+  - barullo por los reservados.
+  atStartOfDialogue:
+    m_PersistentCalls:
+      m_Calls: []
+  atEndOfDialogue:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6035638775194103826}
+        m_MethodName: triggerThisDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2557423897847911487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8368778231796305955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &9080829643097398070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2598420048224557043}
+  m_Layer: 0
+  m_Name: Despacho
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2598420048224557043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9080829643097398070}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 9.394307, y: 0.10343239, z: -276.7979}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3933470043771725060}
+  - {fileID: 8888550167012686589}
+  - {fileID: 2367431659837044517}
+  - {fileID: 6867060823761477045}
+  - {fileID: 8662055082893312528}
+  - {fileID: 1498489235215779933}
+  - {fileID: 3068933853642766083}
+  - {fileID: 2684486308390567592}
+  - {fileID: 1462947413135771728}
+  - {fileID: 5757231634276693547}
+  - {fileID: 9015851180582283107}
+  m_Father: {fileID: 3349729664205163126}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3349729663374121486
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3349729664788609460}
+    m_Modifications:
+    - target: {fileID: 7200774639924187516, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_Name
+      value: 'SimpleDialogue '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187518, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: lines.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187518, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: delay
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187518, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: name
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187518, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: lines.Array.data[0]
+      value: "M\xE1s concretamente AlbonDis & Co: Pub y Dioscoteca"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187518, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: lines.Array.data[1]
+      value: "la dioscoteca m\xE1s famosa del momento."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187518, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: lines.Array.data[2]
+      value: "Te presentamos la historia de Maricarmen\u2026"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -141.13086
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: abc2ede2c4ae6d34584bc14c0be80fdf, type: 3}
+--- !u!4 &5589788488579042161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7200774639924187519, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+    type: 3}
+  m_PrefabInstance: {fileID: 3349729663374121486}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5589788488579042163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7200774639924187517, guid: abc2ede2c4ae6d34584bc14c0be80fdf,
+    type: 3}
+  m_PrefabInstance: {fileID: 3349729663374121486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360cee444d71ae841bc1053a1687edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &3349729665047944408
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3349729664788609460}
+    m_Modifications:
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -3.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -141.13086
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: lines.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: atEndOfDialogue.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: delay
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: name
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: lines.Array.data[0]
+      value: "S\xE1bado noche..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: lines.Array.data[1]
+      value: todos los dioses peregrinan... como siempre...
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: lines.Array.data[2]
+      value: a donde saben que la fiesta y el desfase
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: lines.Array.data[3]
+      value: "est\xE1n asegurados..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: lines.Array.data[4]
+      value: "lugar en el que se re\xFAnen seres fant\xE1sticos"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: lines.Array.data[5]
+      value: y todopoderosos de todo el mundo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: lines.Array.data[6]
+      value: ese lugar es...
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: lines.Array.data[7]
+      value: "M\xD3STOLES"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: atEndOfDialogue.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: atEndOfDialogue.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: atEndOfDialogue.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5589788488579042163}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: atEndOfDialogue.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: triggerThisDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111157, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: atEndOfDialogue.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111158, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: range
+      value: 11.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111158, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: Automatic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111158, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: onlyOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106463144805111159, guid: b25e774e81ec19447b30c0ebffd7acaa,
+        type: 3}
+      propertyPath: m_Name
+      value: InteractionDialogue
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b25e774e81ec19447b30c0ebffd7acaa, type: 3}
+--- !u!4 &2388688186003868076 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1106463144805111156, guid: b25e774e81ec19447b30c0ebffd7acaa,
+    type: 3}
+  m_PrefabInstance: {fileID: 3349729665047944408}
+  m_PrefabAsset: {fileID: 0}

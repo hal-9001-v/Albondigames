@@ -7,7 +7,7 @@ public class EnemyChaser : EnemyController
     private Vector2 moveDir;
     public float speed;
     public Rigidbody2D rb;
-    public int damage;
+    public int damage = 1;
     public bool moving;
     public float restTime;
     void Start()
@@ -32,6 +32,7 @@ public class EnemyChaser : EnemyController
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
+
         if ((hitInfo.gameObject.tag.Equals("AuxCollider")) && (moving = true))
         {
             Debug.Log("Too slow!");

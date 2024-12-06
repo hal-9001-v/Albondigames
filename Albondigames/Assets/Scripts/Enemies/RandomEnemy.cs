@@ -75,13 +75,16 @@ public class RandomEnemy : EnemyController
 
     void OnTriggerStay2D(Collider2D hitInfo)
     {
-        if ((hitInfo.gameObject.tag.Equals("AuxCollider")) && !hitOnce)
+       
+            if ((hitInfo.gameObject.tag.Equals("AuxCollider")) && !hitOnce)
         {
             hitOnce = true;
             player.GetComponent<PlayerController>().TakeDamage(hitDamage);
             StartCoroutine(Wait());
             
         }
+
+          
     }
 
     IEnumerator Wait()
